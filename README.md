@@ -1,22 +1,33 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+A rebuild of Twitter with core features.
 
 * Ruby version
-
-* System dependencies
-
-* Configuration
-
+    ruby 2.3.4p301
 * Database creation
+    sqlite
 
-* Database initialization
+* How I set up my ActiveRecord Associations:
 
-* Services (job queues, cache servers, search engines, etc.)
+user -- id, username, email
+    has_many :tweets
 
-* Deployment instructions
+    has_many :received_follows, foreign_key: :followed_id, class_name: "Follow" 
+    has_many :followers, through: :received_follows
 
-* ...
+    has_many :given_follows, foreign_key: follower_id, class_name: "Follow"
+    has_many :followed_users, through: :given_follows
+    
+follow -- id, follower_id:integer, followed_id:integer
+    belongs_to :follower,  class_name: "User"
+    belongs_to :followed_user, class_name: "User"
+
+tweet -- content, date/time
+    belongs_to :user
+    has_many :comments
+    has_many :likes
+    has_many :retweets
+
+comment -- content, date/time
+    belongs_to :post
+
