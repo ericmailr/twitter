@@ -18,22 +18,32 @@ user -- id, username, email
     has_many :given_follows, foreign_key: follower_id, class_name: "Follow"
     has_many :followed_users, through: :given_follows
 
-    has_many :liked_tweets
+    has_many :likes
     
 follow -- id, follower_id:integer, followed_id:integer
     belongs_to :follower, class_name: "User"
     belongs_to :followed_user, class_name: "User"
 
-tweet -- content, date/time
-    belongs_to :user
-    has_many :comments
-    has_many :likes, as: :post
-    has_many :retweets
 
-comment -- content, date/time
-    belongs_to :post
-    has_many :likes, as: :post
 
-like -- liker_id:integer, post_type:string, post_id:integer
+tweet -- content
     belongs_to :user
-    belongs_to :post, polymorphic: true
+    has_many :comments, as: :postable
+    has_many :likes, as: :postable
+    has_many :retweets, as: :postable
+
+retweet -- postable_type:string, postable_id:integer
+    belongs_to :user
+    belongs_to :postable, polymorphic: true
+    has_many :comments, as: :postable
+    has_many :likes, as: :postable
+
+comment -- content, postable_type:string, postable_id:integer
+    belongs_to :postable, polymorphic: true
+//    has_many :comments, as: :postable // use ancestry gem?
+    has_many :likes, as: :postable
+    has_many :retweets, as: :postable
+
+like -- liker_id:integer, postable_type:string, postable_id:integer
+    belongs_to :user 
+    belongs_to :postable, polymorphic: true
