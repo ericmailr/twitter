@@ -20,30 +20,31 @@ user -- id, username, email
 
     has_many :likes
     
-follow -- id, follower_id:integer, followed_id:integer
+follow -- id, follower_id:integer, followed_user_id:integer
     belongs_to :follower, class_name: "User"
     belongs_to :followed_user, class_name: "User"
 
 
 
-tweet -- content
-    belongs_to :user
-    has_many :comments, as: :postable
-    has_many :likes, as: :postable
-    has_many :retweets, as: :postable
+tweet -- content, tweeter_id
+    belongs_to :tweeter, class_name: "User"
+    has_many :comments, as: :post
+    has_many :likes, as: :post
+    has_many :retweets, as: :post
 
-retweet -- postable_type:string, postable_id:integer
-    belongs_to :user
-    belongs_to :postable, polymorphic: true
-    has_many :comments, as: :postable
-    has_many :likes, as: :postable
+retweet -- post_type:string, post_id:integer, retweeter_id
+    belongs_to :retweeter, class_name: "User"
+    belongs_to :post, polymorphic: true
+    has_many :comments, as: :post
+    has_many :likes, as: :post
 
-comment -- content, postable_type:string, postable_id:integer
-    belongs_to :postable, polymorphic: true
-//    has_many :comments, as: :postable // use ancestry gem?
-    has_many :likes, as: :postable
-    has_many :retweets, as: :postable
+comment -- content, post_type:string, post_id:integer, commenter_id
+    belongs_to :commenter, class_name: "User"
+    belongs_to :post, polymorphic: true
+//    has_many :comments, as: :post // use ancestry gem? has_ancestry
+    has_many :likes, as: :post
+    has_many :retweets, as: :post
 
-like -- liker_id:integer, postable_type:string, postable_id:integer
-    belongs_to :user 
-    belongs_to :postable, polymorphic: true
+like -- liker_id:integer, post_type:string, post_id:integer
+    belongs_to :liker, class_name: "User"
+    belongs_to :post, polymorphic: true
