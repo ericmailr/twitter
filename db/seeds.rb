@@ -5,3 +5,31 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+users = User.create!([
+    {username: "doug", email: "doug@mail.com"}, 
+    {username: "cindy", email: "cindy@mail.com"},
+    {username: "matt", email: "matt@mail.com"}
+])
+
+Follow.create!([
+    {follower_id: users[0].id, followed_user_id: users[1].id },
+    {follower_id: users[2].id, followed_user_id: users[1].id },
+    {follower_id: users[0].id, followed_user_id: users[2].id }
+])
+
+tweets = Tweet.create!([
+    {content: "my day is bad", tweeter_id: users[0].id},
+    {content: "my food is good", tweeter_id: users[1].id},
+    {content: "i'm angry about politics!", tweeter_id: users[2].id}
+])
+
+comments = Comment.create!([
+    {content: "you're right, bad day for you", post_type: "Tweet", post_id: tweets[0].id, commenter_id: users[2].id},
+    {content: "no, your food is bad", post_type: "Tweet", post_id: tweets[1].id, commenter_id: users[0].id}
+])
+
+likes = Like.create!([
+    {liker_id: users[0].id, post_type: "Tweet", post_id: tweets[1].id},
+    {liker_id: users[2].id, post_type: "Comment", post_id: comments[0].id}
+])
