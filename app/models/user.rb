@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+    validates :email, :username, uniqueness: true, presence: true
+
+    /has_secure_password/
+
     has_many :tweets
     has_many :received_follows, foreign_key: :followed_user_id, class_name: "Follow"
     has_many :followers, through: :received_follows

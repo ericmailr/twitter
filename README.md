@@ -9,7 +9,7 @@ A rebuild of Twitter with core features.
 
 * How I set up my ActiveRecord Associations:
 
-user -- id, username, email
+user -- id, username, email, password_digest
     has_many :tweets
 
     has_many :received_follows, foreign_key: :followed_id, class_name: "Follow" 
