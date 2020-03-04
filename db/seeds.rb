@@ -29,6 +29,9 @@ comments = Comment.create!([
     {content: "no, your food is bad", post_type: "Tweet", post_id: tweets[1].id, commenter_id: users[0].id}
 ])
 
+Comment.create! :content => "i don't like you doug", :post_type => "Comment", :post_id => comments[1].id, :commenter_id => users[2].id, :parent => comments[1]
+
+
 likes = Like.create!([
     {liker_id: users[0].id, post_type: "Tweet", post_id: tweets[1].id},
     {liker_id: users[2].id, post_type: "Comment", post_id: comments[0].id}
