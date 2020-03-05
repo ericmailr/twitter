@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users = User.create!([
-    {username: "doug", email: "doug@mail.com"}, 
-    {username: "cindy", email: "cindy@mail.com"},
-    {username: "matt", email: "matt@mail.com"}
+    {username: "doug", email: "doug@mail.com", password: "password"}, 
+    {username: "cindy", email: "cindy@mail.com", password: "password"},
+    {username: "matt", email: "matt@mail.com", password: "password"}
 ])
 
 Follow.create!([
