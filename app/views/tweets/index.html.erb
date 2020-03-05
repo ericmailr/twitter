@@ -6,3 +6,7 @@
 <% end %>
 
 <h1>Tweets#index</h1>
+
+<% current_user.tweets.each do |tweet| %>
+    <p><%= tweet.content %></p>
+<% end %>
