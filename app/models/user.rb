@@ -9,4 +9,21 @@ class User < ApplicationRecord
     has_many :given_follows, foreign_key: :follower_id, class_name: "Follow"
     has_many :followed_users, through: :given_follows
     has_many :likes, foreign_key: :liker_id
+
+    before_create :create_remember_token
+
+    def User.new_remember_token
+        SecureRandom.urlsafe_base64
+    end
+
+    def User.digest(token)
+        Digest::SHA1.hexdigest(token.to_s)
+    end
+
+    private
+
+        def create_remember_token
+            self.remember_token = User.digest(User.new_remember_token)
+        end
+
 end

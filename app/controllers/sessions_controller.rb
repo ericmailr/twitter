@@ -1,11 +1,18 @@
 class SessionsController < ApplicationController
   def new
+    /put this in a #before_action in all necessary controllers/
+    if User.digest(cookies.permanent[:remember_token]) == current_user.remember_token
+      redirect_to root_path
+    end
   end
 
   def create
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      remember_token = User.new_remember_token
+      cookies.permanent[:remember_token] = remember_token
+      user.update_attribute(:remember_token, User.digest(remember_token))
       redirect_to root_path
     else
       flash.now[:alert] = "Username or password is invalid."
@@ -16,5 +23,6 @@ class SessionsController < ApplicationController
   def destroy
     flash[:notice] = "Logged out!"
     redirect_to login_path
+    cookies.permanent[:remember_token] = nil
   end
 end

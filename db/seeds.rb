@@ -20,13 +20,19 @@ Follow.create!([
 
 tweets = Tweet.create!([
     {content: "my day is bad", tweeter_id: users[0].id},
+    {content: "lost my wallet", tweeter_id: users[0].id},
+    {content: "my left foot exploded", tweeter_id: users[0].id},
     {content: "my food is good", tweeter_id: users[1].id},
-    {content: "i'm angry about politics!", tweeter_id: users[2].id}
+    {content: "my food is gone", tweeter_id: users[1].id},
+    {content: "i'm full", tweeter_id: users[1].id},
+    {content: "i'm angry about politics!", tweeter_id: users[2].id},
+    {content: "the other side is dumb", tweeter_id: users[2].id},
+    {content: "i am right, u r not", tweeter_id: users[2].id}
 ])
 
 comments = Comment.create!([
     {content: "you're right, bad day for you", post_type: "Tweet", post_id: tweets[0].id, commenter_id: users[2].id},
-    {content: "no, your food is bad", post_type: "Tweet", post_id: tweets[1].id, commenter_id: users[0].id}
+    {content: "no, your food is bad", post_type: "Tweet", post_id: tweets[3].id, commenter_id: users[0].id}
 ])
 
 Comment.create! :content => "i don't like you doug", :post_type => "Comment", :post_id => comments[1].id, :commenter_id => users[2].id, :parent => comments[1]
