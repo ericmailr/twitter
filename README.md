@@ -7,6 +7,29 @@ A rebuild of Twitter with core features.
 * Database creation
     sqlite
 
+
+
+
+* Features / Structure
+/home: tweets index
+/notifications: mentions
+/bookmarks: extra liked tweets
+/username (profile): tweets tab, comments tab (instead of "tweets & replies" maybe), likes tab
+search?
+who to follow
+
+
+
+
+* Unimplemented Features
+/dm's
+/lists
+/explore: shows trending hashtags
+settings
+no media
+
+
+
 * How I set up my ActiveRecord Associations:
 
 user -- id, username, email, password_digest
