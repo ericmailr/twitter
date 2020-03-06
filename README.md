@@ -11,6 +11,9 @@ A rebuild of Twitter with core features.
 
 
 * Features / Structure
+
+/signup: hit next, sent you verification code (enter it) skip this for now.
+
 /home: tweets index
 /notifications: mentions
 /bookmarks: extra liked tweets

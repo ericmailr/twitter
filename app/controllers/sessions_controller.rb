@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     /put this in a #before_action in all necessary controllers/
-    if User.digest(cookies.permanent[:remember_token]) == current_user.remember_token
+    if current_user && User.digest(cookies.permanent[:remember_token]) == current_user.remember_token
       redirect_to root_path
     end
   end
@@ -22,7 +22,8 @@ class SessionsController < ApplicationController
 
   def destroy
     flash[:notice] = "Logged out!"
-    redirect_to login_path
     cookies.permanent[:remember_token] = nil
+    session[:user_id] = nil
+    redirect_to login_path
   end
 end
