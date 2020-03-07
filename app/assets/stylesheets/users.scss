@@ -5,3 +5,16 @@
 #birthday-disclaimer {
     font-size: .8em;
 }
+
+#date-select {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 60px;
+    width: 20%;
+}
+
+.flex-break {
+    flex-basis: 100%;
+    width: 0;
+}

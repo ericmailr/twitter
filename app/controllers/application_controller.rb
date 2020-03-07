@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  /helper_method makes current_user method available for use in view/
+  #helper_method makes current_user method available for use in view/
   helper_method :current_user
 
   def current_user

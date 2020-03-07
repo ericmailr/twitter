@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    /put this in a #before_action in all necessary controllers/
+    #put this in a #before_action in all necessary controllers
     if current_user && User.digest(cookies.permanent[:remember_token]) == current_user.remember_token
       redirect_to root_path
     end
