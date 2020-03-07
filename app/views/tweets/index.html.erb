@@ -11,6 +11,8 @@
         <%= f.submit 'Tweet' %>
     <% end %>
     <% current_user.tweets.each do |tweet| %>
+        <div><span><%= tweet.tweeter.username %>  @<%= tweet.tweeter.handle %> - <%= tweet.formatted_updated_at %></span></div>
         <p><%= tweet.content %></p>
+        <%#comment, retweet, like%>
     <% end %>
 <% end %>

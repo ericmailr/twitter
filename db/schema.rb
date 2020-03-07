@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200306020456) do
+ActiveRecord::Schema.define(version: 20200307170134) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20200306020456) do
     t.string "remember_token"
     t.string "name"
     t.date "birthday"
+    t.string "handle"
   end
 
 end
