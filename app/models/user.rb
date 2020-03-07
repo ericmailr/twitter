@@ -23,6 +23,11 @@ class User < ApplicationRecord
         Digest::SHA1.hexdigest(token.to_s)
     end
 
+    def User.search(query)
+        query = query.downcase
+        User.where("username like :q or handle like :q or name like :q", :q => "%#{query}%")
+    end
+
     private
 
         def create_remember_token
