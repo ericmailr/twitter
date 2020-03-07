@@ -5,9 +5,11 @@
   <%= link_to "Log In", login_path %>
 <% end %>
 
-<h1>Tweets#index</h1>
-
 <% if current_user %>
+    <%= form_for @tweet do |f| %>
+        <%= f.text_field :content %><br>
+        <%= f.submit 'Tweet' %>
+    <% end %>
     <% current_user.tweets.each do |tweet| %>
         <p><%= tweet.content %></p>
     <% end %>

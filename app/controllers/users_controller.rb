@@ -4,11 +4,13 @@ class UsersController < ApplicationController
     end
 
     def create
-        User.create! user_params
+        User.create user_params
         if (User.find_by(username: user_params[:username])) 
-            redirect_to home_path
+            flash[:notice] = "Signed up! You may now log in."
+            redirect_to login_path
         else 
-            flash[:alert] = "Failed to create user"
+            flash[:alert] = "Failed to sign up."
+            redirect_to signup_path
         end
     end
 
