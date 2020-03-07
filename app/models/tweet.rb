@@ -22,4 +22,9 @@ class Tweet < ApplicationRecord
             updated_time.strftime("%b%e")
         end
     end
+
+    def Tweet.search(query)
+        query = query.downcase
+        Tweet.where("content like ?", "%#{query}%")
+    end
 end

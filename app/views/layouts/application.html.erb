@@ -21,6 +21,14 @@
         <%= submit_tag "Search" %>
       <% end %>
     </div>
+
+    <div id="who-to-follow"
+        <% User.limit(3).each do |u| %>
+          <p><%= u.username %> <span><%= button_to "Follow", controller: "follows", action: "create", method: "post" %></span><p>
+          <p><%= u.handle %></p>
+        <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>

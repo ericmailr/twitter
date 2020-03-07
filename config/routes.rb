@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
+  resources :follows, only: [:create, :destroy]
 
   #as: defines *_path and *_url
   get "tweets", to: "tweets#index", as: "tweets"

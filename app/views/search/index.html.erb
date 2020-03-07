@@ -3,3 +3,11 @@
 <% @user_results.each do |r| %>
     <p><%= r.username %></p>
 <% end %>
+
+<% # should make a tweet partial %>
+<% @tweet_results.each do |t| %>
+    <div><span><%= t.tweeter.username %>  @<%= t.tweeter.handle %> - <%= t.formatted_updated_at %></span></div>
+    <p><%= t.content %></p>
+    ----
+    <%#comment, retweet, like%>
+<% end %>
