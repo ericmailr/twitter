@@ -1,1 +1,11 @@
-<h1>Users#show</h1>
+<h1><%= @user.username %></h1>
+<p>@<%= @user.handle %></p>
+<p>Joined <%= @user.formatted_created_at %></p>
+<%= link_to "#{@user.followers.length}Followers", followers_path(@user.handle) %>
+<%= link_to "#{@user.followed_users.length}Following", following_path(@user.handle) %>
+<p>Tweets</p>
+<% @user.tweets.each do |tweet| %>
+    <div><span><%= tweet.tweeter.username %>  @<%= tweet.tweeter.handle %> - <%= tweet.formatted_updated_at %></span></div>
+    <p><%= tweet.content %></p>
+    <%#comment, retweet, like%>
+<% end %>

@@ -1,18 +1,13 @@
-<% if current_user %>
-  Logged in as <%= current_user.username %>.
-  <%= link_to "Log Out", logout_path %>
-<% else %>
-  <%= link_to "Log In", login_path %>
-<% end %>
 
 <% if current_user %>
     <%= form_for @tweet do |f| %>
         <%= f.text_field :content %><br>
         <%= f.submit 'Tweet' %>
     <% end %>
-    <% current_user.tweets.each do |tweet| %>
-        <div><span><%= tweet.tweeter.username %>  @<%= tweet.tweeter.handle %> - <%= tweet.formatted_updated_at %></span></div>
-        <p><%= tweet.content %></p>
+    <% @tweets.each do |tweet| %>
+        <br><%= tweet.tweeter.username %><br>
+        @<%= tweet.tweeter.handle %><br>
+        <%= tweet.content %>  <%= tweet.formatted_updated_at %><br>
         <%#comment, retweet, like%>
     <% end %>
 <% end %>

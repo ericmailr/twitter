@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   resources :follows, only: [:create, :destroy]
 
   #as: defines *_path and *_url
+  get ":handle/following", to: "follows#index", defaults: {follow_type: "following"}, as: "following"
+  get ":handle/followers", to: "follows#index", defaults: {follow_type: "followers"}, as: "followers"
+
   get "tweets", to: "tweets#index", as: "tweets"
   post "tweets", to: "tweets#create"
   get "signup", to: "users#new", as: "signup"
   get "login", to: "sessions#new", as: "login"
-  get "logout", to: "sessions#destroy", as: "logout"
+  delete "logout", to: "sessions#destroy", as: "logout"
   get "home", to: "tweets#index", as: "home"
   get "search", to: "search#index", as: "search"
+
+  get ":handle", to: "users#show", as: "profile"
 end

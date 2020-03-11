@@ -15,20 +15,22 @@
       </div>
     <% end %>
 
+    <% if current_user %>
+      Logged in as <%= link_to current_user.username, profile_path(current_user.handle) %>.
+      <%= link_to "Log Out", logout_path, method: :delete %>
+    <% else %>
+      <%= link_to "Log In", login_path %>
+    <% end %>
+
     <div id="search">
       <%= form_tag search_path, method: :get do %>
         <%= text_field_tag :query %>
         <%= submit_tag "Search" %>
       <% end %>
     </div>
-
-    <div id="who-to-follow"
-        <% User.limit(3).each do |u| %>
-          <p><%= u.username %> <span><%= button_to "Follow", controller: "follows", action: "create", method: "post" %></span><p>
-          <p><%= u.handle %></p>
-        <% end %>
-    </div>
-
+    <% if current_user %>
+      <%= render :partial => "layouts/who-to-follow" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

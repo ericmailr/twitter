@@ -19,7 +19,7 @@ class Tweet < ApplicationRecord
                 (time_diff / 3600).round.to_s + "h"
             end
         else
-            updated_time.strftime("%b%e")
+            updated_time.strftime("%b %e")
         end
     end
 

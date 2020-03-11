@@ -14,6 +14,7 @@ class User < ApplicationRecord
     has_many :likes, foreign_key: :liker_id, dependent: :destroy
 
     before_create :create_remember_token
+    scope :followable_users, ->(user) { where.not(id: (user.followed_users + [user]).map(&:id))}
 
     def User.new_remember_token
         SecureRandom.urlsafe_base64
@@ -26,6 +27,10 @@ class User < ApplicationRecord
     def User.search(query)
         query = query.downcase
         User.where("username like :q or handle like :q or name like :q", :q => "%#{query}%")
+    end
+
+    def formatted_created_at
+       self.created_at.strftime("%B %Y") 
     end
 
     private

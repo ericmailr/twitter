@@ -5,7 +5,12 @@ class TweetsController < ApplicationController
     end
 
     def index
-        @tweet = Tweet.new
+        if (current_user) 
+            @tweet = Tweet.new
+            @tweets = Tweet.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc)
+        else
+            redirect_to login_path
+        end
     end
 
     private

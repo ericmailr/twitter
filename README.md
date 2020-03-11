@@ -8,7 +8,12 @@ A rebuild of Twitter with core features.
     sqlite
 
 
+* Todo Next
 
+Add comments, comment forms to tweets and comments
+Add like function.
+Add navigation.
+React and Bootstrap
 
 * Features / Structure
 

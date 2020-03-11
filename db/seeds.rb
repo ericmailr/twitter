@@ -9,7 +9,8 @@
 users = User.create!([
     {username: "douginator", handle: "doug", email: "doug@mail.com", password: "password"}, 
     {username: "cindy500", handle: "cindy", email: "cindy@mail.com", password: "password"},
-    {username: "fatmatt", handle: "matt", email: "matt@mail.com", password: "password"}
+    {username: "fatmatt", handle: "matt", email: "matt@mail.com", password: "password"},
+    {username: "eric", handle: "eric", email: "eric@mail.com", password: "password"}
 ])
 
 Follow.create!([
