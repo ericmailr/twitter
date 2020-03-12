@@ -29,10 +29,6 @@ class User < ApplicationRecord
         User.where("username like :q or handle like :q or name like :q", :q => "%#{query}%")
     end
 
-    def formatted_created_at
-       self.created_at.strftime("%B %Y") 
-    end
-
     private
 
         def create_remember_token

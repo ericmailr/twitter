@@ -1,0 +1,22 @@
+<%= link_to profile_path(@tweet.tweeter.handle) do %>
+    <%= @tweet.tweeter.username %><br>
+    @<%= @tweet.tweeter.handle %><br>
+<% end %>
+<p><%= @tweet.content %></p>
+<%= post_updated_at_formatted_full(@tweet.updated_at) %><br>
+<%= link_to "#{@tweet.retweets.count} Retweets", root_path %>
+<%= link_to "#{@tweet.likes.count} Likes", root_path %>
+--------------------------------------------------------------------
+<br>
+
+<% @tweet.comments.each do |comment| %>
+    <%= link_to profile_path(comment.commenter.handle) do %>
+        <br><%= comment.commenter.username %>
+        @<%= comment.commenter.handle %>
+        - <%= date_formatted(comment.updated_at) %><br>
+    <% end %>
+    <%= link_to comment_path(comment.id) do %>
+        <%= comment.content %><br>
+    <% end %>
+<% end %>
+

@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: "tweets#index"
 
+
   resources :users, only: [:new, :create, :show, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :follows, only: [:create, :destroy]
+  resources :tweets, only: [:show]
+  resources :comments, only: [:new, :create, :show, :index]
 
   #as: defines *_path and *_url
   get ":handle/following", to: "follows#index", defaults: {follow_type: "following"}, as: "following"

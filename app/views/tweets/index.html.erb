@@ -4,10 +4,5 @@
         <%= f.text_field :content %><br>
         <%= f.submit 'Tweet' %>
     <% end %>
-    <% @tweets.each do |tweet| %>
-        <br><%= tweet.tweeter.username %><br>
-        @<%= tweet.tweeter.handle %><br>
-        <%= tweet.content %>  <%= tweet.formatted_updated_at %><br>
-        <%#comment, retweet, like%>
-    <% end %>
+    <%= render partial: "layouts/tweets" %>
 <% end %>

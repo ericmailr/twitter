@@ -9,6 +9,20 @@
   </head>
 
   <body>
+    <nav>
+      <% if current_user %>
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "Explore", root_path %></li>
+          <li><%= link_to "Notifications", root_path %></li>
+          <li><%= link_to "Messages", root_path %></li>
+          <li><%= link_to "Bookmarks", root_path %></li>
+          <li><%= link_to "Lists", root_path %></li>
+          <li><%= link_to "Profile", profile_path(current_user.handle) %></li>
+          <li><%= link_to "More", root_path %></li>
+        </ul>
+      <% end %>
+    </nav>
     <% flash.each do |type, msg| %>
       <div>
         <%= msg %>

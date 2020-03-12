@@ -1,0 +1,12 @@
+<% @tweets.each do |tweet| %>
+    <%= link_to profile_path(tweet.tweeter.handle) do %>
+        <br><%= tweet.tweeter.username %>
+        @<%= tweet.tweeter.handle %>
+    <% end %>
+    - <%= post_updated_at_formatted_brief(tweet.updated_at) %><br>
+    <%= link_to tweet_path(tweet.id) do %>
+        <%= tweet.content %> <br>
+        <%= render partial: "layouts/post-options" %>
+        <%#comment, retweet, like%>
+    <% end %>
+<% end %>
