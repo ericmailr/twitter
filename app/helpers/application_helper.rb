@@ -3,7 +3,7 @@ module ApplicationHelper
        date.strftime("%B %Y") 
     end
 
-    def post_updated_at_formatted_brief(date)
+    def tweet_updated_at_formatted_brief(date)
         if date.today?
             time_diff = Time.current - date
             if time_diff < 60
@@ -18,7 +18,7 @@ module ApplicationHelper
         end
     end
 
-    def post_updated_at_formatted_full(date)
+    def tweet_updated_at_formatted_full(date)
        date.strftime("%l:%M %p - %B %e, %Y") 
     end
 

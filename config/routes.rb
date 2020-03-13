@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
   resources :follows, only: [:create, :destroy]
-  resources :tweets, only: [:show]
-  resources :comments, only: [:new, :create, :show, :index]
+  resources :tweets, only: [:new]
 
   #as: defines *_path and *_url
   get ":handle/following", to: "follows#index", defaults: {follow_type: "following"}, as: "following"
@@ -24,4 +23,5 @@ Rails.application.routes.draw do
   get "search", to: "search#index", as: "search"
 
   get ":handle", to: "users#show", as: "profile"
+  get ":handle/status/:id", to: "tweets#show", as: "status"
 end

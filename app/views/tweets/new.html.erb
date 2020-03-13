@@ -1,0 +1,8 @@
+<% if @is_reply %>
+    <%= render partial: "layouts/tweet", locals: {tweet: @tweet.parent} %>
+<% end %>
+<%= form_for @tweet do |f| %>
+    <%= hidden_field_tag 'parent_id', @parent_id %>
+    <%= f.text_field :content %><br>
+    <%= f.submit 'Tweet' %>
+<% end %>

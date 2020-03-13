@@ -1,0 +1,18 @@
+<%= render partial: "layouts/tweet", locals: {tweet: @tweet} %>
+<% @tweet.children.each do |comment| %>
+    <%= link_to profile_path(comment.tweeter.handle) do %>
+        <br><%= comment.tweeter.username %>
+        @<%= comment.tweeter.handle %>
+    <% end %>
+    - <%= tweet_updated_at_formatted_brief(comment.updated_at) %>
+    <br>Replying to @<%= @tweet.tweeter.handle %><br><br>
+    <%= link_to status_path(comment.tweeter.handle, comment.id) do %> 
+        <%= comment.content %> <br>
+        <ul class='tweet-options'>
+            <li><%= link_to "c", new_tweet_path(parent_id: comment.id) %></li>
+            <li>r</li>
+            <li>l</li>
+            <li>u</li>
+        </ul>
+    <% end %>
+<% end %>

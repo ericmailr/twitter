@@ -31,15 +31,13 @@ tweets = Tweet.create!([
     {content: "i am right, u r not", tweeter_id: users[2].id}
 ])
 
-comments = Comment.create!([
-    {content: "you're right, bad day for you", post_type: "Tweet", post_id: tweets[0].id, commenter_id: users[2].id},
-    {content: "no, your food is bad", post_type: "Tweet", post_id: tweets[3].id, commenter_id: users[0].id}
+tweet_comments = Tweet.create!([
+    {content: "your day is always bad", tweeter_id: users[1].id, parent: tweets[0]},
+    {content: "sorry about your day, doug", tweeter_id: users[2].id, parent: tweets[0]},
+    {content: "i stole it", tweeter_id: users[2].id, parent: tweets[1]},
+    {content: "like, real angry!", tweeter_id: users[2].id, parent: tweets[6]}
 ])
 
-Comment.create! :content => "i don't like you doug", :post_type => "Comment", :post_id => comments[1].id, :commenter_id => users[2].id, :parent => comments[1]
-
-
 likes = Like.create!([
-    {liker_id: users[0].id, post_type: "Tweet", post_id: tweets[1].id},
-    {liker_id: users[2].id, post_type: "Comment", post_id: comments[0].id}
+    {liker_id: users[0].id, post_type: "Tweet", post_id: tweets[1].id}
 ])

@@ -1,18 +1,31 @@
 class TweetsController < ApplicationController
+    def new
+        @tweet = Tweet.new
+        if (params[:parent_id])
+            @parent_id = params[:parent_id]
+            @tweet.parent = Tweet.find(params[:parent_id])
+            @is_reply = true;
+        else 
+            @is_reply = false;
+        end
+    end
+
     def create
-        Tweet.create(content: tweet_params[:content], tweeter_id: current_user.id)
+        @tweet = Tweet.create(content: tweet_params[:content], tweeter_id: current_user.id)
+        if (params[:parent_id])
+            @tweet.update_attributes(parent_id: params[:parent_id])
+        end
         redirect_to root_path
     end
 
     def show
-        redirect_to controller: "comments", action: "index", id: params[:id]
+        @tweet = Tweet.find(params[:id])
     end
 
     def index
         if (current_user) 
             @tweet = Tweet.new
-            @tweets = Tweet.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc)
-            @comments = @tweets.map {|t| t.comments}
+            @tweets = Tweet.roots.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc)
         else
             redirect_to login_path
         end

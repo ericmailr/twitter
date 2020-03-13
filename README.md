@@ -10,7 +10,8 @@ A rebuild of Twitter with core features.
 
 * Todo Next
 
-Add comments, comment forms to tweets and comments
+Shoulda just left comments out of it... just tweets with ancestry gem
+
 Add like function.
 Add navigation.
 React and Bootstrap
