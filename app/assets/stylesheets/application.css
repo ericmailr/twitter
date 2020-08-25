@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+html, body, ul {
+    padding: 0;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -24,8 +29,37 @@ a:hover {
 }
 
 .tweet-options {
+    width: 50%;
     display: flex;
     list-style-type: none;
-    justify-content: space-between;
-    width: 200px;
+    justify-content: space-around;
+}
+
+.tweet-options > * {
+    width: 40px;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+}
+
+.tweet-options > li > * {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+body {
+    width: 100%;
+}
+
+#container {
+    width: 30%;
+    margin: auto;
+    border: solid;
+}
+
+nav {
+    position: fixed;
+    top: 20%;
+    left: 20%;
 }

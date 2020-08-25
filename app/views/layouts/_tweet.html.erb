@@ -3,12 +3,11 @@
     @<%= tweet.tweeter.handle %>
 <% end %>
 - <%= tweet_updated_at_formatted_brief(tweet.updated_at) %><br>
-<%= link_to status_path(tweet.tweeter.handle, tweet.id) do %>
-    <%= tweet.content %> <br>
-    <ul class='tweet-options'>
-        <li><%= link_to "c", new_tweet_path(parent_id: tweet.id) %></li>
-        <li>r</li>
-        <li>l</li>
-        <li>u</li>
-    </ul>
-<% end %>
+<%= link_to tweet.content, status_path(tweet.tweeter.handle, tweet.id) %>
+<ul class='tweet-options'>
+    <li><%= link_to "c", new_tweet_path(parent_id: tweet.id) %><%= tweet.children.count %></li>
+    <li><%= link_to "r", retweets_path(tweet_id: tweet.id), method: :post %><%= tweet.retweets.count %></li>
+    <li><%= link_to "rc", new_retweet_path(tweet_id: tweet.id) %></li>
+    <li><%= link_to "l", likes_path(tweet_id: tweet.id), method: :post %><%= tweet.likes.count %></li>
+    <li>u</li>
+</ul>

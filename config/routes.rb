@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :follows, only: [:create, :destroy]
   resources :tweets, only: [:new]
+  resources :likes, only: [:create, :destroy]
+  resources :retweets, only: [:new, :create, :destroy]
 
   #as: defines *_path and *_url
   get ":handle/following", to: "follows#index", defaults: {follow_type: "following"}, as: "following"

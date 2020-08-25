@@ -1,0 +1,6 @@
+<%= render partial: "layouts/tweet", locals: {tweet: @og_tweet} %>
+    
+<%= form_for @retweet do |f| %>
+    <%= f.text_field :content %><br>
+    <%= f.submit 'Retweet' %>
+<% end %>

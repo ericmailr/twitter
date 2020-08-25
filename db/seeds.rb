@@ -39,5 +39,5 @@ tweet_comments = Tweet.create!([
 ])
 
 likes = Like.create!([
-    {liker_id: users[0].id, post_type: "Tweet", post_id: tweets[1].id}
+    {liker_id: users[0].id, tweet_id: tweets[1].id}
 ])

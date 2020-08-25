@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200312215638) do
+ActiveRecord::Schema.define(version: 20200316054438) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -29,10 +29,9 @@ ActiveRecord::Schema.define(version: 20200312215638) do
 
   create_table "likes", force: :cascade do |t|
     t.integer "liker_id"
-    t.string "post_type"
-    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tweet_id"
   end
 
   create_table "retweets", force: :cascade do |t|
@@ -40,6 +39,7 @@ ActiveRecord::Schema.define(version: 20200312215638) do
     t.datetime "updated_at", null: false
     t.integer "retweeter_id"
     t.integer "tweet_id"
+    t.string "content"
   end
 
   create_table "tweets", force: :cascade do |t|

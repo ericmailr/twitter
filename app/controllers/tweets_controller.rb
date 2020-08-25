@@ -14,8 +14,10 @@ class TweetsController < ApplicationController
         @tweet = Tweet.create(content: tweet_params[:content], tweeter_id: current_user.id)
         if (params[:parent_id])
             @tweet.update_attributes(parent_id: params[:parent_id])
+            redirect_to status_path(@tweet.parent.tweeter.handle, @tweet.parent.id)
+        else
+            redirect_to root_path
         end
-        redirect_to root_path
     end
 
     def show
