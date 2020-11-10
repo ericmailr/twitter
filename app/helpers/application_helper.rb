@@ -19,7 +19,7 @@ module ApplicationHelper
     end
 
     def tweet_updated_at_formatted_full(date)
-       date.strftime("%l:%M %p - %B %e, %Y") 
+       date.strftime("%l:%M %p · %b %e, %Y") 
     end
 
 

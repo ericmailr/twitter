@@ -1,4 +1,5 @@
 <%= render partial: "layouts/tweet", locals: {tweet: @tweet} %>
+<%# TWEET COMMENTS %>
 <% @tweet.children.each do |comment| %>
     <%= link_to profile_path(comment.tweeter.handle) do %>
         <br><%= comment.tweeter.username %>

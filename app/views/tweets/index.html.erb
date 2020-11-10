@@ -1,4 +1,5 @@
 <% if current_user %>
+    <%= react_component 'NewTweet', tweeterId: current_user.id %>
     <%= form_for @tweet do |f| %>
         <%= f.text_field :content %><br>
         <%= f.submit 'Tweet' %>
