@@ -78,6 +78,14 @@ nav {
   align-items: stretch;
 }
 
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
 #tweets {
   flex: 3;
   display: flex;
@@ -92,7 +100,7 @@ nav {
 }
 
 .tweet {
-  padding-left: 40px;
+  display: flex;
 }
 
 #search-container {
