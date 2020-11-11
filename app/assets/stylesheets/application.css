@@ -20,7 +20,6 @@ ul {
   padding: 0;
   background: rgb(21, 32, 43);
   color: #ffffff;
-  overflow-x: hidden;
   font-family: "Open Sans", "Roboto", sans-serif;
 }
 
@@ -38,7 +37,6 @@ a:hover {
 }
 
 .tweet-options {
-  width: 50%;
   display: flex;
   list-style-type: none;
   justify-content: space-around;
@@ -46,7 +44,6 @@ a:hover {
 
 .tweet-options > * {
   width: 40px;
-  background-color: gray;
   display: flex;
   justify-content: center;
 }
@@ -57,18 +54,41 @@ a:hover {
   text-align: center;
 }
 
-body {
-  width: 100%;
+#container {
+  display: flex;
+  justify-content: space-between;
 }
 
-#container {
-  width: 45%;
-  margin: auto;
-  border: solid;
+#nav-container {
+  display: flex;
+  justify-content: right;
+  flex: 2;
+  padding: 30px;
 }
 
 nav {
   position: fixed;
-  top: 20%;
-  left: 10%;
+}
+
+#main-container {
+  flex: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+#tweets {
+  flex: 3;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+#search-container {
+  flex: 4;
+  padding: 30px;
+}
+
+#search {
+  position: fixed;
 }
