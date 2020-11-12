@@ -11,20 +11,20 @@
   <body>
     <% if current_user %>
       <div id="container">
-        <div id="nav-container">
-          <nav>
-            <ul>
-              <li><%= link_to "Home", root_path %></li>
-              <li><%= link_to "Explore", root_path %></li>
-              <li><%= link_to "Notifications", root_path %></li>
-              <li><%= link_to "Messages", root_path %></li>
-              <li><%= link_to "Bookmarks", root_path %></li>
-              <li><%= link_to "Lists", root_path %></li>
-              <li><%= link_to "Profile", profile_path(current_user.handle) %></li>
-              <li><%= link_to "More", root_path %></li>
-            </ul>
-          </nav>
-        </div>
+          <div id="nav-container">
+            <nav>
+              <ul>
+                <li><%= link_to "Home", root_path %></li>
+                <li><%= link_to "Explore", root_path %></li>
+                <li><%= link_to "Notifications", root_path %></li>
+                <li><%= link_to "Messages", root_path %></li>
+                <li><%= link_to "Bookmarks", root_path %></li>
+                <li><%= link_to "Lists", root_path %></li>
+                <li><%= link_to "Profile", profile_path(current_user.handle) %></li>
+                <li><%= link_to "More", root_path %></li>
+              </ul>
+            </nav>
+          </div>
           <div id="main-container">
             <div id="tweets">
               <% flash.each do |type, msg| %>
