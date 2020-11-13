@@ -1,12 +1,8 @@
-<%= render partial: "layouts/tweet", locals: {tweet: @tweet} %>
+<%= react_component("Status", {tweet: @tweet, tweeter: @tweet.tweeter, updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at)}) %>
 <% @tweet.children.each do |comment| %>
-    <%= link_to profile_path(comment.tweeter.handle) do %>
-        <br><%= comment.tweeter.username %>
-        @<%= comment.tweeter.handle %>
-    <% end %>
-    - <%= tweet_updated_at_formatted_brief(comment.updated_at) %>
-    <br>Replying to @<%= @tweet.tweeter.handle %><br><br>
-    <%= link_to comment.content, status_path(comment.tweeter.handle, comment.id) %> 
+
+    <%= react_component("tweets/Tweet", {tweet: comment, tweeter: comment.tweeter, updatedAt: tweet_updated_at_formatted_brief(comment.updated_at), parentHandle: comment.parent.tweeter.handle}) %>
+
     <ul class='tweet-options'>
         <li><%= link_to "c", new_tweet_path(parent_id: comment.id) %></li>
         <li>r</li>
