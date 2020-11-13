@@ -4,6 +4,7 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :tweets, foreign_key: :tweeter_id, dependent: :destroy
+    has_many :retweets, foreign_key: :retweeter_id, dependent: :destroy
     
     has_many :received_follows, foreign_key: :followed_user_id, class_name: "Follow", dependent: :destroy
     has_many :followers, through: :received_follows

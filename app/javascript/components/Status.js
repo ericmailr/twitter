@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "../assets/avatar.png";
+import TweetOptions from "./tweets/TweetOptions";
 
 function Status(props) {
   return (

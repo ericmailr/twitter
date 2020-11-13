@@ -38,6 +38,10 @@ tweet_comments = Tweet.create!([
     {content: "like, real angry!", tweeter_id: users[2].id, parent: tweets[6]}
 ])
 
+retweets = Retweet.create!([
+   {retweeter_id: users[0].id, tweet_id: tweets[2].id} 
+])
+
 likes = Like.create!([
     {liker_id: users[0].id, tweet_id: tweets[1].id}
 ])
