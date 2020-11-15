@@ -5,9 +5,9 @@ class RetweetsController < ApplicationController
     end
 
     def create
-        @retweet = Retweet.create(retweeter_id: current_user.id, tweet_id: params[:tweet_id])
+        @retweet = Retweet.create(retweeter_id: current_user.id, tweet_id: retweet_params[:tweet_id])
         @retweet.update_attributes(content: Tweet.find(@retweet.tweet_id).content)
-        if (params[:content])
+        if (params[:comment])
             #change to update as a tweet comment, not content
            #@retweet.update_column(content: params[:content])
         end
@@ -16,4 +16,10 @@ class RetweetsController < ApplicationController
     def destroy
 
     end
+
+    private
+        def retweet_params
+           params.require(:retweet).permit(:comment, :tweet_id) 
+        end
+
 end

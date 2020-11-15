@@ -1,5 +1,5 @@
 class Retweet < ApplicationRecord
-    validates :retweeter_id, :tweet_id, presence: true
+    validates :retweeter_id, presence: true
     
     has_ancestry
     belongs_to :tweet
