@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_160246) do
+ActiveRecord::Schema.define(version: 2020_11_17_002643) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"

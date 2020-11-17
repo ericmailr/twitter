@@ -1,4 +1,4 @@
-<%= render partial: "layouts/tweet", locals: {tweet: @og_tweet} %>
+<%= render partial: "layouts/post", locals: {post: @og_tweet} %>
     
 <%= form_for @retweet do |f| %>
     <%= f.hidden_field 'tweet_id', :value => @og_tweet.id %>

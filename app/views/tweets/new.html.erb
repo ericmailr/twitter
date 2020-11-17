@@ -1,5 +1,5 @@
 <% if @is_reply %>
-    <%= render partial: "layouts/tweet", locals: {tweet: @tweet.parent} %>
+    <%= render partial: "layouts/post", locals: {post: @tweet.parent} %>
 <% end %>
 <%= form_for @tweet do |f| %>
     <%= hidden_field_tag 'parent_id', @parent_id %>

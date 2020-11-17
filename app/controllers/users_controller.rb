@@ -17,6 +17,8 @@ class UsersController < ApplicationController
     def show
         @user = User.find_by!(handle: params[:handle])
         @tweets = @user.tweets
+        @retweets = @user.retweets
+        @posts = (@retweets + @tweets).sort_by(&:updated_at).reverse
     end
 
     private

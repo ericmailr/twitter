@@ -4,6 +4,13 @@ import Avatar from "../../assets/avatar.png";
 import ReplyHeader from "./ReplyHeader";
 
 function Tweet(props) {
+  const content = () => {
+    if (props.tweet.comment) {
+      return props.tweet.comment;
+    } else {
+      return props.tweet.content;
+    }
+  };
   return (
     <div className="tweet">
       <img className="avatar" src={Avatar} alt="default avatar" />
@@ -12,14 +19,14 @@ function Tweet(props) {
           {props.tweeter.username}
           {" @"}
           {props.tweeter.handle}
-          {" · "}
         </a>
+        {" · "}
         {props.updatedAt} <br />
         {props.parentHandle ? (
           <ReplyHeader parentHandle={props.parentHandle} />
         ) : null}
         <a href={Routes.status_path(props.tweeter.handle, props.tweet.id)}>
-          {props.tweet.content}
+          {content()}
         </a>
       </div>
     </div>

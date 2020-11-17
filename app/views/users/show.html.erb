@@ -4,4 +4,4 @@
 <%= link_to "#{@user.followers.length} Followers", followers_path(@user.handle) %>
 <%= link_to "#{@user.followed_users.length} Following", following_path(@user.handle) %>
 <br>
-<%= render partial: "layouts/tweets" %>
+<%= render partial: "layouts/posts" %>

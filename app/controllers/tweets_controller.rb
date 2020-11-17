@@ -28,6 +28,8 @@ class TweetsController < ApplicationController
         if (current_user) 
             @tweet = Tweet.new
             @tweets = Tweet.roots.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc)
+            @posts = @tweets
+            #add retweets to list
         else
             redirect_to login_path
         end
