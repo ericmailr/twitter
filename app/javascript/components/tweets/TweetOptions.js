@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function TweetOptions(props) {
   return (
-    <div className="tweet-options">
+    <div className="tweet-options font-secondary">
       <a href={Routes.new_tweet_path({ parent_id: props.tweetId })}>
         {" "}
         c {props.commentCount}
