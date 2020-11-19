@@ -49,19 +49,15 @@ belongs_to :followed_user, class_name: "User"
 
 tweet -- content, tweeter_id
 belongs_to :tweeter, class_name: "User"
-has_many :comments, as: :post
-has_many :likes, as: :post
-has_many :retweets, as: :post
+has_many :tweets
+has_many :likes
+has_many :retweets
 
-retweet -- post_type:string, post_id:integer, retweeter_id
+retweet -- retweeter_id
 belongs_to :retweeter, class_name: "User"
-belongs_to :post, polymorphic: true
-has_many :comments, as: :post
-has_many :likes, as: :post
+belongs_to :tweet
+has_many :tweets
+has_many :likes
 
 like -- liker_id:integer, tweet_id
 belongs_to :liker, class_name: "User"
-
-//belongs_to :post, polymorphic: true
-
-Should I have a post model?

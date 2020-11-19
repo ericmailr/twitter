@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function ReplyHeader(props) {
   return (
-    <div>
+    <div className={"font-secondary"}>
       Replying to
       <a href={Routes.profile_path(props.parentHandle)}>
         {" @"}

@@ -1,21 +1,19 @@
 <div>
-  <%# NEED TO ADD CHECKS FOR COMMENTS, SHOW ORIGINAL TWEET #%>
-  <%# if a retweet with comment, show comment at top, then below indented parent #%>
   <%# if a reply, show reply on bottom, line on left up to parent #%>
   <%# replies only show on Tweets & Replies tab of profile, not on Tweets tab #%>
   <% if post.class.name == "Tweet" %>
-    <%= react_component("tweets/Tweet", {tweet: post, tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parentHandle: ""}) %>
-    <%= react_component("tweets/TweetOptions", {tweetId: post.id, commentCount: post.children.count, retweetCount: post.retweets.count}) %>
-    <ul class='tweet-options'>
-        <li><%= link_to "c", new_tweet_path(parent_id: post.id) %><%= post.children.count %></li>
-        <li><%= link_to "r", retweets_path(tweet_id: post.id), method: :post %><%= post.retweets.count %></li>
-        <li><%= link_to "rc", new_retweet_path(tweet_id: post.id) %></li>
-        <li><%= link_to "l", likes_path(tweet_id: post.id), method: :post %><%= post.likes.count %></li>
-        <li>u</li>
-    </ul>
+    <% if post.parent %>
+      <%= react_component("tweets/Reply", {reply: post, replyTweeter: post.tweeter, replyCommentCount: post.children.count, replyRetweetCount: post.retweets.count, updatedAt: post.updated_at, parent: post.parent, parentTweeter: post.parent.tweeter, parentCommentCount: post.parent.children.count, parentRetweetCount: post.parent.retweets.count, parentUpdatedAt: post.parent.updated_at}) %>
+    <% else %>
+      <%= react_component("tweets/Tweet", {tweet: post, tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent}) %>
+      <%= react_component("tweets/TweetOptions", {tweetId: post.id, commentCount: post.children.count, retweetCount: post.retweets.count}) %>
+      <ul class='tweet-options'>
+          <li><%= link_to "l", likes_path(tweet_id: post.id), method: :post %><%= post.likes.count %></li>
+          <li>u</li>
+      </ul>
+    <% end %>
   <% end %>
   <% if post.class.name == "Retweet" %>
-    <%# with comment %>
     <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
   <% end %>
 </div>

@@ -1,8 +1,6 @@
 <%= react_component("Status", {tweet: @tweet, tweeter: @tweet.tweeter, updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at)}) %>
 <% @tweet.children.each do |comment| %>
-
-    <%= react_component("tweets/Tweet", {tweet: comment, tweeter: comment.tweeter, updatedAt: tweet_updated_at_formatted_brief(comment.updated_at), parentHandle: comment.parent.tweeter.handle}) %>
-
+    <%= react_component("tweets/Tweet", {tweet: comment, tweeter: comment.tweeter, updatedAt: tweet_updated_at_formatted_brief(comment.updated_at), replyingTo: comment.parent.tweeter.handle}) %>
     <ul class='tweet-options'>
         <li><%= link_to "c", new_tweet_path(parent_id: comment.id) %></li>
         <li>r</li>

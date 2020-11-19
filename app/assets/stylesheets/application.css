@@ -28,6 +28,14 @@ ul {
   color: rgb(136, 153, 166);
 }
 
+.tweet-header {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  font-weight: 700;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -79,8 +87,8 @@ nav {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 49px;
+  height: 49px;
   border-radius: 50%;
   vertical-align: top;
   margin-right: 10px;
@@ -97,10 +105,10 @@ nav {
 
 #tweets > * {
   border-bottom: 1px solid rgba(136, 153, 166, 0.25);
-  padding: 8px;
+  padding: 5px 8px;
 }
 
-.retweeted {
+.quoted {
   border: 1px solid rgba(136, 153, 166, 0.25);
   padding: 8px;
   margin-left: 40px;
@@ -118,4 +126,9 @@ nav {
 
 #search {
   position: fixed;
+}
+
+.reply-line {
+  border-left: solid;
+  height: 20px;
 }

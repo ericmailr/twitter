@@ -22,9 +22,7 @@ function Tweet(props) {
         </a>
         {" · "}
         {props.updatedAt} <br />
-        {props.parentHandle ? (
-          <ReplyHeader parentHandle={props.parentHandle} />
-        ) : null}
+        {props.replyingTo && <ReplyHeader parentHandle={props.replyingTo} />}
         <a href={Routes.status_path(props.tweeter.handle, props.tweet.id)}>
           {content()}
         </a>
@@ -37,7 +35,8 @@ Tweet.propTypes = {
   tweet: PropTypes.object,
   tweeter: PropTypes.object,
   updatedAt: PropTypes.string,
-  parentHandle: PropTypes.string,
+  replyingTo: PropTypes.string,
+  parent: PropTypes.object,
 };
 
 export default Tweet;
