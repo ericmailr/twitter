@@ -3,5 +3,13 @@
         <%= f.text_field :content %><br>
         <%= f.submit 'Tweet' %>
     <% end %>
-    <%= render partial: "layouts/posts" %>
+    <% @posts.each do |post| %>
+      <% if post.class.name == "Tweet" %>
+        <% if !post.parent %>
+            <%= react_component("FeedTweet", {tweet: post, tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, commentCount: post.children.count, retweetCount: post.retweets.count} ) %> 
+        <% end %>
+      <% elsif post.class.name == "Retweet" %>
+          <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
+      <% end %>
+    <% end %>
 <% end %>

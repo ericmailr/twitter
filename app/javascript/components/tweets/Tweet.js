@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "../../assets/avatar.png";
 import ReplyHeader from "./ReplyHeader";
 
 function Tweet(props) {
@@ -13,15 +12,19 @@ function Tweet(props) {
   };
   return (
     <div className="tweet">
-      <img className="avatar" src={Avatar} alt="default avatar" />
       <div>
         <a href={Routes.profile_path(props.tweeter.handle)}>
-          {props.tweeter.username}
-          {" @"}
-          {props.tweeter.handle}
+          <span className={"username"}>{props.tweeter.username}</span>
+          <span className={"font-secondary handle"}>
+            {" @"}
+            {props.tweeter.handle}
+          </span>
         </a>
-        {" · "}
-        {props.updatedAt} <br />
+        <span className={"font-secondary"}>
+          {" · "}
+          {props.updatedAt}
+        </span>
+        <br />
         {props.replyingTo && <ReplyHeader parentHandle={props.replyingTo} />}
         <a href={Routes.status_path(props.tweeter.handle, props.tweet.id)}>
           {content()}

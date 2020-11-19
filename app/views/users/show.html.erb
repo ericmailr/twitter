@@ -3,4 +3,17 @@
 <p>Joined <%= date_formatted(@user.created_at) %></p>
 <%= link_to "#{@user.followers.length} Followers", followers_path(@user.handle) %>
 <%= link_to "#{@user.followed_users.length} Following", following_path(@user.handle) %>
-<%= render partial: "layouts/posts" %>
+
+<%# INSTEAD: JUST DO ALL LOGIC HERE, MAKE COMPONENT CALLED PROFILETWEET #%>
+
+<% @posts.each do |post| %>
+    <% if post.class.name == "Tweet" %>
+        <% if post.parent %>
+            <%= react_component("tweets/Reply", {reply: post, replyTweeter: post.tweeter, replyCommentCount: post.children.count, replyRetweetCount: post.retweets.count, replyUpdatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, parentTweeter: post.parent.tweeter, parentCommentCount: post.parent.children.count, parentRetweetCount: post.parent.retweets.count, parentUpdatedAt: tweet_updated_at_formatted_brief(post.parent.updated_at)}) %>
+        <% else %>
+            <%= react_component("FeedTweet", {tweet: post, tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, commentCount: post.children.count, retweetCount: post.retweets.count}) %> 
+        <% end %>
+    <% elsif post.class.name == "Retweet" %>
+        <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
+    <% end %>
+<% end %>

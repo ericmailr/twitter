@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "../../assets/avatar.png";
 import Tweet from "../tweets/Tweet";
 
 function Retweet(props) {
   return (
     <div>
+      {/* A RETWEET WITH A COMMENT IS CALLED A QUOTE TWEET */}
       {props.comment ? (
         <div>
           <Tweet

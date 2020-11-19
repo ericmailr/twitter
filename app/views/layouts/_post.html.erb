@@ -1,5 +1,4 @@
 <div>
-  <%# if a reply, show reply on bottom, line on left up to parent #%>
   <%# replies only show on Tweets & Replies tab of profile, not on Tweets tab #%>
   <% if post.class.name == "Tweet" %>
     <% if post.parent %>
