@@ -97,8 +97,24 @@ nav {
   height: 49px;
   border-radius: 50%;
   vertical-align: top;
-  margin-right: 10px;
   flex-shrink: 0;
+  padding: 4px 0;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.reply-connector {
+  background-image: linear-gradient(#8899a680, #8899a680);
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 20px;
+  width: 5px;
 }
 
 #tweets {
@@ -125,6 +141,11 @@ nav {
   display: flex;
 }
 
+.tweet-content {
+  display: flex;
+  flex-direction: column;
+}
+
 .tweet {
   display: flex;
 }
@@ -136,11 +157,7 @@ nav {
 }
 
 .reply-container > .tweet-options {
-  margin-bottom: 8px;
-}
-
-.reply-parent {
-  border-left: solid;
+  margin-bottom: 6px;
 }
 
 .feed-tweet {

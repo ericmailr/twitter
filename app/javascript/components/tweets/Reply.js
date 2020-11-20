@@ -8,33 +8,42 @@ import TweetOptions from "./TweetOptions";
 function Reply(props) {
   return (
     <div className="reply-container">
-      <div className="tweet-container reply-parent">
-        <Avatar />
-        <Tweet
-          tweet={props.parent}
-          tweeter={props.parentTweeter}
-          updatedAt={props.parentUpdatedAt}
-        />
+      <div className="tweet-container">
+        <div className="avatar-container">
+          <Avatar />
+          <div className="reply-connector"></div>
+        </div>
+        <div className="tweet-content">
+          <Tweet
+            tweet={props.parent}
+            tweeter={props.parentTweeter}
+            updatedAt={props.parentUpdatedAt}
+          />
+          <TweetOptions
+            tweetId={props.parent.id}
+            commentCount={props.parentCommentCount}
+            retweetCount={props.parentRetweetCount}
+          />
+        </div>
       </div>
-      <TweetOptions
-        tweetId={props.parent.id}
-        commentCount={props.parentCommentCount}
-        retweetCount={props.parentRetweetCount}
-      />
 
       <div className="tweet-container">
-        <Avatar />
-        <Tweet
-          tweet={props.reply}
-          tweeter={props.replyTweeter}
-          updatedAt={props.replyUpdatedAt}
-        />
+        <div className="avatar-container">
+          <Avatar />
+        </div>
+        <div className="tweet-content">
+          <Tweet
+            tweet={props.reply}
+            tweeter={props.replyTweeter}
+            updatedAt={props.replyUpdatedAt}
+          />
+          <TweetOptions
+            tweetId={props.reply.id}
+            commentCount={props.replyCommentCount}
+            retweetCount={props.replyRetweetCount}
+          />
+        </div>
       </div>
-      <TweetOptions
-        tweetId={props.reply.id}
-        commentCount={props.replyCommentCount}
-        retweetCount={props.replyRetweetCount}
-      />
     </div>
   );
 }

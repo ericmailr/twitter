@@ -9,7 +9,9 @@ function FeedTweet(props) {
   return (
     <div className="feed-tweet">
       <div className="tweet-container">
-        <Avatar />
+        <div className="avatar-container">
+          <Avatar />
+        </div>
         <Tweet
           tweet={props.tweet}
           tweeter={props.tweeter}
