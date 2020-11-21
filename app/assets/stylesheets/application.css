@@ -113,8 +113,8 @@ nav {
   background-size: 2px 100%;
   background-repeat: no-repeat;
   background-position: center center;
-  height: 20px;
-  width: 5px;
+  height: 100%;
+  width: 10px;
 }
 
 #tweets {
