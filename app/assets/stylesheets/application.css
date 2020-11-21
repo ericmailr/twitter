@@ -58,9 +58,18 @@ a {
 }
 
 .tweet-options > * {
-  width: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.tweet-options-svg {
+  align-self: flex-end;
+}
+
+.tweet-options > a > span {
+  align-self: flex-start;
+  font-size: 13px;
+  padding: 0 10px;
 }
 
 .tweet-options > li > * {
