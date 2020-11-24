@@ -22,6 +22,13 @@ class TweetsController < ApplicationController
 
     def show
         @tweet = Tweet.find(params[:id])
+        respond_to do |format|
+            format.json do
+                msg = { :status => "ok", :message => "Success!", :likesCount => @tweet.likes.count }
+                render :json => msg
+            end
+            format.html {  }
+        end
     end
 
     def index

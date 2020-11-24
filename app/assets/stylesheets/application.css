@@ -64,18 +64,13 @@ a {
 
 .tweet-options-svg {
   align-self: flex-end;
+  width: 18.75px;
+  height: 18.75px;
 }
 
-.tweet-options > a > span {
-  align-self: flex-start;
+.tweet-options > * > span {
   font-size: 13px;
   padding: 0 10px;
-}
-
-.tweet-options > li > * {
-  display: block;
-  width: 100%;
-  text-align: center;
 }
 
 #container {
@@ -153,6 +148,7 @@ nav {
 .tweet-content {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .tweet {

@@ -12,19 +12,21 @@ function FeedTweet(props) {
         <div className="avatar-container">
           <Avatar />
         </div>
-        <Tweet
-          tweet={props.tweet}
-          tweeter={props.tweeter}
-          updatedAt={props.updatedAt}
-          replyingTo={props.replyingTo}
-          parent={props.parent}
-        />
+        <div className="tweet-content">
+          <Tweet
+            tweet={props.tweet}
+            tweeter={props.tweeter}
+            updatedAt={props.updatedAt}
+            replyingTo={props.replyingTo}
+            parent={props.parent}
+          />
+          <TweetOptions
+            tweetId={props.tweet.id}
+            commentCount={props.commentCount}
+            retweetCount={props.retweetCount}
+          />
+        </div>
       </div>
-      <TweetOptions
-        tweetId={props.tweet.id}
-        commentCount={props.commentCount}
-        retweetCount={props.retweetCount}
-      />
     </div>
   );
 }
