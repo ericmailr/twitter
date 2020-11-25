@@ -68,7 +68,7 @@ a {
   height: 18.75px;
 }
 
-.tweet-options > * > span {
+.option-count {
   font-size: 13px;
   padding: 0 10px;
 }
