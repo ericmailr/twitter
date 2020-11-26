@@ -5,6 +5,7 @@ class Tweet < ApplicationRecord
     belongs_to :tweeter, class_name: "User"
     has_many :tweets, dependent: :destroy
     has_many :likes, dependent: :destroy
+    has_many :likers, class_name: "User", through: :likes
     has_many :retweets, dependent: :destroy
 
 
