@@ -9,7 +9,7 @@ function TweetOptions(props) {
     <div className="tweet-options font-secondary">
       <Reply tweetId={props.tweetId} commentCount={props.commentCount} />
       <Retweet tweetId={props.tweetId} retweetCount={props.retweetCount} />
-      <Like tweetId={props.tweetId} />
+      <Like tweetId={props.tweetId} isLiked={props.isLiked} />
     </div>
   );
 }
@@ -18,6 +18,7 @@ TweetOptions.propTypes = {
   tweetId: PropTypes.number,
   commentCount: PropTypes.number,
   retweetCount: PropTypes.number,
+  isLiked: PropTypes.bool,
 };
 
 export default TweetOptions;

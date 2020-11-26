@@ -24,6 +24,7 @@ function FeedTweet(props) {
             tweetId={props.tweet.id}
             commentCount={props.commentCount}
             retweetCount={props.retweetCount}
+            isLiked={props.isLiked}
           />
         </div>
       </div>
@@ -39,6 +40,7 @@ Tweet.propTypes = {
   parent: PropTypes.object,
   commentCount: PropTypes.number,
   retweetCount: PropTypes.number,
+  isLiked: PropTypes.bool,
 };
 
 export default FeedTweet;
