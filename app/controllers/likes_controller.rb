@@ -1,6 +1,5 @@
 class LikesController < ApplicationController
 
-    #Just do all this in Tweets controller?
     def create
         @like = Like.find_by(liker_id: current_user.id, tweet_id: params[:tweet_id])
         if (!@like)  

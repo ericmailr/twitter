@@ -101,6 +101,22 @@ nav {
   align-items: stretch;
 }
 
+.status {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+}
+
+.status-content {
+  font-size: 23px;
+  line-height: 1.35em;
+  padding: 10px 0;
+}
+
 .avatar {
   width: 49px;
   height: 49px;

@@ -23,6 +23,7 @@ function Reply(props) {
             tweetId={props.parent.id}
             commentCount={props.parentCommentCount}
             retweetCount={props.parentRetweetCount}
+            isLiked={props.parentIsLiked}
           />
         </div>
       </div>
@@ -41,6 +42,7 @@ function Reply(props) {
             tweetId={props.reply.id}
             commentCount={props.replyCommentCount}
             retweetCount={props.replyRetweetCount}
+            isLiked={props.replyIsLiked}
           />
         </div>
       </div>
@@ -54,11 +56,13 @@ Reply.propTypes = {
   replyCommentCount: PropTypes.number,
   replyRetweetCount: PropTypes.number,
   replyUpdatedAt: PropTypes.string,
+  replyIsLiked: PropTypes.bool,
   parent: PropTypes.object,
   parentTweeter: PropTypes.object,
   parentCommentCount: PropTypes.number,
   parentRetweetCount: PropTypes.number,
   parentUpdatedAt: PropTypes.string,
+  parentIsLiked: PropTypes.bool,
 };
 
 export default Reply;
