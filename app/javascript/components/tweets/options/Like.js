@@ -78,7 +78,6 @@ function Like(props) {
           });
         })();
       }}>
-      {" "}
       {likeState.isLiked ? (
         <svg className="tweet-options-svg" viewBox="0 0 24 24">
           <g>

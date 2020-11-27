@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 function Share(props) {
   return (
     <a className="option-container" href="#">
-      {" "}
       <svg className="tweet-options-svg" viewBox="0 0 24 24">
         <g>
           <path

@@ -6,7 +6,6 @@ function Retweet(props) {
     <a
       className="option-container"
       href={Routes.new_retweet_path({ tweet_id: props.tweetId })}>
-      {" "}
       <svg className="tweet-options-svg" viewBox="0 0 24 24">
         <g>
           <path

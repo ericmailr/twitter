@@ -6,7 +6,6 @@ function Reply(props) {
     <a
       className="option-container"
       href={Routes.new_tweet_path({ parent_id: props.tweetId })}>
-      {" "}
       <svg className="tweet-options-svg" viewBox="0 0 24 24">
         <g>
           <path

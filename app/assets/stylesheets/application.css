@@ -60,19 +60,19 @@ a {
 .option-container {
   display: flex;
   justify-content: flex-start;
+  align-items: flex-start;
   flex: 1;
 }
 
 .tweet-options-svg {
   width: 18.75px;
   height: 18.75px;
-  padding: 2px;
-  margin-left: -2px;
 }
 
 .option-count {
   font-size: 13px;
-  padding: 0 8px;
+  line-height: 13px;
+  padding: 1px 10px;
 }
 
 .liked-color {
