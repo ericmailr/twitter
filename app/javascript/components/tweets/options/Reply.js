@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 function Reply(props) {
   return (
-    <a href={Routes.new_tweet_path({ parent_id: props.tweetId })}>
+    <a
+      className="option-container"
+      href={Routes.new_tweet_path({ parent_id: props.tweetId })}>
       {" "}
       <svg className="tweet-options-svg" viewBox="0 0 24 24">
         <g>

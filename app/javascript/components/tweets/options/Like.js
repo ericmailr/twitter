@@ -62,6 +62,7 @@ function Like(props) {
 
   return (
     <div
+      className="option-container"
       onClick={() => {
         (async () => {
           let msg = "";

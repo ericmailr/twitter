@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Like from "./options/Like";
 import Retweet from "./options/Retweet";
 import Reply from "./options/Reply";
+import Share from "./options/Share";
 
 function TweetOptions(props) {
   return (
@@ -10,6 +11,7 @@ function TweetOptions(props) {
       <Reply tweetId={props.tweetId} commentCount={props.commentCount} />
       <Retweet tweetId={props.tweetId} retweetCount={props.retweetCount} />
       <Like tweetId={props.tweetId} isLiked={props.isLiked} />
+      <Share tweetId={props.tweetId} />
     </div>
   );
 }

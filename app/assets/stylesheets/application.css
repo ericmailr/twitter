@@ -53,29 +53,31 @@ a {
 .tweet-options {
   display: flex;
   list-style-type: none;
-  justify-content: space-around;
-  margin: 4px 0;
+  justify-content: flex-start;
+  padding: 8px 0;
 }
 
-.tweet-options > * {
+.option-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex: 1;
 }
 
 .tweet-options-svg {
-  align-self: flex-end;
   width: 18.75px;
   height: 18.75px;
+  padding: 2px;
+  margin-left: -2px;
+}
+
+.option-count {
+  font-size: 13px;
+  padding: 0 8px;
 }
 
 .liked-color {
   fill: rgb(224, 36, 94);
   color: rgb(224, 36, 94);
-}
-
-.option-count {
-  font-size: 13px;
-  padding: 0 10px;
 }
 
 #container {
