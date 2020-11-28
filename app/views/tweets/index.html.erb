@@ -4,6 +4,7 @@
         <%= f.submit 'Tweet' %>
     <% end %>
     <% @posts.each do |post| %>
+      <%# REWORK SO THAT I'M JUST PASSING POST INSTEAD OF POST AND ALL ITS PROPERTIES (SERIALIZE?) #%> 
       <% if post.class.name == "Tweet" %>
         <% if !post.parent %>
             <%= react_component("FeedTweet", {tweet: post, tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, commentCount: post.children.count, retweetCount: post.retweets.count, isLiked: post.likers.include?(current_user)} ) %> 

@@ -24,7 +24,8 @@ function Status(props) {
         href={Routes.status_path(props.tweeter.handle, props.tweet.id)}>
         {props.tweet.content}
       </a>
-      <span className="font-secondary">{props.updatedAt} </span>
+      <div className="font-secondary">{props.updatedAt} </div>
+      <div>{console.log(props.tweetjson)}</div>
     </div>
   );
 }
@@ -33,6 +34,7 @@ Status.propTypes = {
   tweet: PropTypes.object,
   tweeter: PropTypes.object,
   updatedAt: PropTypes.string,
+  tweetjson: PropTypes.object,
 };
 
 export default Status;
