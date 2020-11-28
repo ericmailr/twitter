@@ -16,13 +16,13 @@ function Reply(props) {
         <div className="tweet-content">
           <Tweet
             tweet={props.parent}
-            tweeter={props.parentTweeter}
+            tweeter={props.parent.tweeter}
             updatedAt={props.parentUpdatedAt}
           />
           <TweetOptions
             tweetId={props.parent.id}
-            commentCount={props.parentCommentCount}
-            retweetCount={props.parentRetweetCount}
+            commentCount={props.parent.children.length}
+            retweetCount={props.parent.retweets.length}
             isLiked={props.parentIsLiked}
           />
         </div>
@@ -35,13 +35,13 @@ function Reply(props) {
         <div className="tweet-content">
           <Tweet
             tweet={props.reply}
-            tweeter={props.replyTweeter}
+            tweeter={props.reply.tweeter}
             updatedAt={props.replyUpdatedAt}
           />
           <TweetOptions
             tweetId={props.reply.id}
-            commentCount={props.replyCommentCount}
-            retweetCount={props.replyRetweetCount}
+            commentCount={props.reply.children.length}
+            retweetCount={props.reply.retweets.length}
             isLiked={props.replyIsLiked}
           />
         </div>
@@ -52,15 +52,9 @@ function Reply(props) {
 
 Reply.propTypes = {
   reply: PropTypes.object,
-  replyTweeter: PropTypes.object,
-  replyCommentCount: PropTypes.number,
-  replyRetweetCount: PropTypes.number,
   replyUpdatedAt: PropTypes.string,
   replyIsLiked: PropTypes.bool,
   parent: PropTypes.object,
-  parentTweeter: PropTypes.object,
-  parentCommentCount: PropTypes.number,
-  parentRetweetCount: PropTypes.number,
   parentUpdatedAt: PropTypes.string,
   parentIsLiked: PropTypes.bool,
 };

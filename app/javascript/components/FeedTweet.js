@@ -15,15 +15,14 @@ function FeedTweet(props) {
         <div className="tweet-content">
           <Tweet
             tweet={props.tweet}
-            tweeter={props.tweeter}
+            tweeter={props.tweet.tweeter}
             updatedAt={props.updatedAt}
             replyingTo={props.replyingTo}
-            parent={props.parent}
           />
           <TweetOptions
             tweetId={props.tweet.id}
-            commentCount={props.commentCount}
-            retweetCount={props.retweetCount}
+            commentCount={props.tweet.children.length}
+            retweetCount={props.tweet.retweets.length}
             isLiked={props.isLiked}
           />
         </div>
@@ -37,9 +36,6 @@ Tweet.propTypes = {
   tweeter: PropTypes.object,
   updatedAt: PropTypes.string,
   replyingTo: PropTypes.string,
-  parent: PropTypes.object,
-  commentCount: PropTypes.number,
-  retweetCount: PropTypes.number,
   isLiked: PropTypes.bool,
 };
 
