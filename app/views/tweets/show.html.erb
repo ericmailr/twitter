@@ -1,4 +1,4 @@
-<%= react_component("statuses/Status", {tweetjson: TweetSerializer.new(@tweet), tweet: @tweet, tweeter: @tweet.tweeter, updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at), isLiked: @tweet.likers.include?(current_user)}) %>
+<%= react_component("statuses/Status", {tweet: TweetSerializer.new(@tweet), updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at), isLiked: @tweet.likers.include?(current_user)}) %>
 <% @tweet.children.each do |comment| %>
     <%= react_component("tweets/Tweet", {tweet: comment, tweeter: comment.tweeter, updatedAt: tweet_updated_at_formatted_brief(comment.updated_at), replyingTo: comment.parent.tweeter.handle}) %>
 <% end %>

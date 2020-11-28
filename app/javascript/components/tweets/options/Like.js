@@ -95,10 +95,12 @@ function Like(props) {
           </g>
         </svg>
       )}
-      <span
-        className={`option-count ${likeState.isLiked ? "liked-color" : ""}`}>
-        {likeState.likesCount}
-      </span>
+      {!props.omitCount && (
+        <span
+          className={`option-count ${likeState.isLiked ? "liked-color" : ""}`}>
+          {likeState.likesCount}
+        </span>
+      )}
     </div>
   );
 }
@@ -106,6 +108,7 @@ function Like(props) {
 Like.propTypes = {
   tweetId: PropTypes.number,
   isLiked: PropTypes.bool,
+  omitCount: PropTypes.bool,
 };
 
 export default Like;
