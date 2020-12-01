@@ -61,3 +61,59 @@ has_many :likes
 
 like -- liker_id:integer, tweet_id
 belongs_to :liker, class_name: "User"
+
+CHANGING TWEET MODEL SETUP
+
+just make them all tweets... simplifying ancestry stuff. new columns for quote, quote_tweet, quoted_tweet_id
+(Cons: all the same class, empty extra columns)
+
+OR
+
+Single Table Inheritance with subclasses
+Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
+(Cons: empty extra columns)
+Can easily get a list of all types of posts, ordered by date for example
+
+OR
+
+Rails Delegated types? STI with delegated child companion object
+https://belighted.com/blog/implementing-multiple-table-inheritance-in-rails
+https://github.com/rails/rails/pull/39341
+
+wots all this then?
+module Postable
+extend ActiveSupport::Concern
+
+included do
+has_one :post, as: :postable, touch: true
+end
+end
+
+POST
+id
+content
+tweeter_id
+ancestry
+
+delegated_type :postable, types: %w[ Tweet Retweet QuoteTweet ]
+
+TWEET
+same as POST. Stored in POST table
+
+include Postable
+
+RETWEET
+same as POST, content is og tweet's content (or perhaps even nil). Stored in POST table
+tweet_id
+
+include Postable
+
+QUOTE TWEET
+same as POST, stored in POST table
+tweet_id
+quote: og tweet
+now content is the new comment
+
+include Postable
+
+Can I have subclasses that still use ancestry gem of superclass...

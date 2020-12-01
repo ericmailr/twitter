@@ -15,5 +15,5 @@
         <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
     <% end %>
     
-    <%# add another elsif for new QuoteTweet model, remove comment column from retweets, add new component for QuoteTweet, add QuoteTweets to @posts in controller, add serializers for both Retweet and QuoteTweet #%>
+    <%# add another elsif for new QuoteTweet model, remove comment column from retweets, add QuoteTweets to @posts in controller, add serializers for both Retweet and QuoteTweet #%>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_002643) do
+ActiveRecord::Schema.define(version: 2020_11_29_164507) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id"
@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 2020_11_17_002643) do
     t.integer "tweet_id"
   end
 
+  create_table "quote_tweets", force: :cascade do |t|
+    t.integer "quote_tweeter_id"
+    t.integer "tweet_id"
+    t.string "quote"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,7 +42,6 @@ ActiveRecord::Schema.define(version: 2020_11_17_002643) do
     t.integer "tweet_id"
     t.string "content"
     t.string "ancestry"
-    t.string "comment"
     t.index ["ancestry"], name: "index_retweets_on_ancestry"
   end
 
