@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import Avatar from "./../Avatar";
 import Tweet from "./Tweet";
 import TweetOptions from "./TweetOptions";
-
+//VERY similar to FeedTweet. In FeedTweet: check if tweet has parent,
+//      if so add parent with child in reply-container, and add reply-connector to parent's avatar connector
 function Reply(props) {
   return (
     <div className="reply-container">

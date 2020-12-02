@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "../../assets/avatar.png";
-import Reply from "../tweets/options/Reply";
-import Retweet from "../tweets/options/Retweet";
-import Like from "../tweets/options/Like";
-import Share from "../tweets/options/Share";
+import TweetOptions from "../tweets/TweetOptions";
 
 function Status(props) {
   return (
@@ -53,24 +50,13 @@ function Status(props) {
           </a>
         )}
       </div>
-      <div className="status-options">
-        <Reply
-          tweetId={props.tweet.id}
-          commentCount={props.tweet.children.length}
-          omitCount={true}
-        />
-        <Retweet
-          tweetId={props.tweet.id}
-          retweetCount={props.tweet.retweets.length}
-          omitCount={true}
-        />
-        <Like
-          tweetId={props.tweet.id}
-          isLiked={props.isLiked}
-          omitCount={true}
-        />
-        <Share tweetId={props.tweet.id} />
-      </div>
+      <TweetOptions
+        tweetId={props.tweet.id}
+        commentCount={props.tweet.children.length}
+        retweetCount={props.tweet.retweets.length}
+        isLiked={props.isLiked}
+        omitCount={true}
+      />
     </div>
   );
 }

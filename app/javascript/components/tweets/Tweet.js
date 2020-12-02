@@ -12,7 +12,6 @@ function Tweet(props) {
   };
   return (
     <div className="tweet">
-      {/* NEEDS AVATAR AND STUFF, CAN I ACTUALLY JUST USE FEEDTWEET (CALLED FROM STATUS, FOR EACH CHILD REPLY) */}
       <div>
         <a href={Routes.profile_path(props.tweeter.handle)}>
           <span className={"username"}>{props.tweeter.username}</span>
@@ -28,7 +27,7 @@ function Tweet(props) {
         <br />
         {props.replyingTo && <ReplyHeader parentHandle={props.replyingTo} />}
         <a href={Routes.status_path(props.tweeter.handle, props.tweet.id)}>
-          {content()}
+          {props.tweet.content}
         </a>
       </div>
     </div>

@@ -7,25 +7,24 @@ import TweetOptions from "./tweets/TweetOptions";
 
 function FeedTweet(props) {
   return (
-    <div className="feed-tweet">
-      <div className="tweet-container">
-        <div className="avatar-container">
-          <Avatar />
-        </div>
-        <div className="tweet-content">
-          <Tweet
-            tweet={props.tweet}
-            tweeter={props.tweet.tweeter}
-            updatedAt={props.updatedAt}
-            replyingTo={props.replyingTo}
-          />
-          <TweetOptions
-            tweetId={props.tweet.id}
-            commentCount={props.tweet.children.length}
-            retweetCount={props.tweet.retweets.length}
-            isLiked={props.isLiked}
-          />
-        </div>
+    <div className="tweet-container">
+      {/*add tweet-header here? */}
+      <div className="avatar-container">
+        <Avatar />
+      </div>
+      <div className="tweet-content">
+        <Tweet
+          tweet={props.tweet}
+          tweeter={props.tweet.tweeter}
+          updatedAt={props.updatedAt}
+          replyingTo={props.replyingTo}
+        />
+        <TweetOptions
+          tweetId={props.tweet.id}
+          commentCount={props.tweet.children.length}
+          retweetCount={props.tweet.retweets.length}
+          isLiked={props.isLiked}
+        />
       </div>
     </div>
   );

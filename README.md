@@ -56,15 +56,19 @@ has_many :retweets
 retweet -- retweeter_id
 belongs_to :retweeter, class_name: "User"
 belongs_to :tweet
-has_many :tweets
+has_many :tweets //nevermind, this is solved with ancestry gem
 has_many :likes
 
 like -- liker_id:integer, tweet_id
 belongs_to :liker, class_name: "User"
 
+DRY: Don't Repeat Yourself
+
 CHANGING TWEET MODEL SETUP
 
-just make them all tweets... simplifying ancestry stuff. new columns for quote, quote_tweet, quoted_tweet_id
+just make them all tweets... simplifying ancestry stuff. new columns for quote_id
+content is nil for retweets
+
 (Cons: all the same class, empty extra columns)
 
 OR
@@ -72,48 +76,18 @@ OR
 Single Table Inheritance with subclasses
 Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
 (Cons: empty extra columns)
-Can easily get a list of all types of posts, ordered by date for example
+
+Potentially overkill...?
+What is the benefit over just leaving inheritance out of it and just removing Retweet/QuoteTweet classes?
+It does seem easier to grab retweets, quote_tweets without needing another column for og tweet id to find quote_tweets since they're all the same class. Very small benefit though.
 
 OR
 
+NOT COMING UNTIL RAILS 6.1
 Rails Delegated types? STI with delegated child companion object
 https://belighted.com/blog/implementing-multiple-table-inheritance-in-rails
 https://github.com/rails/rails/pull/39341
 
-wots all this then?
-module Postable
-extend ActiveSupport::Concern
+TODO NEXT:
 
-included do
-has_one :post, as: :postable, touch: true
-end
-end
-
-POST
-id
-content
-tweeter_id
-ancestry
-
-delegated_type :postable, types: %w[ Tweet Retweet QuoteTweet ]
-
-TWEET
-same as POST. Stored in POST table
-
-include Postable
-
-RETWEET
-same as POST, content is og tweet's content (or perhaps even nil). Stored in POST table
-tweet_id
-
-include Postable
-
-QUOTE TWEET
-same as POST, stored in POST table
-tweet_id
-quote: og tweet
-now content is the new comment
-
-include Postable
-
-Can I have subclasses that still use ancestry gem of superclass...
+Retweets need avatars.

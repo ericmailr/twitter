@@ -4,9 +4,6 @@ class TweetsController < ApplicationController
         if (params[:parent_id])
             @parent_id = params[:parent_id]
             @tweet.parent = Tweet.find(params[:parent_id])
-            @is_reply = true;
-        else 
-            @is_reply = false;
         end
     end
 

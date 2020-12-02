@@ -7,10 +7,28 @@ import Share from "./options/Share";
 
 function TweetOptions(props) {
   return (
-    <div className="tweet-options font-secondary">
-      <Reply tweetId={props.tweetId} commentCount={props.commentCount} />
-      <Retweet tweetId={props.tweetId} retweetCount={props.retweetCount} />
-      <Like tweetId={props.tweetId} isLiked={props.isLiked} />
+    <div
+      className={
+        //consider changing omitCount to statusOption? (more aptly named)
+        props.omitCount
+          ? "status-options font-secondary"
+          : "tweet-options font-secondary"
+      }>
+      <Reply
+        tweetId={props.tweetId}
+        commentCount={props.commentCount}
+        omitCount={props.omitCount}
+      />
+      <Retweet
+        tweetId={props.tweetId}
+        retweetCount={props.retweetCount}
+        omitCount={props.omitCount}
+      />
+      <Like
+        tweetId={props.tweetId}
+        isLiked={props.isLiked}
+        omitCount={props.omitCount}
+      />
       <Share tweetId={props.tweetId} />
     </div>
   );
@@ -21,6 +39,7 @@ TweetOptions.propTypes = {
   commentCount: PropTypes.number,
   retweetCount: PropTypes.number,
   isLiked: PropTypes.bool,
+  omitCount: PropTypes.bool,
 };
 
 export default TweetOptions;

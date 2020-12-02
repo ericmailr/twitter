@@ -1,5 +1,5 @@
-<% if @is_reply %>
-    <%= render partial: "layouts/post", locals: {post: @tweet.parent} %>
+<% if @tweet.parent %>
+    <%= react_component("statuses/Status", {tweet: TweetSerializer.new(@tweet.parent), updatedAt: tweet_updated_at_formatted_full(@tweet.parent.updated_at), isLiked: @tweet.parent.likers.include?(current_user)}) %>
 <% end %>
 <%= form_for @tweet do |f| %>
     <%= hidden_field_tag 'parent_id', @parent_id %>

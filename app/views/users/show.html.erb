@@ -12,7 +12,7 @@
             <%= react_component("FeedTweet", {tweet: TweetSerializer.new(post), updatedAt: tweet_updated_at_formatted_brief(post.updated_at), isLiked: post.likers.include?(current_user)}) %> 
         <% end %>
     <% elsif post.class.name == "Retweet" %>
-        <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
+        <%= react_component("retweets/Retweet", {tweet: TweetSerializer.new(post), quoted_tweet: TweetSerializer.new(post.tweet), updatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at)}) %>
     <% end %>
     
     <%# add another elsif for new QuoteTweet model, remove comment column from retweets, add QuoteTweets to @posts in controller, add serializers for both Retweet and QuoteTweet #%>
