@@ -90,4 +90,6 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-Retweets need avatars.
+Add Headers for Retweeted, liked, "received a reply", and gave a reply?
+
+Eventually I need to figure out my sessions, current_user. As of now, I can't logout of one and back in as another and have it show what it should.

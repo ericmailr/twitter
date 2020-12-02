@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    flash[:notice] = "Logged out!"
+    flash.now[:notice] = "Logged out!"
     cookies.permanent[:remember_token] = nil
     session[:user_id] = nil
     redirect_to login_path

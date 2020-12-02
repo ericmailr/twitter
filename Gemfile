@@ -33,6 +33,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+#ancestry gem for tree structure model (used for comments)
+gem 'ancestry'
+
 gem 'webpacker', '~> 5.x'
 gem 'react-rails', '~> 2.6.1'
 gem 'js-routes', '~> 1.4.9'
@@ -55,6 +58,3 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-#ancestry gem for tree structure model (used for comments)
-gem 'ancestry'

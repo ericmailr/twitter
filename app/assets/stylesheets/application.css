@@ -197,6 +197,7 @@ nav {
 
 .tweet-container {
   display: flex;
+  cursor: pointer;
 }
 
 .tweet-content {

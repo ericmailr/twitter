@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Tweet from "../tweets/Tweet";
-import FeedTweet from "../FeedTweet";
 
 function Retweet(props) {
   //tweet-header goes above tweet-content, with a symbol for header above the avatar-container.
@@ -20,7 +19,7 @@ function Retweet(props) {
         </span>
       </span>
       <div>
-        <FeedTweet
+        <Tweet
           tweet={props.quoted_tweet}
           tweeter={props.quoted_tweet.tweeter}
           updatedAt={props.updatedAt}

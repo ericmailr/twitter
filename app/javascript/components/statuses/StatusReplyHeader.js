@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function ReplyHeader(props) {
+function StatusReplyHeader(props) {
   return (
     <div className={"font-secondary"}>
       Replying to
@@ -13,8 +13,8 @@ function ReplyHeader(props) {
   );
 }
 
-ReplyHeader.propTypes = {
+StatusReplyHeader.propTypes = {
   parentHandle: PropTypes.string,
 };
 
-export default ReplyHeader;
+export default StatusReplyHeader;
