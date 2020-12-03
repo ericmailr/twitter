@@ -163,7 +163,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 10px;
+  flex: 1;
 }
 
 .reply-connector {
@@ -195,6 +195,11 @@ nav {
   border-radius: 15px;
 }
 
+.post-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .tweet-container {
   display: flex;
   cursor: pointer;
@@ -204,10 +209,34 @@ nav {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  flex: 8;
 }
 
 .tweet {
   display: flex;
+}
+
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.header-svg {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-svg > span {
+  width: 49px; /* same as avatar width */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-message {
+  flex: 8;
 }
 
 .reply-container {

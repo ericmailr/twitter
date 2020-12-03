@@ -9,7 +9,7 @@
             <%= react_component("tweets/Tweet", {tweet: TweetSerializer.new(post), tweeter: post.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, commentCount: post.children.count, retweetCount: post.retweets.count, isLiked: post.likers.include?(current_user)} ) %> 
         <% end %>
       <% elsif post.class.name == "Retweet" %>
-          <%= react_component("retweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
+          <%= react_component("tweets/Retweet", {retweet: post, tweet: post.tweet, retweeter: post.retweeter, tweeter: post.tweet.tweeter, updatedAt: tweet_updated_at_formatted_brief(post.updated_at), tweetUpdatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), comment: post.comment}) %>
       <% end %>
     <% end %>
 <% end %>
