@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "../../assets/avatar.png";
 import TweetOptions from "../tweets/TweetOptions";
+import Stats from "./Stats";
 
 function Status(props) {
   return (
@@ -10,7 +11,7 @@ function Status(props) {
         <div className="avatar-container">
           <img className="avatar" src={Avatar} alt="default avatar" />
         </div>
-        <div>
+        <div className="status-tweeter">
           <a href={Routes.profile_path(props.tweet.tweeter.handle)}>
             <div className={"username"}>{props.tweet.tweeter.username}</div>
             <div className={"font-secondary handle"}>
@@ -28,28 +29,13 @@ function Status(props) {
 
       <div className="status-updated-at font-secondary">{props.updatedAt} </div>
 
-      {/* only show if there are any, and if there are, only show the ones with count > 0 */}
-      <div className="status-stats">
-        {props.tweet.retweets.length > 0 && (
-          <a href="#">
-            <span style={{ fontWeight: "700" }}>
-              {props.tweet.retweets.length}{" "}
-            </span>
-            <span className="font-secondary">Retweets</span>
-          </a>
-        )}
-
-        {/*NEED TO ADD QUOTE TWEETS HERE*/}
-
-        {props.tweet.likes.length > 0 && (
-          <a href="#">
-            <span style={{ fontWeight: "700" }}>
-              {props.tweet.likes.length}{" "}
-            </span>
-            <span className="font-secondary">Likes</span>
-          </a>
-        )}
-      </div>
+      {props.tweet.retweets.length + props.tweet.likes.length > 0 && (
+        <div className="status-stats">
+          <Stats type="Retweets" count={props.tweet.retweets.length} />
+          <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />
+          <Stats type="Likes" count={props.tweet.likes.length} />
+        </div>
+      )}
       <TweetOptions
         tweetId={props.tweet.id}
         commentCount={props.tweet.children.length}

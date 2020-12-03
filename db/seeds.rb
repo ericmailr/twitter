@@ -39,7 +39,7 @@ tweet_comments = Tweet.create!([
 ])
 
 retweets = Retweet.create!([
-   {tweeter_id: users[0].id, quote_id: tweets[2].id, type: "Retweet"} 
+   {tweeter_id: users[3].id, content: tweets[2].content, quote_id: tweets[2].id, type: "Retweet"} 
 ])
 
 quote_tweets = QuoteTweet.create!([

@@ -113,10 +113,14 @@ nav {
   align-items: center;
 }
 
+.status-tweeter {
+  flex: 8;
+}
+
 .status-content {
   font-size: 23px;
   line-height: 1.35em;
-  padding: 10px 0;
+  padding-top: 10px;
 }
 
 .status-updated-at {
@@ -221,6 +225,7 @@ nav {
   justify-content: space-between;
   font-weight: 700;
   font-size: 13px;
+  padding: 2px 0;
 }
 
 .header-svg {

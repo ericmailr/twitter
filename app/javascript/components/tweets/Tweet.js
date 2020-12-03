@@ -9,8 +9,12 @@ import ActionHeader from "./ActionHeader";
 function Tweet(props) {
   return (
     <div className="post-container">
-      {/*add tweet-header here? */}
-      <ActionHeader username={props.tweet.tweeter.username} />
+      {props.actionHeader && (
+        <ActionHeader
+          username={props.tweeter.username}
+          action={props.actionHeader}
+        />
+      )}
       <div className="tweet-container">
         <div className="avatar-container">
           <Avatar />
@@ -61,10 +65,12 @@ function Tweet(props) {
 
 Tweet.propTypes = {
   tweet: PropTypes.object,
+  tweeter: PropTypes.object,
   updatedAt: PropTypes.string,
   replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,
   isParent: PropTypes.bool,
+  actionHeader: PropTypes.string,
 };
 
 export default Tweet;
