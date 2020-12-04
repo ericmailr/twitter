@@ -29,6 +29,7 @@ function TweetOptions(props) {
         isLiked={props.isLiked}
         isStatusOption={props.isStatusOption}
         toggleLike={props.toggleLike}
+        likesCount={props.likesCount}
       />
       <Share tweetId={props.tweetId} />
     </div>
@@ -43,6 +44,7 @@ TweetOptions.propTypes = {
   isRetweeted: PropTypes.bool,
   isStatusOption: PropTypes.bool,
   toggleLike: PropTypes.func,
+  likesCount: PropTypes.number,
 };
 
 export default TweetOptions;

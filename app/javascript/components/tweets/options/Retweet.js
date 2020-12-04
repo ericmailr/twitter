@@ -21,7 +21,7 @@ function Retweet(props) {
             }></path>
         </g>
       </svg>
-      {!props.isStatusOption && (
+      {!props.isStatusOption && props.retweetCount != 0 && (
         <span
           className={`option-count ${props.isRetweeted && "retweeted-color"}`}>
           {props.retweetCount}

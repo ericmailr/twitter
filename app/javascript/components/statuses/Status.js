@@ -78,14 +78,13 @@ function Status(props) {
           <Stats type="Retweets" count={props.tweet.retweets.length} />
           <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />
           <Stats type="Likes" count={likeState.likesCount} />
-          {/* Need to update count when option is clicked... Move all of likeState and other options' states to Status.js, and probably Tweet.js as well (or maybe a TweetWrapper to handle state for both), pass handler to option components */}
         </div>
       )}
       <TweetOptions
         tweetId={props.tweet.id}
         commentCount={props.tweet.children.length}
         retweetCount={props.tweet.retweets.length}
-        isLiked={props.isLiked}
+        isLiked={likeState.isLiked}
         isStatusOption={true}
         toggleLike={toggleLike}
       />
