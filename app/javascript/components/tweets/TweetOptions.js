@@ -23,6 +23,7 @@ function TweetOptions(props) {
         tweetId={props.tweetId}
         retweetCount={props.retweetCount}
         omitCount={props.omitCount}
+        isRetweeted={props.isRetweeted}
       />
       <Like
         tweetId={props.tweetId}

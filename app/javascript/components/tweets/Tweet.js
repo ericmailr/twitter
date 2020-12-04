@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Avatar from "../Avatar";
 import StatusReplyHeader from "../statuses/StatusReplyHeader";
 import TweetOptions from "./TweetOptions";
@@ -56,6 +55,7 @@ function Tweet(props) {
             commentCount={props.tweet.children.length}
             retweetCount={props.tweet.retweets.length}
             isLiked={props.isLiked}
+            isRetweeted={props.isRetweeted}
           />
         </div>
       </div>
@@ -70,6 +70,7 @@ Tweet.propTypes = {
   replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,
   isParent: PropTypes.bool,
+  isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,
 };
 

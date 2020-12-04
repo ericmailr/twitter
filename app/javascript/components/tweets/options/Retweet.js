@@ -5,7 +5,11 @@ function Retweet(props) {
   return (
     <a
       className="option-container"
-      href={Routes.new_retweet_path({ quote_id: props.tweetId })}>
+      href={
+        props.isRetweeted
+          ? "#" //reloads page...
+          : Routes.new_retweet_path({ quote_id: props.tweetId })
+      }>
       <svg className="tweet-options-svg" viewBox="0 0 24 24">
         <g>
           <path
@@ -24,6 +28,7 @@ Retweet.propTypes = {
   tweetId: PropTypes.number,
   retweetCount: PropTypes.number,
   omitCount: PropTypes.bool,
+  isRetweeted: PropTypes.bool,
 };
 
 export default Retweet;

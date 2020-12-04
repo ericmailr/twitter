@@ -9,7 +9,8 @@ function Retweet(props) {
         tweet={props.quoted_tweet}
         tweeter={props.tweet.tweeter}
         updatedAt={props.updatedAt}
-        isLiked={props.isLiked}
+        isOgLiked={props.isLiked}
+        isOgRetweeted={props.ogIsRetweeted}
         actionHeader={"retweet"}
       />
     </div>
@@ -20,7 +21,8 @@ Retweet.propTypes = {
   tweet: PropTypes.object,
   quoted_tweet: PropTypes.object,
   updatedAt: PropTypes.string,
-  isLiked: PropTypes.bool,
+  isOgLiked: PropTypes.bool,
+  isOgRetweeted: PropTypes.bool,
 };
 
 export default Retweet;

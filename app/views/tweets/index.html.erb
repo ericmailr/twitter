@@ -1,15 +1,31 @@
 <% if current_user %>
-    <%= form_for @tweet do |f| %>
-        <%= f.text_field :content %><br>
-        <%= f.submit 'Tweet' %>
-    <% end %>
-    <% @posts.each do |post| %>
-      <% if post.class.name == "Tweet" %>
-        <% if !post.parent %>
-            <%= react_component("tweets/Tweet", {tweet: TweetSerializer.new(post), updatedAt: tweet_updated_at_formatted_brief(post.updated_at), parent: post.parent, isLiked: post.likers.include?(current_user)} ) %> 
-        <% end %>
-      <% elsif post.class.name == "Retweet" %>
-          <%= react_component("tweets/Retweet", {tweet: TweetSerializer.new(post), quoted_tweet: TweetSerializer.new(post.tweet), updatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), isLiked: post.tweet.likers.include?(current_user)}) %>
+  <%= form_for @tweet do |f| %>
+    <%= f.text_field :content %><br>
+    <%= f.submit 'Tweet' %>
+  <% end %>
+  <% @posts.each do |post| %>
+    <% if post.class.name == "Tweet" %>
+      <% if !post.parent %>
+        <%= react_component("tweets/Tweet", 
+          {
+            tweet: TweetSerializer.new(post), 
+            updatedAt: tweet_updated_at_formatted_brief(post.updated_at), 
+            parent: post.parent, 
+            isLiked: post.likers.include?(current_user),
+            isRetweeted: post.retweeters.include?(current_user) 
+          }) 
+        %>
       <% end %>
+    <% elsif post.class.name == "Retweet" %>
+      <%= react_component("tweets/Retweet", 
+        {
+          tweet: TweetSerializer.new(post), 
+          quoted_tweet: TweetSerializer.new(post.tweet), 
+          updatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), 
+          isOgLiked: post.tweet.likers.include?(current_user),
+          isOgRetweeted: post.tweet.retweeters.include?(current_user)
+        }) 
+      %>
     <% end %>
+  <% end %>
 <% end %>
