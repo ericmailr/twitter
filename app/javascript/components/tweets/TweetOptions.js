@@ -9,26 +9,26 @@ function TweetOptions(props) {
   return (
     <div
       className={
-        //consider changing omitCount to statusOption? (more aptly named)
-        props.omitCount
+        props.isStatusOption
           ? "status-options font-secondary"
           : "tweet-options font-secondary"
       }>
       <Reply
         tweetId={props.tweetId}
         commentCount={props.commentCount}
-        omitCount={props.omitCount}
+        isStatusOption={props.isStatusOption}
       />
       <Retweet
         tweetId={props.tweetId}
         retweetCount={props.retweetCount}
-        omitCount={props.omitCount}
+        isStatusOption={props.isStatusOption}
         isRetweeted={props.isRetweeted}
       />
       <Like
         tweetId={props.tweetId}
         isLiked={props.isLiked}
-        omitCount={props.omitCount}
+        isStatusOption={props.isStatusOption}
+        toggleLike={props.toggleLike}
       />
       <Share tweetId={props.tweetId} />
     </div>
@@ -40,7 +40,9 @@ TweetOptions.propTypes = {
   commentCount: PropTypes.number,
   retweetCount: PropTypes.number,
   isLiked: PropTypes.bool,
-  omitCount: PropTypes.bool,
+  isRetweeted: PropTypes.bool,
+  isStatusOption: PropTypes.bool,
+  toggleLike: PropTypes.func,
 };
 
 export default TweetOptions;

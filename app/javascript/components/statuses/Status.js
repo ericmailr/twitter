@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Avatar from "../../assets/avatar.png";
 import TweetOptions from "../tweets/TweetOptions";
 import Stats from "./Stats";
 
 function Status(props) {
+  const [likeState, setLikeState] = useState([]);
+  useEffect(async () => {
+    let msg = await fetch(`/tweets/${props.tweet.id}`);
+    let json = await msg.json();
+    setLikeState({
+      likesCount: json.likesCount,
+      isLiked: props.isLiked,
+    });
+  }, []);
+
+  const toggleLike = async () => {
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    let msg = "";
+    if (!likeState.isLiked) {
+      msg = await fetch("/likes", {
+        method: "POST",
+        body: JSON.stringify({
+          tweet_id: props.tweet.id,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    } else {
+      msg = await fetch(`/likes/${props.tweet.id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    }
+    let json = await msg.json();
+    setLikeState({
+      likesCount: json.likesCount,
+      isLiked: !likeState.isLiked,
+    });
+  };
+
   return (
     <div className="status">
       <div className="status-header">
@@ -33,7 +77,8 @@ function Status(props) {
         <div className="status-stats">
           <Stats type="Retweets" count={props.tweet.retweets.length} />
           <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />
-          <Stats type="Likes" count={props.tweet.likes.length} />
+          <Stats type="Likes" count={likeState.likesCount} />
+          {/* Need to update count when option is clicked... Move all of likeState and other options' states to Status.js, and probably Tweet.js as well (or maybe a TweetWrapper to handle state for both), pass handler to option components */}
         </div>
       )}
       <TweetOptions
@@ -41,7 +86,8 @@ function Status(props) {
         commentCount={props.tweet.children.length}
         retweetCount={props.tweet.retweets.length}
         isLiked={props.isLiked}
-        omitCount={true}
+        isStatusOption={true}
+        toggleLike={toggleLike}
       />
     </div>
   );

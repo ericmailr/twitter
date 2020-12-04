@@ -90,6 +90,10 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-Issue: Can retweet things more than once. if already retweeted, drop down to undo retweet
+Issues:
+
+move tweet state up to wrapper component, pass handler as prop to option components as needed
+
+if isRetweeted, drop down to undo retweet
 
 Eventually I need to figure out my sessions, current_user. As of now, I can't logout of one and back in as another and have it show what it should.
