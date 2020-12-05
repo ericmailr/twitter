@@ -9,6 +9,7 @@ function Status(props) {
   useEffect(async () => {
     let msg = await fetch(`/tweets/${props.tweet.id}`);
     let json = await msg.json();
+    // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
     setLikeState({
       likesCount: json.likesCount,
       isLiked: props.isLiked,
