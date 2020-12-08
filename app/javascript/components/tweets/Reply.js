@@ -1,21 +1,24 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import Tweet from "./Tweet";
+import PostWrapper from "../PostWrapper";
 
 function Reply(props) {
   return (
     <React.Fragment>
-      <Tweet
+      {/* change to PostWrapper with postType tweet */}
+      <PostWrapper
         tweet={props.parent}
         updatedAt={props.parentUpdatedAt}
         isLiked={props.parentIsLiked}
         isParent={true}
+        postType={"tweet"}
       />
-      <Tweet
+      <PostWrapper
         tweet={props.reply}
         updatedAt={props.replyUpdatedAt}
         isLiked={props.replyIsLiked}
         isParent={false}
+        postType={"tweet"}
       />
     </React.Fragment>
   );

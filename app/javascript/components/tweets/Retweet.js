@@ -1,17 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tweet from "./Tweet";
+import PostWrapper from "../PostWrapper";
 
 function Retweet(props) {
   return (
     <div>
-      <Tweet
+      RETWEET
+      <PostWrapper
         tweet={props.quoted_tweet}
         tweeter={props.tweet.tweeter}
         updatedAt={props.updatedAt}
         isOgLiked={props.isLiked}
         isOgRetweeted={props.ogIsRetweeted}
         actionHeader={"retweet"}
+        postType={"tweet"}
       />
     </div>
   );

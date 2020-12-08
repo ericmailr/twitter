@@ -6,50 +6,6 @@ import TweetOptions from "./TweetOptions";
 import ActionHeader from "./ActionHeader";
 
 function Tweet(props) {
-  const [likeState, setLikeState] = useState([]);
-  useEffect(async () => {
-    let msg = await fetch(`/tweets/${props.tweet.id}`);
-    let json = await msg.json();
-    setLikeState({
-      likesCount: json.likesCount,
-      isLiked: props.isLiked,
-    });
-  }, []);
-
-  const toggleLike = async () => {
-    const csrf = document
-      .querySelector("meta[name='csrf-token']")
-      .getAttribute("content");
-    let msg = "";
-    if (!likeState.isLiked) {
-      msg = await fetch("/likes", {
-        method: "POST",
-        body: JSON.stringify({
-          tweet_id: props.tweet.id,
-        }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrf,
-        },
-      });
-    } else {
-      msg = await fetch(`/likes/${props.tweet.id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrf,
-        },
-      });
-    }
-    let json = await msg.json();
-    setLikeState({
-      likesCount: json.likesCount,
-      isLiked: !likeState.isLiked,
-    });
-  };
-
   return (
     <div className="post-container">
       {props.actionHeader && (
@@ -98,11 +54,11 @@ function Tweet(props) {
             tweetId={props.tweet.id}
             commentCount={props.tweet.children.length}
             retweetCount={props.tweet.retweets.length}
-            likesCount={likeState.likesCount}
-            isLiked={likeState.isLiked}
+            likesCount={props.likesCount}
+            isLiked={props.isLiked}
             isRetweeted={props.isRetweeted}
             isStatusOption={false}
-            toggleLike={toggleLike}
+            toggleLike={props.toggleLike}
           />
         </div>
       </div>
@@ -119,6 +75,7 @@ Tweet.propTypes = {
   isParent: PropTypes.bool,
   isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,
+  toggleLike: PropTypes.func,
 };
 
 export default Tweet;

@@ -45,6 +45,7 @@ TweetOptions.propTypes = {
   isStatusOption: PropTypes.bool,
   toggleLike: PropTypes.func,
   likesCount: PropTypes.number,
+  newParent: PropTypes.object,
 };
 
 export default TweetOptions;

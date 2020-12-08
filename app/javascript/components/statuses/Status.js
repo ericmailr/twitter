@@ -5,51 +5,6 @@ import TweetOptions from "../tweets/TweetOptions";
 import Stats from "./Stats";
 
 function Status(props) {
-  const [likeState, setLikeState] = useState([]);
-  useEffect(async () => {
-    let msg = await fetch(`/tweets/${props.tweet.id}`);
-    let json = await msg.json();
-    // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
-    setLikeState({
-      likesCount: json.likesCount,
-      isLiked: props.isLiked,
-    });
-  }, []);
-
-  const toggleLike = async () => {
-    const csrf = document
-      .querySelector("meta[name='csrf-token']")
-      .getAttribute("content");
-    let msg = "";
-    if (!likeState.isLiked) {
-      msg = await fetch("/likes", {
-        method: "POST",
-        body: JSON.stringify({
-          tweet_id: props.tweet.id,
-        }),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrf,
-        },
-      });
-    } else {
-      msg = await fetch(`/likes/${props.tweet.id}`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrf,
-        },
-      });
-    }
-    let json = await msg.json();
-    setLikeState({
-      likesCount: json.likesCount,
-      isLiked: !likeState.isLiked,
-    });
-  };
-
   return (
     <div className="status">
       <div className="status-header">
@@ -78,16 +33,16 @@ function Status(props) {
         <div className="status-stats">
           <Stats type="Retweets" count={props.tweet.retweets.length} />
           <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />
-          <Stats type="Likes" count={likeState.likesCount} />
+          <Stats type="Likes" count={props.likesCount} />
         </div>
       )}
       <TweetOptions
         tweetId={props.tweet.id}
         commentCount={props.tweet.children.length}
         retweetCount={props.tweet.retweets.length}
-        isLiked={likeState.isLiked}
+        isLiked={props.isLiked}
         isStatusOption={true}
-        toggleLike={toggleLike}
+        toggleLike={props.toggleLike}
       />
     </div>
   );
