@@ -52,37 +52,29 @@ function PostWrapper(props) {
   return (
     <React.Fragment>
       {props.postType.toLowerCase() === "tweet" && (
-        <Tweet
-          {...props}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
+        <div className="post-border">
+          <Tweet
+            {...props}
+            toggleLike={toggleLike}
+            likesCount={likeState.likesCount}
+            isLiked={likeState.isLiked}
+          />
+        </div>
       )}
       {props.postType.toLowerCase() === "status" && (
-        <Status
-          tweet={props.tweet}
-          updatedAt={props.updatedAt}
-          isLiked={props.isLiked}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
+        <div className="post-border">
+          <Status
+            tweet={props.tweet}
+            updatedAt={props.updatedAt}
+            isLiked={props.isLiked}
+            toggleLike={toggleLike}
+            likesCount={likeState.likesCount}
+            isLiked={likeState.isLiked}
+          />
+        </div>
       )}
       {props.postType.toLowerCase() === "retweet" && (
-        <Tweet
-          tweet={props.tweet}
-          tweeter={props.tweeter}
-          updatedAt={props.updatedAt}
-          actionHeader={"retweet"}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "quote_tweet" && (
-        <React.Fragment>
-          Quote Tweet
+        <div className="post-border">
           <Tweet
             tweet={props.tweet}
             tweeter={props.tweeter}
@@ -92,20 +84,38 @@ function PostWrapper(props) {
             likesCount={likeState.likesCount}
             isLiked={likeState.isLiked}
           />
+        </div>
+      )}
+      {props.postType.toLowerCase() === "quote_tweet" && (
+        <React.Fragment>
+          Quote Tweet
+          <div className="post-border">
+            <Tweet
+              tweet={props.tweet}
+              tweeter={props.tweeter}
+              updatedAt={props.updatedAt}
+              actionHeader={"retweet"}
+              toggleLike={toggleLike}
+              likesCount={likeState.likesCount}
+              isLiked={likeState.isLiked}
+            />
+          </div>
         </React.Fragment>
       )}
 
       {props.postType.toLowerCase() === "reply-parent" && (
-        <Tweet
-          tweet={props.tweet}
-          updatedAt={props.updatedAt}
-          isLiked={props.isLiked}
-          isRetweeted={props.isRetweeted}
-          isParent={true}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
+        <div className="post-border">
+          <Tweet
+            tweet={props.tweet}
+            updatedAt={props.updatedAt}
+            isLiked={props.isLiked}
+            isRetweeted={props.isRetweeted}
+            isParent={true}
+            toggleLike={toggleLike}
+            likesCount={likeState.likesCount}
+            isLiked={likeState.isLiked}
+          />
+        </div>
       )}
       {props.postType.toLowerCase() === "reply" && (
         <Tweet
