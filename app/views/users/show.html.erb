@@ -3,11 +3,14 @@
 <p>Joined <%= date_formatted(@user.created_at) %></p>
 <%= link_to "#{@user.followers.length} Followers", followers_path(@user.handle) %>
 <%= link_to "#{@user.followed_users.length} Following", following_path(@user.handle) %>
-<% @posts.each do |post| %>
-  <% if post.class.name == "Tweet" %>
-    <% if post.parent %>
-      <%# direct to handle/with_replies #%>
-      <%= react_component("tweets/Reply", {
+<%= react_component("PostList", {posts: @posts}) %>
+<%# BIG COMMENT BLOCK #%>
+<% if false %>
+  <% @posts.each do |post| %>
+    <% if post.class.name == "Tweet" %>
+      <% if post.parent %>
+        <%# direct to handle/with_replies #%>
+        <%= react_component("tweets/Reply", {
             reply: TweetSerializer.new(post),
             replyUpdatedAt: tweet_updated_at_formatted_brief(post.updated_at),
             parent: TweetSerializer.new(post.parent),
@@ -16,23 +19,23 @@
             parentIsLiked: post.parent.likers.include?(current_user)
           }) 
         %>
-    <% else %>
-      <%= react_component("PostWrapper", {
+      <% else %>
+        <%= react_component("PostWrapper", {
           tweet: TweetSerializer.new(post), 
           updatedAt: tweet_updated_at_formatted_brief(post.updated_at),
           isLiked: post.likers.include?(current_user),
           postType: "tweet" 
         }) 
       %>
-    <% end %>
-  <% elsif post.class.name == "Retweet" %>
-    <%= react_component("tweets/Retweet", {
+      <% end %>
+    <% elsif post.class.name == "Retweet" %>
+      <%= react_component("tweets/Retweet", {
             tweet: TweetSerializer.new(post), 
             quoted_tweet: TweetSerializer.new(post.tweet), 
             updatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at),
             isLiked: post.tweet.likers.include?(current_user)
         }) 
     %>
+    <% end %>
   <% end %>
-  <%# add another elsif for new QuoteTweet model, remove comment column from retweets, add QuoteTweets to @posts in controller, add serializers for both Retweet and QuoteTweet #%>
 <% end %>

@@ -5,7 +5,6 @@ import PostWrapper from "../PostWrapper";
 function Reply(props) {
   return (
     <React.Fragment>
-      {/* change to PostWrapper with postType tweet */}
       <PostWrapper
         tweet={props.parent}
         updatedAt={props.parentUpdatedAt}

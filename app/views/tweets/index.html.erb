@@ -3,32 +3,5 @@
     <%= f.text_field :content %><br>
     <%= f.submit 'Tweet' %>
   <% end %>
-  <%= react_component("PostList", {posts: @tweets}) %>
-  <%# BIG COMMENT BLOCK #%>
-  <% if false %>
-    <% @posts.each do |post| %>
-      <% if post.class.name == "Tweet" %>
-        <%= react_component("PostWrapper", 
-          {
-            tweet: TweetSerializer.new(post), 
-            updatedAt: tweet_updated_at_formatted_brief(post.updated_at), 
-            parent: post.parent, 
-            isLiked: post.likers.include?(current_user),
-            isRetweeted: post.retweeters.include?(current_user), 
-            postType: "tweet"
-          }
-        ) %>
-      <% elsif post.class.name == "Retweet" %>
-        <%= react_component("tweets/Retweet", 
-        {
-          tweet: TweetSerializer.new(post), 
-          quoted_tweet: TweetSerializer.new(post.tweet), 
-          updatedAt: tweet_updated_at_formatted_brief(post.tweet.updated_at), 
-          isOgLiked: post.tweet.likers.include?(current_user),
-          isOgRetweeted: post.tweet.retweeters.include?(current_user)
-        }) 
-      %>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%= react_component("PostList", {posts: @posts}) %>
 <% end %>

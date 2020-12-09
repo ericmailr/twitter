@@ -1,17 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PostWrapper from "../PostWrapper";
-
+//THINK I CAN DELETE THIS COMPONENT
 function Retweet(props) {
   return (
     <div>
-      RETWEET
       <PostWrapper
         tweet={props.quoted_tweet}
         tweeter={props.tweet.tweeter}
         updatedAt={props.updatedAt}
         isOgLiked={props.isLiked}
-        isOgRetweeted={props.ogIsRetweeted}
+        isOgRetweeted={props.isOgRetweeted}
         actionHeader={"retweet"}
         postType={"tweet"}
       />

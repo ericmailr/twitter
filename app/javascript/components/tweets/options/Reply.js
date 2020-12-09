@@ -7,26 +7,21 @@ function Reply(props) {
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     if (showModal) {
-      //broken
-      console.log("show");
       document.body.addEventListener("click", clickHandler);
       document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
       document.getElementById("modal").style.display = "block";
     } else {
-      console.log("don't show");
-      document.body.removeEventListener("click", clickHandler);
       document.body.style.backgroundColor = "rgb(21, 32, 43)";
       document.getElementById("modal").style.display = "none";
     }
   });
-  //need a better understanding of useEffect
-  //need to add in ReplyModal somewhere else, pass these methods to this Reply component as prop.
-  //should only have one ReplyModal show, not one for each tweet on page
+  //need a better understanding of useEffect, particularly second argument
 
   const clickHandler = (e) => {
-    console.log("clickHandler, showModal: " + showModal);
-    console.log("e.target.id: " + e.target.id);
-    e.target.id != "modal" && toggleModal();
+    if (e.target.id != "modal") {
+      toggleModal();
+      document.body.removeEventListener("click", clickHandler);
+    }
   };
 
   const toggleModal = () => {
@@ -35,15 +30,16 @@ function Reply(props) {
 
   return (
     <React.Fragment>
-      {ReactDOM.createPortal(
-        <ReplyModal
-          showModal={showModal}
-          toggleModal={toggleModal}
-          tweetId={props.tweetId}
-        />,
-        document.getElementById("modal")
-      )}
-      <div className="option-container" /*onClick={toggleModal}*/>
+      {showModal &&
+        ReactDOM.createPortal(
+          <ReplyModal
+            showModal={showModal}
+            toggleModal={toggleModal}
+            tweetId={props.tweetId}
+          />,
+          document.getElementById("modal")
+        )}
+      <div className="option-container" onClick={toggleModal}>
         <svg className="tweet-options-svg" viewBox="0 0 24 24">
           <g>
             <path

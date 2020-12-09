@@ -32,21 +32,35 @@ class TweetsController < ApplicationController
     def index
         if (current_user) 
             @tweet = Tweet.new
-            @posts = Tweet.roots.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc)
-            @tweets = []
-            @posts.each do |tweet|
-                if tweet.class.name == "Retweet" 
-                    @tweets << { "tweet" => TweetSerializer.new(tweet), 
-                            "quoted_tweet" => TweetSerializer.new(tweet.tweet),
-                           "updatedAt" => tweet_updated_at_formatted_brief(tweet.tweet.updated_at),
-                           "isOgLiked" => tweet.tweet.likers.include?(current_user),
-                           "isOgRetweeted" => tweet.tweet.retweets.include?(current_user),
+            @posts = Tweet.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
+            @posts.map! do |post|
+                if post.parent             
+                    { "reply" => TweetSerializer.new(post), 
+                           "replyUpdatedAt" => tweet_updated_at_formatted_brief(post.updated_at),
+                           "isReplyLiked" => post.likers.include?(current_user),
+                           "parent" => TweetSerializer.new(post.parent),
+                           "parentUpdatedAt" => tweet_updated_at_formatted_brief(post.parent.updated_at),
+                           "isParentLiked" => post.parent.likers.include?(current_user),
+                           "postType" => "reply" }
+                elsif post.class.name == "Retweet" 
+                    { "tweet" => TweetSerializer.new(post), 
+                            "quoted_tweet" => TweetSerializer.new(post.tweet),
+                           "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
+                           "isLiked" => post.tweet.likers.include?(current_user),
+                           "isRetweeted" => post.tweet.retweets.include?(current_user),
                            "postType" => "retweet" }
-                elsif tweet.class.name == "Tweet"
-                    @tweets << { "tweet" => TweetSerializer.new(tweet), 
-                           "updatedAt" => tweet_updated_at_formatted_brief(tweet.updated_at),
-                           "isLiked" => tweet.likers.include?(current_user),
-                           "isRetweeted" => tweet.retweets.include?(current_user),
+                elsif post.class.name == "QuoteTweet"
+                     { "tweet" => TweetSerializer.new(post), 
+                            "quoted_tweet" => TweetSerializer.new(post.tweet),
+                           "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
+                           "isLiked" => post.tweet.likers.include?(current_user),
+                           "isRetweeted" => post.tweet.retweets.include?(current_user),
+                           "postType" => "quote_tweet" }
+                elsif post.class.name == "Tweet"
+                    { "tweet" => TweetSerializer.new(post), 
+                           "updatedAt" => tweet_updated_at_formatted_brief(post.updated_at),
+                           "isLiked" => post.likers.include?(current_user),
+                           "isRetweeted" => post.retweets.include?(current_user),
                            "postType" => "tweet" }
                 end
            end

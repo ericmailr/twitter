@@ -92,7 +92,12 @@ TODO NEXT:
 
 Issues:
 
-Move modal state stuff to PostList
+Add border-top and padding to tweets
+
+Click on reply, should show reply STATUS with parent TWEET connected above... page scrolled to reply.
+-add isReply to Tweet?
+
+Multiple replies to one tweet in feed
 
 Rework application layout, make containers react components
 

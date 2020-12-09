@@ -5,7 +5,7 @@ function ReplyModal(props) {
   /* href={Routes.new_tweet_path({ parent_id: props.tweetId }) */
   // fetch new_tweet_path and then run form_for here, post tweets path to create
 
-  return <React.Fragment>reply to tweet</React.Fragment>;
+  return <React.Fragment>reply to tweet form</React.Fragment>;
 }
 
 ReplyModal.propTypes = {
