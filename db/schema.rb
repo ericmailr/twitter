@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2020_12_01_184150) do
   create_table "retweets", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tweet_id"
     t.string "ancestry"
     t.index ["ancestry"], name: "index_retweets_on_ancestry"
   end

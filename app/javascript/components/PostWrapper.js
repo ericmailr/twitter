@@ -24,7 +24,7 @@ function PostWrapper(props) {
       msg = await fetch("/likes", {
         method: "POST",
         body: JSON.stringify({
-          tweet_id: props.tweet.id,
+          quote_id: props.tweet.id,
         }),
         headers: {
           Accept: "application/json",
@@ -52,29 +52,37 @@ function PostWrapper(props) {
   return (
     <React.Fragment>
       {props.postType.toLowerCase() === "tweet" && (
-        <div className="post-border">
-          <Tweet
-            {...props}
-            toggleLike={toggleLike}
-            likesCount={likeState.likesCount}
-            isLiked={likeState.isLiked}
-          />
-        </div>
+        <Tweet
+          {...props}
+          toggleLike={toggleLike}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+        />
       )}
       {props.postType.toLowerCase() === "status" && (
-        <div className="post-border">
-          <Status
-            tweet={props.tweet}
-            updatedAt={props.updatedAt}
-            isLiked={props.isLiked}
-            toggleLike={toggleLike}
-            likesCount={likeState.likesCount}
-            isLiked={likeState.isLiked}
-          />
-        </div>
+        <Status
+          tweet={props.tweet}
+          updatedAt={props.updatedAt}
+          isLiked={props.isLiked}
+          toggleLike={toggleLike}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+        />
       )}
       {props.postType.toLowerCase() === "retweet" && (
-        <div className="post-border">
+        <Tweet
+          tweet={props.tweet}
+          tweeter={props.tweeter}
+          updatedAt={props.updatedAt}
+          actionHeader={"retweet"}
+          toggleLike={toggleLike}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+        />
+      )}
+      {props.postType.toLowerCase() === "quote_tweet" && (
+        <React.Fragment>
+          Quote Tweet
           <Tweet
             tweet={props.tweet}
             tweeter={props.tweeter}
@@ -84,38 +92,20 @@ function PostWrapper(props) {
             likesCount={likeState.likesCount}
             isLiked={likeState.isLiked}
           />
-        </div>
-      )}
-      {props.postType.toLowerCase() === "quote_tweet" && (
-        <React.Fragment>
-          Quote Tweet
-          <div className="post-border">
-            <Tweet
-              tweet={props.tweet}
-              tweeter={props.tweeter}
-              updatedAt={props.updatedAt}
-              actionHeader={"retweet"}
-              toggleLike={toggleLike}
-              likesCount={likeState.likesCount}
-              isLiked={likeState.isLiked}
-            />
-          </div>
         </React.Fragment>
       )}
 
       {props.postType.toLowerCase() === "reply-parent" && (
-        <div className="post-border">
-          <Tweet
-            tweet={props.tweet}
-            updatedAt={props.updatedAt}
-            isLiked={props.isLiked}
-            isRetweeted={props.isRetweeted}
-            isParent={true}
-            toggleLike={toggleLike}
-            likesCount={likeState.likesCount}
-            isLiked={likeState.isLiked}
-          />
-        </div>
+        <Tweet
+          tweet={props.tweet}
+          updatedAt={props.updatedAt}
+          isLiked={props.isLiked}
+          isRetweeted={props.isRetweeted}
+          isParent={true}
+          toggleLike={toggleLike}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+        />
       )}
       {props.postType.toLowerCase() === "reply" && (
         <Tweet
@@ -123,7 +113,18 @@ function PostWrapper(props) {
           updatedAt={props.updatedAt}
           isLiked={props.isLiked}
           isRetweeted={props.isRetweeted}
-          isParent={false}
+          isReply={true}
+          toggleLike={toggleLike}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+        />
+      )}
+      {props.postType.toLowerCase() === "like" && (
+        <Tweet
+          tweet={props.tweet}
+          tweeter={props.tweeter}
+          updatedAt={props.updatedAt}
+          actionHeader={"like"}
           toggleLike={toggleLike}
           likesCount={likeState.likesCount}
           isLiked={likeState.isLiked}

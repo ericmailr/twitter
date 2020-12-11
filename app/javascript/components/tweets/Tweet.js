@@ -7,7 +7,10 @@ import ActionHeader from "./ActionHeader";
 
 function Tweet(props) {
   return (
-    <div className="post-container">
+    <div
+      className={
+        props.isReply ? "post-container" : "post-container post-border"
+      }>
       {props.actionHeader && (
         <ActionHeader
           username={props.tweeter.username}
@@ -73,6 +76,7 @@ Tweet.propTypes = {
   replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,
   isParent: PropTypes.bool,
+  isReply: PropTypes.bool,
   isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,
   toggleLike: PropTypes.func,

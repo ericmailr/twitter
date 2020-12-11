@@ -38,7 +38,7 @@ function PostList(props) {
             postType={post.postType}
           />
         ) : post.postType.toLowerCase() === "reply" ? (
-          <React.Fragment key={post.reply.id}>
+          <React.Fragment key={post.parent.id}>
             <PostWrapper
               tweet={post.parent}
               updatedAt={post.parentUpdatedAt}
@@ -54,6 +54,16 @@ function PostList(props) {
               postType={"reply"}
             />
           </React.Fragment>
+        ) : post.postType.toLowerCase() === "like" ? (
+          <PostWrapper
+            key={post.tweet.id}
+            tweet={post.quoted_tweet}
+            tweeter={post.tweet.tweeter}
+            updatedAt={post.updatedAt}
+            isLiked={post.isLiked}
+            isRetweeted={post.isRetweetet}
+            postType={post.postType}
+          />
         ) : null;
       })}
     </React.Fragment>

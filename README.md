@@ -90,14 +90,14 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-Issues:
-
-Add border-top and padding to tweets
+Rename Tweet to Post, make new Tweet subclass.
 
 Click on reply, should show reply STATUS with parent TWEET connected above... page scrolled to reply.
 -add isReply to Tweet?
 
-Multiple replies to one tweet in feed
+Multiple replies to one tweet in feed:
+-what happens if multiple replies to one tweet? just show one reply and one reference to the parent on the feed
+-replies under status: chains of replies (2+ generations) get chained with the reply connector under status, show up to 3 total tweets chained? with link below to show more?
 
 Rework application layout, make containers react components
 
