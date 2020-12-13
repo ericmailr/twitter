@@ -7,7 +7,7 @@ function Retweet(props) {
     <div>
       <PostWrapper
         tweet={props.quoted_tweet}
-        tweeter={props.tweet.tweeter}
+        user={props.tweet.user}
         updatedAt={props.updatedAt}
         isOgLiked={props.isLiked}
         isOgRetweeted={props.isOgRetweeted}

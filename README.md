@@ -90,7 +90,9 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-Rename Tweet to Post, make new Tweet subclass.
+Make a posts controller with index
+
+Identify differences in props needed for different post types and try to simplify #index, PostList and PostWrapper
 
 Click on reply, should show reply STATUS with parent TWEET connected above... page scrolled to reply.
 -add isReply to Tweet?

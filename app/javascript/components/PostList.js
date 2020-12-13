@@ -5,64 +5,65 @@ import PostWrapper from "./PostWrapper";
 function PostList(props) {
   return (
     <React.Fragment>
-      {props.posts.map((post) => {
-        return post.postType.toLowerCase() === "retweet" ? (
+      {console.log(props.newposts)}
+      {props.posts.map((postHash) => {
+        return postHash.postType.toLowerCase() === "retweet" ? (
           <PostWrapper
-            key={post.tweet.id}
-            tweet={post.quoted_tweet}
-            tweeter={post.tweet.tweeter}
-            retweet={post.tweet}
-            updatedAt={post.updatedAt}
-            isLiked={post.isLiked}
-            isRetweeted={post.isRetweeted}
+            key={postHash.post.id}
+            tweet={postHash.quoted_tweet}
+            user={postHash.post.user}
+            retweet={postHash.post}
+            updatedAt={postHash.updatedAt}
+            isLiked={postHash.isLiked}
+            isRetweeted={postHash.isRetweeted}
             postType={"retweet"}
           />
-        ) : post.postType.toLowerCase() === "quote_tweet" ? (
+        ) : postHash.postType.toLowerCase() === "quote_tweet" ? (
           <PostWrapper
-            key={post.tweet.id}
-            tweet={post.quoted_tweet}
-            tweeter={post.tweet.tweeter}
-            retweet={post.tweet}
-            updatedAt={post.updatedAt}
-            isLiked={post.isLiked}
-            isRetweeted={post.isRetweeted}
+            key={postHash.post.id}
+            tweet={postHash.quoted_tweet}
+            user={postHash.post.user}
+            retweet={postHash.post}
+            updatedAt={postHash.updatedAt}
+            isLiked={postHash.isLiked}
+            isRetweeted={postHash.isRetweeted}
             postType={"quote_tweet"}
           />
-        ) : post.postType.toLowerCase() === "tweet" ? (
+        ) : postHash.postType.toLowerCase() === "tweet" ? (
           <PostWrapper
-            key={post.tweet.id}
-            tweet={post.tweet}
-            updatedAt={post.updatedAt}
-            isLiked={post.isLiked}
-            isRetweeted={post.isRetweetet}
-            postType={post.postType}
+            key={postHash.post.id}
+            tweet={postHash.post}
+            updatedAt={postHash.updatedAt}
+            isLiked={postHash.isLiked}
+            isRetweeted={postHash.isRetweetet}
+            postType={postHash.postType}
           />
-        ) : post.postType.toLowerCase() === "reply" ? (
-          <React.Fragment key={post.parent.id}>
+        ) : postHash.postType.toLowerCase() === "reply" ? (
+          <React.Fragment key={postHash.parent.id}>
             <PostWrapper
-              tweet={post.parent}
-              updatedAt={post.parentUpdatedAt}
-              isLiked={post.isParentLiked}
-              isRetweeted={post.isParentRetweeted}
+              tweet={postHash.parent}
+              updatedAt={postHash.parentUpdatedAt}
+              isLiked={postHash.isParentLiked}
+              isRetweeted={postHash.isParentRetweeted}
               postType={"reply-parent"}
             />
             <PostWrapper
-              tweet={post.reply}
-              updatedAt={post.replyUpdatedAt}
-              isLiked={post.isReplyLiked}
-              isRetweeted={post.isReplyRetweeted}
+              tweet={postHash.post}
+              updatedAt={postHash.updatedAt}
+              isLiked={postHash.isLiked}
+              isRetweeted={postHash.isRetweeted}
               postType={"reply"}
             />
           </React.Fragment>
-        ) : post.postType.toLowerCase() === "like" ? (
+        ) : postHash.postType.toLowerCase() === "like" ? (
           <PostWrapper
-            key={post.tweet.id}
-            tweet={post.quoted_tweet}
-            tweeter={post.tweet.tweeter}
-            updatedAt={post.updatedAt}
-            isLiked={post.isLiked}
-            isRetweeted={post.isRetweetet}
-            postType={post.postType}
+            key={postHash.post.id}
+            tweet={postHash.quoted_tweet}
+            user={postHash.post.user}
+            updatedAt={postHash.updatedAt}
+            isLiked={postHash.isLiked}
+            isRetweeted={postHash.isRetweetet}
+            postType={postHash.postType}
           />
         ) : null;
       })}
@@ -72,6 +73,7 @@ function PostList(props) {
 
 PostList.propTypes = {
   posts: PropTypes.array,
+  newposts: PropTypes.array,
 };
 
 export default PostList;

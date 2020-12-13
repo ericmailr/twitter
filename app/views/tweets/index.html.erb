@@ -3,5 +3,5 @@
     <%= f.text_field :content %><br>
     <%= f.submit 'Tweet' %>
   <% end %>
-  <%= react_component("PostList", {posts: @posts}) %>
+  <%= react_component("PostList", {posts: @posts, newposts: @newposts}) %>
 <% end %>

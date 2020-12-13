@@ -72,7 +72,7 @@ function PostWrapper(props) {
       {props.postType.toLowerCase() === "retweet" && (
         <Tweet
           tweet={props.tweet}
-          tweeter={props.tweeter}
+          user={props.user}
           updatedAt={props.updatedAt}
           actionHeader={"retweet"}
           toggleLike={toggleLike}
@@ -85,7 +85,7 @@ function PostWrapper(props) {
           Quote Tweet
           <Tweet
             tweet={props.tweet}
-            tweeter={props.tweeter}
+            user={props.user}
             updatedAt={props.updatedAt}
             actionHeader={"retweet"}
             toggleLike={toggleLike}
@@ -122,7 +122,7 @@ function PostWrapper(props) {
       {props.postType.toLowerCase() === "like" && (
         <Tweet
           tweet={props.tweet}
-          tweeter={props.tweeter}
+          user={props.user}
           updatedAt={props.updatedAt}
           actionHeader={"like"}
           toggleLike={toggleLike}
@@ -136,7 +136,7 @@ function PostWrapper(props) {
 
 PostWrapper.propTypes = {
   tweet: PropTypes.object,
-  tweeter: PropTypes.object,
+  user: PropTypes.object,
   retweet: PropTypes.object,
   updatedAt: PropTypes.string,
   replyingTo: PropTypes.string,

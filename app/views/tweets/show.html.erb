@@ -4,6 +4,6 @@
     isLiked: @tweet.likers.include?(current_user),
     postType: "status"
     }) %>
-<% @tweet.children.each do |comment| %>
-  <%= react_component("tweets/Tweet", {tweet: TweetSerializer.new(comment), updatedAt: tweet_updated_at_formatted_brief(comment.updated_at), replyingTo: comment.parent.tweeter.handle}) %>
+<% @tweet.children.each do |reply| %>
+  <%= react_component("PostWrapper", {tweet: TweetSerializer.new(reply), updatedAt: tweet_updated_at_formatted_brief(reply.updated_at), replyingTo: reply.parent.user.handle, postType: "tweet"}) %>
 <% end %>

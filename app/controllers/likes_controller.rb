@@ -1,9 +1,9 @@
 class LikesController < ApplicationController
 
     def create
-        @like = Like.find_by(tweeter_id: current_user.id, quote_id: params[:quote_id])
+        @like = Like.find_by(user_id: current_user.id, quote_id: params[:quote_id])
         if (!@like)  
-            Like.create(tweeter_id: current_user.id, quote_id: params[:quote_id])
+            Like.create(user_id: current_user.id, quote_id: params[:quote_id])
         end
         respond_to do |format|
             msg = { :status => "ok", :message => "Liked. Success!", :likesCount => Tweet.find(params[:quote_id]).likes.count }
@@ -12,7 +12,7 @@ class LikesController < ApplicationController
     end
 
     def destroy
-        @like = Like.find_by(tweeter_id: current_user.id, quote_id: params[:id])
+        @like = Like.find_by(user_id: current_user.id, quote_id: params[:id])
         if (@like)
             Like.destroy(@like.id)
         end

@@ -13,7 +13,7 @@ function Tweet(props) {
       }>
       {props.actionHeader && (
         <ActionHeader
-          username={props.tweeter.username}
+          username={props.user.username}
           action={props.actionHeader}
         />
       )}
@@ -25,13 +25,11 @@ function Tweet(props) {
         <div className="tweet-content">
           <div className="tweet">
             <div>
-              <a href={Routes.profile_path(props.tweet.tweeter.handle)}>
-                <span className={"username"}>
-                  {props.tweet.tweeter.username}
-                </span>
+              <a href={Routes.profile_path(props.tweet.user.handle)}>
+                <span className={"username"}>{props.tweet.user.username}</span>
                 <span className={"font-secondary handle"}>
                   {" @"}
-                  {props.tweet.tweeter.handle}
+                  {props.tweet.user.handle}
                 </span>
               </a>
               <span className={"font-secondary"}>
@@ -45,7 +43,7 @@ function Tweet(props) {
               )}
               <a
                 href={Routes.status_path(
-                  props.tweet.tweeter.handle,
+                  props.tweet.user.handle,
                   props.tweet.id
                 )}>
                 {props.tweet.content}
@@ -71,7 +69,7 @@ function Tweet(props) {
 
 Tweet.propTypes = {
   tweet: PropTypes.object,
-  tweeter: PropTypes.object,
+  user: PropTypes.object,
   updatedAt: PropTypes.string,
   replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,

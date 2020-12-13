@@ -7,13 +7,13 @@ function QuoteTweet(props) {
     <div>
       <Tweet
         tweet={props.comment}
-        tweeter={props.comment.retweeter}
+        user={props.comment.retweeter}
         updatedAt={props.commentUpdatedAt}
       />
       <div className="quoted">
         <Tweet
           tweet={props.quoteTweet}
-          tweeter={props.quoteTweet.tweeter}
+          user={props.quoteTweet.user}
           updatedAt={props.quoteTweetUpdatedAt}
         />
       </div>

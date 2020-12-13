@@ -9,10 +9,10 @@ class TweetsController < ApplicationController
     end
 
     def create
-        @tweet = Tweet.create(content: tweet_params[:content], tweeter_id: current_user.id)
+        @tweet = Tweet.create(content: tweet_params[:content], user_id: current_user.id)
         if (params[:parent_id])
             @tweet.update_attributes(parent_id: params[:parent_id])
-            redirect_to status_path(@tweet.parent.tweeter.handle, @tweet.parent.id)
+            redirect_to status_path(@tweet.parent.user.handle, @tweet.parent.id)
         else
             redirect_to root_path
         end
@@ -32,56 +32,31 @@ class TweetsController < ApplicationController
     def index
         if (current_user) 
             @tweet = Tweet.new
-            #how can i make this method smaller/simpler? 
-            @posts = Tweet.where(tweeter_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
+            @posts = Post.where(user_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
             parents_already_posted = []
             @posts.map! do |post|
+                postHash = {:postType => post.class.name.downcase, :updatedAt => tweet_updated_at_formatted_brief(post.updated_at)}
                 if post.class.name == "Like"
-                    {"tweet" => TweetSerializer.new(post),
-                     "quoted_tweet" => TweetSerializer.new(post.tweet),
-                     "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
-                     "isLiked" => post.tweet.likers.include?(current_user),
-                     "isRetweeted" => post.tweet.retweeters.include?(current_user),
-                     "postType" => "like"}
-                elsif post.parent             
-                    if parents_already_posted.include?(post.parent)  
-                        nil
-                    else
+                    postHash[:post] = LikeSerializer.new(post)
+                elsif parents_already_posted.include?(post.parent) || parents_already_posted.include?(post)
+                    postHash = nil
+                else
+                    postHash[:post] = TweetSerializer.new(post)
+                    postHash[:isLiked] = post.likers.include?(current_user)
+                    postHash[:isRetweeted] = post.retweeters.include?(current_user)
+                    if post.parent
                         parents_already_posted << post.parent
-                        {"reply" => TweetSerializer.new(post), 
-                         "replyUpdatedAt" => tweet_updated_at_formatted_brief(post.updated_at),
-                         "isReplyLiked" => post.likers.include?(current_user),
-                         "parent" => TweetSerializer.new(post.parent),
-                         "parentUpdatedAt" => tweet_updated_at_formatted_brief(post.parent.updated_at),
-                         "isParentLiked" => post.parent.likers.include?(current_user),
-                         "postType" => "reply"
-                        }
-                    end
-                elsif post.class.name == "Retweet" 
-                    { "tweet" => TweetSerializer.new(post), 
-                      "quoted_tweet" => TweetSerializer.new(post.tweet),
-                      "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
-                      "isLiked" => post.tweet.likers.include?(current_user),
-                      "isRetweeted" => post.tweet.retweets.include?(current_user),
-                      "postType" => "retweet" }
-                elsif post.class.name == "QuoteTweet"
-                     { "tweet" => TweetSerializer.new(post), 
-                       "quoted_tweet" => TweetSerializer.new(post.tweet),
-                       "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
-                       "isLiked" => post.tweet.likers.include?(current_user),
-                       "isRetweeted" => post.tweet.retweets.include?(current_user),
-                       "postType" => "quote_tweet" }
-                elsif post.class.name == "Tweet"
-                    if parents_already_posted.include?(post)
-                        nil
-                    else
-                    { "tweet" => TweetSerializer.new(post), 
-                       "updatedAt" => tweet_updated_at_formatted_brief(post.updated_at),
-                       "isLiked" => post.likers.include?(current_user),
-                       "isRetweeted" => post.retweets.include?(current_user),
-                       "postType" => "tweet" }
+                        postHash[:parent] = TweetSerializer.new(post.parent)
+                        postHash[:parentUpdatedAt] = tweet_updated_at_formatted_brief(post.parent.updated_at)
+                        postHash[:isParentLiked] = post.parent.likers.include?(current_user)
+                        postHash[:isParentRetweeted] = post.parent.retweeters.include?(current_user)
+                        postHash[:postType] = "reply"
                     end
                 end
+                if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name)
+                    postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)  
+                end
+                postHash
            end.compact!
         else
             redirect_to login_path

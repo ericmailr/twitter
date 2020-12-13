@@ -12,24 +12,24 @@ function Status(props) {
           <img className="avatar" src={Avatar} alt="default avatar" />
         </div>
         <div className="status-tweeter">
-          <a href={Routes.profile_path(props.tweet.tweeter.handle)}>
-            <div className={"username"}>{props.tweet.tweeter.username}</div>
+          <a href={Routes.profile_path(props.tweet.user.handle)}>
+            <div className={"username"}>{props.tweet.user.username}</div>
             <div className={"font-secondary handle"}>
               {" @"}
-              {props.tweet.tweeter.handle}
+              {props.tweet.user.handle}
             </div>
           </a>
         </div>
       </div>
       <a
         className="status-content"
-        href={Routes.status_path(props.tweet.tweeter.handle, props.tweet.id)}>
+        href={Routes.status_path(props.tweet.user.handle, props.tweet.id)}>
         {props.tweet.content}
       </a>
 
       <div className="status-updated-at font-secondary">{props.updatedAt} </div>
 
-      {props.tweet.retweets.length + props.tweet.likes.length > 0 && (
+      {props.tweet.retweets.length + props.likesCount > 0 && (
         <div className="status-stats">
           <Stats type="Retweets" count={props.tweet.retweets.length} />
           <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />

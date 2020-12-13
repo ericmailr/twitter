@@ -6,7 +6,7 @@ class RetweetsController < ApplicationController
     end
 
     def create
-        @retweet = Retweet.create(tweeter_id: current_user.id, quote_id: retweet_params[:quote_id], content: Tweet.find(retweet_params[:quote_id]).content)
+        @retweet = Retweet.create(user_id: current_user.id, quote_id: retweet_params[:quote_id], content: Tweet.find(retweet_params[:quote_id]).content)
     end
 
     def destroy

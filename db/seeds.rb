@@ -20,32 +20,32 @@ Follow.create!([
 ])
 
 tweets = Tweet.create!([
-    {content: "my day is bad", tweeter_id: users[0].id},
-    {content: "lost my wallet", tweeter_id: users[0].id},
-    {content: "my left foot exploded", tweeter_id: users[0].id},
-    {content: "my food is good", tweeter_id: users[1].id},
-    {content: "my food is gone", tweeter_id: users[1].id},
-    {content: "i'm full", tweeter_id: users[1].id},
-    {content: "i'm angry about politics!", tweeter_id: users[2].id},
-    {content: "the other side is dumb", tweeter_id: users[2].id},
-    {content: "i am right, u r not", tweeter_id: users[2].id}
+    {content: "my day is bad", user_id: users[0].id},
+    {content: "lost my wallet", user_id: users[0].id},
+    {content: "my left foot exploded", user_id: users[0].id},
+    {content: "my food is good", user_id: users[1].id},
+    {content: "my food is gone", user_id: users[1].id},
+    {content: "i'm full", user_id: users[1].id},
+    {content: "i'm angry about politics!", user_id: users[2].id},
+    {content: "the other side is dumb", user_id: users[2].id},
+    {content: "i am right, u r not", user_id: users[2].id}
 ])
 
 tweet_comments = Tweet.create!([
-    {content: "your day is always bad", tweeter_id: users[1].id, parent: tweets[0]},
-    {content: "sorry about your day, doug", tweeter_id: users[2].id, parent: tweets[0]},
-    {content: "i stole it", tweeter_id: users[2].id, parent: tweets[1]},
-    {content: "like, real angry!", tweeter_id: users[2].id, parent: tweets[6]}
+    {content: "your day is always bad", user_id: users[1].id, parent: tweets[0]},
+    {content: "sorry about your day, doug", user_id: users[2].id, parent: tweets[0]},
+    {content: "i stole it", user_id: users[2].id, parent: tweets[1]},
+    {content: "like, real angry!", user_id: users[2].id, parent: tweets[6]}
 ])
 
 retweets = Retweet.create!([
-   {tweeter_id: users[3].id, content: tweets[2].content, quote_id: tweets[2].id} 
+   {user_id: users[2].id, content: tweets[2].content, quote_id: tweets[2].id} 
 ])
 
 quote_tweets = QuoteTweet.create!([
-    {tweeter_id: users[1].id, quote_id: tweets[2].id}
+    {user_id: users[1].id, quote_id: tweets[2].id}
 ])
 
 likes = Like.create!([
-    {tweeter_id: users[1].id, quote_id: tweets[1].id}
+    {user_id: users[1].id, quote_id: tweets[1].id}
 ])
