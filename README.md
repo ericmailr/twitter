@@ -8,10 +8,6 @@ A rebuild of Twitter with core features.
 - Database creation
   sqlite
 
-- Todo Next
-
-Shoulda just left comments out of it... just tweets with ancestry gem
-
 - Features / Structure
 
 /signup: hit next, sent you verification code (enter it) skip this for now.
@@ -31,36 +27,6 @@ who to follow
   no media
 
 - How I set up my ActiveRecord Associations:
-
-user -- id, username, email, password_digest
-has_many :tweets
-
-    has_many :received_follows, foreign_key: :followed_id, class_name: "Follow"
-    has_many :followers, through: :received_follows
-
-    has_many :given_follows, foreign_key: follower_id, class_name: "Follow"
-    has_many :followed_users, through: :given_follows
-
-    has_many :likes
-
-follow -- id, follower_id:integer, followed_user_id:integer
-belongs_to :follower, class_name: "User"
-belongs_to :followed_user, class_name: "User"
-
-tweet -- content, tweeter_id
-belongs_to :tweeter, class_name: "User"
-has_many :tweets
-has_many :likes
-has_many :retweets
-
-retweet -- retweeter_id
-belongs_to :retweeter, class_name: "User"
-belongs_to :tweet
-has_many :tweets //nevermind, this is solved with ancestry gem
-has_many :likes
-
-like -- liker_id:integer, tweet_id
-belongs_to :liker, class_name: "User"
 
 DRY: Don't Repeat Yourself
 
@@ -90,7 +56,9 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-Make a posts controller with index
+"like real angry" is replying to wrong tweet
+
+Make a posts controller with index. (2/25 : should i? looking at long after writing)
 
 Identify differences in props needed for different post types and try to simplify #index, PostList and PostWrapper
 
@@ -103,7 +71,7 @@ Multiple replies to one tweet in feed:
 
 Rework application layout, make containers react components
 
-I should probably be using Bootstrap (like Twitter)
+Use Bootstrap (like Twitter)
 
 somewhat randomly, when clicking a lot of likes and whatnot, after page refresh:
 Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.

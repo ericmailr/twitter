@@ -44,7 +44,7 @@ function ActionHeader(props) {
                   </g>
                 </svg>
               ),
-            }[props.action]
+            }[props.action === "quotetweet" ? "retweet" : props.action]
           }
         </span>
       </span>
@@ -52,6 +52,7 @@ function ActionHeader(props) {
         {props.username}
         {
           {
+            quotetweet: " Retweeted",
             retweet: " Retweeted",
             reply: " replied",
             receivedReply: " received a reply",

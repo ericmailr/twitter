@@ -1,7 +1,10 @@
-<%= react_component("statuses/Status", {tweet: TweetSerializer.new(@og_tweet), updatedAt: tweet_updated_at_formatted_full(@og_tweet.updated_at), isLiked: @og_tweet.likers.include?(current_user)}) %>
-    
+<%= react_component("statuses/Status", 
+    {tweet: TweetSerializer.new(@og_tweet), 
+    updatedAt: tweet_updated_at_formatted_full(@og_tweet.updated_at), 
+    isLiked: @og_tweet.likers.include?(current_user)}) 
+%>
 <%= form_for @retweet do |f| %>
-    <%= f.hidden_field 'quote_id', :value => @og_tweet.id %>
-    <%# f.text_field :content #%><br>
-    <%= f.submit 'Retweet' %>
+  <%= f.hidden_field 'quote_id', :value => @og_tweet.id %>
+  <%# f.text_field :content #%><br>
+  <%= f.submit 'Retweet' %>
 <% end %>

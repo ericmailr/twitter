@@ -11,10 +11,15 @@ class TweetsController < ApplicationController
     def create
         @tweet = Tweet.create(content: tweet_params[:content], user_id: current_user.id)
         if (params[:parent_id])
-            @tweet.update_attributes(parent_id: params[:parent_id])
-            redirect_to status_path(@tweet.parent.user.handle, @tweet.parent.id)
+            @tweet.update(parent_id: params[:parent_id])
+            #redirect_to status_path(@tweet.parent.user.handle, @tweet.parent.id)
         else
-            redirect_to root_path
+            #redirect_to root_path
+        end
+        #new
+        respond_to do |format|
+            msg = { :status => "ok", :message => "Tweeted. Success!" }
+            format.json  { render :json => msg } 
         end
     end
 
@@ -22,7 +27,7 @@ class TweetsController < ApplicationController
         @tweet = Tweet.find(params[:id])
         respond_to do |format|
             format.json do
-                msg = { :status => "ok", :message => "Success!", :likesCount => @tweet.likes.count }
+                msg = { :status => "ok", :message => "Success!", :likesCount => @tweet.likes.count, :retweetsCount => @tweet.retweets.count }
                 render :json => msg
             end
             format.html {  }
@@ -32,12 +37,19 @@ class TweetsController < ApplicationController
     def index
         if (current_user) 
             @tweet = Tweet.new
-            @posts = Post.where(user_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
+            tweets = Tweet.includes(:likers, :retweeters).where(user_id: current_user.followed_users.map {|u| u.id}).to_a
+            #includes user?
+            likes = Like.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
+            retweets = Retweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
+            quote_tweets = QuoteTweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
+            @posts = (tweets + likes + retweets + quote_tweets).sort_by {|post| post.updated_at}.reverse
+            #@posts = Post.where(user_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
             parents_already_posted = []
             @posts.map! do |post|
                 postHash = {:postType => post.class.name.downcase, :updatedAt => tweet_updated_at_formatted_brief(post.updated_at)}
-                if post.class.name == "Like"
+                if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name) 
                     postHash[:post] = LikeSerializer.new(post)
+                    parents_already_posted << post.tweet
                 elsif parents_already_posted.include?(post.parent) || parents_already_posted.include?(post)
                     postHash = nil
                 else

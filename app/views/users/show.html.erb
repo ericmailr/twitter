@@ -3,7 +3,10 @@
 <p>Joined <%= date_formatted(@user.created_at) %></p>
 <%= link_to "#{@user.followers.length} Followers", followers_path(@user.handle) %>
 <%= link_to "#{@user.followed_users.length} Following", following_path(@user.handle) %>
-<%= react_component("PostList", {posts: @posts}) %>
+<% if false %>
+  <%= react_component("PostList", {posts: @posts}) %>
+<% end %>
+<%= react_component("Profile", {posts: @posts}) %>
 <%# BIG COMMENT BLOCK #%>
 <% if false %>
   <% @posts.each do |post| %>

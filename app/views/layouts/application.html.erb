@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>Twitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application' %>
@@ -11,44 +13,33 @@
   <body>
     <% if current_user %>
       <div id="container">
-        <div id="nav-container">
-          <nav>
-            <ul>
-              <li><%= link_to "Home", root_path %></li>
-              <li><%= link_to "Explore", root_path %></li>
-              <li><%= link_to "Notifications", root_path %></li>
-              <li><%= link_to "Messages", root_path %></li>
-              <li><%= link_to "Bookmarks", root_path %></li>
-              <li><%= link_to "Lists", root_path %></li>
-              <li><%= link_to "Profile", profile_path(current_user.handle) %></li>
-              <li><%= link_to "More", root_path %></li>
-            </ul>
-          </nav>
-        </div>
         <div id="main-container">
+          <%= react_component("Nav", {handle: current_user.handle}, {id: "nav-container"}) %>
           <div id="tweets">
+            <%= react_component("TopHeader", {header: "Home"}) %>
             <% flash.each do |type, msg| %>
               <div>
                 <%= msg %>
               </div>
             <% end %>
+            <%= react_component("tweets/NewTweet", {rows: 1}) %>
+            <div id="divider"></div>
             <%= yield %>
           </div>
           <div id="search-container">
             <div id="search">
               <%= form_tag search_path, method: :get do %>
-                <%= text_field_tag :query %>
-                <%= submit_tag "Search" %>
+                <%= text_field_tag(:query, "Search Twitter", :class => "search-input font-secondary") %>
               <% end %>
               <%= link_to "Log Out", logout_path, method: :delete %>
               <%= render :partial => "layouts/who-to-follow" %>
             </div>
           </div>
         </div>
+        <div id="modal-container"></div>
       </div>
     <% else %>
       <%= yield %>
     <% end %>
-    <div id="modal"></div>
   </body>
 </html>

@@ -24,7 +24,6 @@ tweets = Tweet.create!([
     {content: "lost my wallet", user_id: users[0].id},
     {content: "my left foot exploded", user_id: users[0].id},
     {content: "my food is good", user_id: users[1].id},
-    {content: "my food is gone", user_id: users[1].id},
     {content: "i'm full", user_id: users[1].id},
     {content: "i'm angry about politics!", user_id: users[2].id},
     {content: "the other side is dumb", user_id: users[2].id},
@@ -35,7 +34,7 @@ tweet_comments = Tweet.create!([
     {content: "your day is always bad", user_id: users[1].id, parent: tweets[0]},
     {content: "sorry about your day, doug", user_id: users[2].id, parent: tweets[0]},
     {content: "i stole it", user_id: users[2].id, parent: tweets[1]},
-    {content: "like, real angry!", user_id: users[2].id, parent: tweets[6]}
+    {content: "like, real angry!", user_id: users[2].id, parent: tweets[5]}
 ])
 
 retweets = Retweet.create!([

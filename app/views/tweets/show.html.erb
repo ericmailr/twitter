@@ -1,6 +1,7 @@
 <%= react_component("PostWrapper", {
     tweet: TweetSerializer.new(@tweet), 
     updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at),
+    updatedAtBrief: tweet_updated_at_formatted_brief(@tweet.updated_at),
     isLiked: @tweet.likers.include?(current_user),
     postType: "status"
     }) %>

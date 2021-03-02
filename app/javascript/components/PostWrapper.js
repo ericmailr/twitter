@@ -5,6 +5,7 @@ import Tweet from "./tweets/Tweet";
 
 function PostWrapper(props) {
   const [likeState, setLikeState] = useState([]);
+  const [retweetState, setRetweetState] = useState([]);
   useEffect(async () => {
     let msg = await fetch(`/tweets/${props.tweet.id}`);
     let json = await msg.json();
@@ -12,6 +13,10 @@ function PostWrapper(props) {
     setLikeState({
       likesCount: json.likesCount,
       isLiked: props.isLiked,
+    });
+    setRetweetState({
+      retweetsCount: json.retweetsCount,
+      isRetweeted: props.isRetweeted,
     });
   }, []);
 
@@ -49,85 +54,69 @@ function PostWrapper(props) {
     });
   };
 
+  const toggleRetweet = async (e) => {
+    e.stopPropagation();
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    let msg = "";
+    if (!retweetState.isRetweeted) {
+      msg = await fetch("/retweets", {
+        method: "POST",
+        body: JSON.stringify({
+          retweet: { quote_id: props.tweet.id },
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    } else {
+      msg = await fetch(`/retweets/${props.tweet.id}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+          retweet: { quote_id: props.tweet.id },
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    }
+    let json = await msg.json();
+    setRetweetState({
+      retweetsCount: json.retweetsCount,
+      isRetweeted: !retweetState.isRetweeted,
+    });
+  };
+
   return (
     <React.Fragment>
-      {props.postType.toLowerCase() === "tweet" && (
+      {props.postType === "status" ? (
+        <Status
+          {...props}
+          toggleLike={toggleLike}
+          toggleRetweet={toggleRetweet}
+          likesCount={likeState.likesCount}
+          isLiked={likeState.isLiked}
+          retweetsCount={retweetState.retweetsCount}
+          isRetweeted={retweetState.isRetweeted}
+          isParent={props.postType === "reply-parent"}
+          isReply={props.postType === "reply"}
+        />
+      ) : (
         <Tweet
           {...props}
           toggleLike={toggleLike}
+          toggleRetweet={toggleRetweet}
           likesCount={likeState.likesCount}
           isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "status" && (
-        <Status
-          tweet={props.tweet}
-          updatedAt={props.updatedAt}
-          isLiked={props.isLiked}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "retweet" && (
-        <Tweet
-          tweet={props.tweet}
-          user={props.user}
-          updatedAt={props.updatedAt}
-          actionHeader={"retweet"}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "quote_tweet" && (
-        <React.Fragment>
-          Quote Tweet
-          <Tweet
-            tweet={props.tweet}
-            user={props.user}
-            updatedAt={props.updatedAt}
-            actionHeader={"retweet"}
-            toggleLike={toggleLike}
-            likesCount={likeState.likesCount}
-            isLiked={likeState.isLiked}
-          />
-        </React.Fragment>
-      )}
-
-      {props.postType.toLowerCase() === "reply-parent" && (
-        <Tweet
-          tweet={props.tweet}
-          updatedAt={props.updatedAt}
-          isLiked={props.isLiked}
-          isRetweeted={props.isRetweeted}
-          isParent={true}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "reply" && (
-        <Tweet
-          tweet={props.tweet}
-          updatedAt={props.updatedAt}
-          isLiked={props.isLiked}
-          isRetweeted={props.isRetweeted}
-          isReply={true}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-        />
-      )}
-      {props.postType.toLowerCase() === "like" && (
-        <Tweet
-          tweet={props.tweet}
-          user={props.user}
-          updatedAt={props.updatedAt}
-          actionHeader={"like"}
-          toggleLike={toggleLike}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
+          retweetsCount={retweetState.retweetsCount}
+          isRetweeted={retweetState.isRetweeted}
+          isParent={props.postType === "reply-parent"}
+          isReply={props.postType === "reply"}
         />
       )}
     </React.Fragment>
@@ -137,11 +126,10 @@ function PostWrapper(props) {
 PostWrapper.propTypes = {
   tweet: PropTypes.object,
   user: PropTypes.object,
-  retweet: PropTypes.object,
+  //retweet: PropTypes.object,
   updatedAt: PropTypes.string,
-  replyingTo: PropTypes.string,
+  //replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,
-  isParent: PropTypes.bool,
   isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,
   postType: PropTypes.string,

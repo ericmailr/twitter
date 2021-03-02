@@ -1,7 +1,9 @@
 <% if current_user %>
-  <%= form_for @tweet do |f| %>
-    <%= f.text_field :content %><br>
-    <%= f.submit 'Tweet' %>
+  <% if false %>
+    <%= form_for @tweet do |f| %>
+      <%= f.text_field :content %><br>
+      <%= f.submit 'Tweet' %>
+    <% end %>
   <% end %>
-  <%= react_component("PostList", {posts: @posts, newposts: @newposts}) %>
+  <%= react_component("PostList", {posts: @posts}) %>
 <% end %>
