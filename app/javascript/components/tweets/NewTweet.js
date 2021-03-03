@@ -6,6 +6,29 @@ function NewTweet(props) {
   // fetch new_tweet_path and then run form_for here, post tweets path to create
   // right now I'm not using new tweet controller action. problem? idk, but for now I think it's fine to just skip the new action
 
+  const readySubmitButton = () => {
+    let newTweetClassElementIndex = props.parentTweet ? 1 : 0;
+    let submitButton = document.getElementsByClassName("submit-button")[
+      newTweetClassElementIndex
+    ];
+    submitButton.classList.add(
+      "submittable-button",
+      "reply-color-background-hover"
+    );
+    submitButton.classList.remove("unsubmittable-button");
+    if (
+      document.getElementsByClassName("new-tweet-input")[
+        newTweetClassElementIndex
+      ].value === ""
+    ) {
+      submitButton.classList.remove(
+        "submittable-button",
+        "reply-color-background-hover"
+      );
+      submitButton.classList.add("unsubmittable-button");
+    }
+  };
+
   const submit = async () => {
     const csrf = document
       .querySelector("meta[name='csrf-token']")
@@ -38,18 +61,15 @@ function NewTweet(props) {
             placeholder={
               props.parentTweet ? "Tweet your reply" : "What's happening?"
             }
+            onInput={readySubmitButton}
           />
           <div className="submit-new-tweet-container">
             <div className="submit-options"></div>
-            {props.parentTweet ? (
-              <div className="submit-button" onClick={submit}>
-                Reply
-              </div>
-            ) : (
-              <div className="submit-button" onClick={submit}>
-                Tweet
-              </div>
-            )}
+            <div
+              className="submit-button unsubmittable-button"
+              onClick={submit}>
+              {props.parentTweet ? "Reply" : "Tweet"}
+            </div>
           </div>
         </div>
       </div>

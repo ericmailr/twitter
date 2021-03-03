@@ -1,0 +1,90 @@
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import Avatar from "./Avatar";
+
+function SuggestedFollow(props) {
+  const [followState, setFollowState] = useState({});
+
+  useEffect(async () => {
+    let msg = await fetch(`/${props.current_user_handle}/following`);
+    let json = await msg.json();
+    setFollowState({
+      isFollowed: json.isFollowed,
+      buttonClass: json.isFollowed ? "following-button" : "",
+    });
+  }, []);
+
+  const toggleFollow = async (e) => {
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    let msg = "";
+    if (!followState.isFollowed) {
+      msg = await fetch("/follows", {
+        method: "POST",
+        body: JSON.stringify({
+          followed_user_id: props.user.id,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    } else {
+      msg = await fetch(`/follows/${props.user.id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    }
+    let json = await msg.json();
+    setFollowState({
+      isFollowed: json.isFollowed,
+      buttonClass: json.isFollowed ? "following-button" : "",
+    });
+  };
+
+  const followButtonEnterStyle = (e) => {
+    e.currentTarget.classList.add("follow-button-hover");
+  };
+
+  const followButtonLeaveStyle = (e) => {
+    e.currentTarget.classList.remove("follow-button-hover");
+  };
+
+  return (
+    <div className="suggested-follow">
+      <div className="avatar-container suggested-follow-avatar">
+        <Avatar />
+      </div>
+      <div className="suggested-follow-handle">
+        <a href={Routes.profile_path(props.user.handle)}>
+          <span className={"username"}>{props.user.username}</span>
+          <span className={"font-secondary handle"}>
+            {" @"}
+            {props.user.handle}
+          </span>
+        </a>
+      </div>
+      <div
+        className={"follow-button " + followState.buttonClass}
+        onClick={toggleFollow}
+        onMouseEnter={followButtonEnterStyle}
+        onMouseLeave={followButtonLeaveStyle}>
+        {followState.isFollowed ? "Following" : "Follow"}
+      </div>
+    </div>
+  );
+}
+
+SuggestedFollow.propTypes = {
+  user: PropTypes.object,
+  current_user_handle: PropTypes.string,
+  isFollowed: PropTypes.bool,
+};
+
+export default SuggestedFollow;

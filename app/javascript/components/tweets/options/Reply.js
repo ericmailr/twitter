@@ -8,15 +8,16 @@ function Reply(props) {
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     if (showModal) {
+      document.addEventListener("keyup", exitModalHandler);
       document
         .getElementsByClassName("exit-svg-container")[0]
-        .addEventListener("click", clickHandler);
+        .addEventListener("click", exitModalHandler);
       document
         .getElementById("nav-container")
-        .addEventListener("click", clickHandler);
+        .addEventListener("click", exitModalHandler);
       document
         .getElementById("modal-container")
-        .addEventListener("click", clickHandler);
+        .addEventListener("click", exitModalHandler);
       // add/remove classes with different color instead? easier to change later
       document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
       document.getElementById("modal-container").style.display = "flex";
@@ -27,22 +28,25 @@ function Reply(props) {
   });
   //need a better understanding of useEffect, particularly second argument
 
-  const clickHandler = (e) => {
-    let modalElement = document.getElementById("modal");
-    let exitModalElement = document.getElementsByClassName(
-      "exit-svg-container"
-    )[0];
-    if (
-      !modalElement.contains(e.target) ||
-      exitModalElement.contains(e.target)
-    ) {
-      toggleModal();
-      document
-        .getElementById("nav-container")
-        .removeEventListener("click", clickHandler);
-      document
-        .getElementById("modal-container")
-        .removeEventListener("click", clickHandler);
+  const exitModalHandler = (e) => {
+    if ((e.type === "keyup" && e.key === "Escape") || e.type === "click") {
+      let modalElement = document.getElementById("modal");
+      let exitModalElement = document.getElementsByClassName(
+        "exit-svg-container"
+      )[0];
+      if (
+        e.type === "keyup" ||
+        !modalElement.contains(e.target) ||
+        exitModalElement.contains(e.target)
+      ) {
+        toggleModal();
+        document
+          .getElementById("nav-container")
+          .removeEventListener("click", exitModalHandler);
+        document
+          .getElementById("modal-container")
+          .removeEventListener("click", exitModalHandler);
+      }
     }
   };
 

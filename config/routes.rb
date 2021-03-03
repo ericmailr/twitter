@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
-  resources :follows, only: [:create, :destroy]
+  resources :follows, only: [:create]
   resources :tweets, only: [:new, :show]
   resources :likes, only: [:create, :destroy]
   resources :retweets, only: [:new, :create, :destroy]
@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get "login", to: "sessions#new", as: "login"
   delete "logout", to: "sessions#destroy", as: "logout"
   get "search", to: "search#index", as: "search"
+  
+  delete "follows/:followed_user_id", to: "follows#destroy", as: "follow"
   
   get ":handle", to: "users#show", as: "profile"
   get ":handle/status/:id", to: "tweets#show", as: "status"

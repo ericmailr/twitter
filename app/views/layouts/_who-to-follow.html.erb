@@ -1,8 +1,8 @@
-<h3> You might like </h3>
-<div id="who-to-follow"
+<div class="suggested-section">
+  <h2> Who to follow </h2>
+  <div id="who-to-follow"
     <% User.followable_users(current_user).order('RANDOM()').limit(3).each do |u| %>
-        <p><%= u.username %> <span><%= button_to "Follow", controller: "follows", action: "create", followed_user_id: u.id, method: "post" %></span></p>
-<p>@<%= u.handle %></p>
-<% end %>
-</div>
-<br>
+        <%= react_component("SuggestedFollow", {user: UserSerializer.new(u), current_user_handle: current_user.handle}) %>
+    <% end %>
+   </div>
+  </div>
