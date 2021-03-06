@@ -1,35 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Avatar from "../Avatar";
 
 function NewTweet(props) {
-  // fetch new_tweet_path and then run form_for here, post tweets path to create
-  // right now I'm not using new tweet controller action. problem? idk, but for now I think it's fine to just skip the new action
+  const [submitButtonClasses, setSubmitButtonClasses] = useState(
+    "unsubmittable-button"
+  );
 
-  const readySubmitButton = () => {
-    let newTweetClassElementIndex = props.parentTweet ? 1 : 0;
-    let submitButton = document.getElementsByClassName("submit-button")[
-      newTweetClassElementIndex
-    ];
-    submitButton.classList.add(
-      "submittable-button",
-      "reply-color-background-hover"
-    );
-    submitButton.classList.remove("unsubmittable-button");
-    if (
-      document.getElementsByClassName("new-tweet-input")[
-        newTweetClassElementIndex
-      ].value === ""
-    ) {
-      submitButton.classList.remove(
-        "submittable-button",
-        "reply-color-background-hover"
-      );
-      submitButton.classList.add("unsubmittable-button");
+  const readySubmitButton = (e) => {
+    if (e.currentTarget.value === "") {
+      setSubmitButtonClasses("unsubmittable-button");
+    } else {
+      setSubmitButtonClasses("submittable-button reply-color-background-hover");
     }
   };
 
   const submit = async () => {
+    let newTweetClassElementIndex = props.parentTweet ? 1 : 0;
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
@@ -38,7 +25,9 @@ function NewTweet(props) {
       method: "POST",
       body: JSON.stringify({
         parent_id: props.parentTweet ? props.parentTweet.id : null,
-        content: document.getElementsByClassName("new-tweet-input")[0].value,
+        content: document.getElementsByClassName("new-tweet-input")[
+          newTweetClassElementIndex
+        ].value,
       }),
       headers: {
         Accept: "application/json",
@@ -66,7 +55,7 @@ function NewTweet(props) {
           <div className="submit-new-tweet-container">
             <div className="submit-options"></div>
             <div
-              className="submit-button unsubmittable-button"
+              className={"submit-button " + submitButtonClasses}
               onClick={submit}>
               {props.parentTweet ? "Reply" : "Tweet"}
             </div>

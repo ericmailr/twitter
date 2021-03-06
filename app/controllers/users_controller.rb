@@ -17,8 +17,9 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by!(handle: params[:handle])
-        @tweets = @user.tweets + @user.retweets + @user.quote_tweets
+        @tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
         @posts = @tweets.sort_by(&:updated_at).reverse.to_a
+        @post_types = params[:post_types]
         
         parents_already_posted = []
         @posts.map! do |post|
@@ -46,34 +47,7 @@ class UsersController < ApplicationController
             end
             postHash
        end.compact!
-=begin
-        @posts.map! do |post|
-            if post.parent             
-                nil
-            elsif post.class.name == "Retweet" 
-                { "tweet" => TweetSerializer.new(post), 
-                        "quoted_tweet" => TweetSerializer.new(post.tweet),
-                       "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
-                       "isLiked" => post.tweet.likers.include?(current_user),
-                       "isRetweeted" => post.tweet.retweets.include?(current_user),
-                       "postType" => "retweet" }
-            elsif post.class.name == "QuoteTweet"
-                 { "tweet" => TweetSerializer.new(post), 
-                        "quoted_tweet" => TweetSerializer.new(post.tweet),
-                       "updatedAt" => tweet_updated_at_formatted_brief(post.tweet.updated_at),
-                       "isLiked" => post.tweet.likers.include?(current_user),
-                       "isRetweeted" => post.tweet.retweets.include?(current_user),
-                       "postType" => "quote_tweet" }
-            elsif post.class.name == "Tweet"
-                { "tweet" => TweetSerializer.new(post), 
-                       "updatedAt" => tweet_updated_at_formatted_brief(post.updated_at),
-                       "isLiked" => post.likers.include?(current_user),
-                       "isRetweeted" => post.retweets.include?(current_user),
-                       "postType" => "tweet" }
-            end
-       end.compact!
-=end
-    #no replies
+     #  render component: "Profile", prerender: false, props: { posts: @posts, user: UserSerializer.new(@user), user_created_at: date_formatted(@user.created_at) } 
     end
 
     private

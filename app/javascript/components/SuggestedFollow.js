@@ -6,7 +6,7 @@ function SuggestedFollow(props) {
   const [followState, setFollowState] = useState({});
 
   useEffect(async () => {
-    let msg = await fetch(`/${props.current_user_handle}/following`);
+    let msg = await fetch(`/${props.user.handle}/following`);
     let json = await msg.json();
     setFollowState({
       isFollowed: json.isFollowed,
@@ -57,25 +57,29 @@ function SuggestedFollow(props) {
   };
 
   return (
-    <div className="suggested-follow">
+    <div
+      className="suggested-follow tweet-container"
+      style={props.last ? { borderBottom: "none" } : {}}>
       <div className="avatar-container suggested-follow-avatar">
         <Avatar />
       </div>
-      <div className="suggested-follow-handle">
-        <a href={Routes.profile_path(props.user.handle)}>
-          <span className={"username"}>{props.user.username}</span>
-          <span className={"font-secondary handle"}>
-            {" @"}
-            {props.user.handle}
-          </span>
-        </a>
-      </div>
-      <div
-        className={"follow-button " + followState.buttonClass}
-        onClick={toggleFollow}
-        onMouseEnter={followButtonEnterStyle}
-        onMouseLeave={followButtonLeaveStyle}>
-        {followState.isFollowed ? "Following" : "Follow"}
+      <div className="suggested-follow-content">
+        <div className="suggested-follow-handle">
+          <a href={Routes.profile_path(props.user.handle)}>
+            <span className={"username"}>{props.user.username}</span>
+            <span className={"font-secondary handle"}>
+              {" @"}
+              {props.user.handle}
+            </span>
+          </a>
+        </div>
+        <div
+          className={"follow-button " + followState.buttonClass}
+          onClick={toggleFollow}
+          onMouseEnter={followButtonEnterStyle}
+          onMouseLeave={followButtonLeaveStyle}>
+          {followState.isFollowed ? "Following" : "Follow"}
+        </div>
       </div>
     </div>
   );
@@ -83,8 +87,7 @@ function SuggestedFollow(props) {
 
 SuggestedFollow.propTypes = {
   user: PropTypes.object,
-  current_user_handle: PropTypes.string,
-  isFollowed: PropTypes.bool,
+  last: PropTypes.bool,
 };
 
 export default SuggestedFollow;

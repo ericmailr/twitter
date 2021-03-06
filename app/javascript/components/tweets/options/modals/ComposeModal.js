@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tweet from "../../Tweet";
 import Avatar from "../../../Avatar";
-import NewTweet from "../../../tweets/NewTweet";
+import NewTweet from "../../NewTweet";
 
-function ReplyModal(props) {
+function ComposeModal(props) {
   /* href={Routes.new_tweet_path({ parent_id: props.tweetId }) */
   // fetch new_tweet_path and then run form_for here, post tweets path to create
 
@@ -20,24 +20,26 @@ function ReplyModal(props) {
         </div>
       </div>
       <div className="scrollable">
-        <Tweet
-          tweet={props.tweet}
-          isParent={true}
-          updatedAt={props.updatedAt}
-          hideOptions={true}
-          newReply={true}
-        />
+        {props.tweet && (
+          <Tweet
+            tweet={props.tweet}
+            isParent={true}
+            updatedAt={props.updatedAt}
+            hideOptions={true}
+            newReply={true}
+          />
+        )}
         <NewTweet rows={5} parentTweet={props.tweet} />
       </div>
     </div>
   );
 }
 
-ReplyModal.propTypes = {
+ComposeModal.propTypes = {
   showModal: PropTypes.bool,
   toggleModal: PropTypes.func,
   tweet: PropTypes.object,
   updatedAt: PropTypes.string,
 };
 
-export default ReplyModal;
+export default ComposeModal;

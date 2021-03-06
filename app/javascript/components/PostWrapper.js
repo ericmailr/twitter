@@ -126,9 +126,7 @@ function PostWrapper(props) {
 PostWrapper.propTypes = {
   tweet: PropTypes.object,
   user: PropTypes.object,
-  //retweet: PropTypes.object,
   updatedAt: PropTypes.string,
-  //replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,
   isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,

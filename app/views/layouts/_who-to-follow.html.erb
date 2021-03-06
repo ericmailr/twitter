@@ -1,8 +1,0 @@
-<div class="suggested-section">
-  <h2> Who to follow </h2>
-  <div id="who-to-follow"
-    <% User.followable_users(current_user).order('RANDOM()').limit(3).each do |u| %>
-        <%= react_component("SuggestedFollow", {user: UserSerializer.new(u), current_user_handle: current_user.handle}) %>
-    <% end %>
-   </div>
-  </div>

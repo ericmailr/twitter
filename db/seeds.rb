@@ -15,7 +15,9 @@ users = User.create!([
 
 Follow.create!([
     {follower_id: users[0].id, followed_user_id: users[1].id },
+    {follower_id: users[1].id, followed_user_id: users[3].id },
     {follower_id: users[2].id, followed_user_id: users[1].id },
+    {follower_id: users[1].id, followed_user_id: users[2].id },
     {follower_id: users[0].id, followed_user_id: users[2].id }
 ])
 

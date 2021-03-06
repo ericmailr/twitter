@@ -1,7 +1,7 @@
 # README
 
 Eric Miller
-A rebuild of Twitter with core features.
+Twitter clone
 
 - Ruby version
   ruby 2.3.4p301
@@ -56,11 +56,27 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-"like real angry" is replying to wrong tweet
+profile avatar, background image
 
-Make a posts controller with index. (2/25 : should i? looking at long after writing)
+signout popup
 
-Identify differences in props needed for different post types and try to simplify #index, PostList and PostWrapper
+FIX SESSIONS
+
+rework application.html.erb and make everything a react component
+
+add quote-tweet function
+
+fix search
+
+add delete tweet option
+
+Add signup
+
+Expand Nav with Labels
+
+Fix back button on TopHeader to not just go back a page
+
+Work on Responsiveness
 
 Click on reply, should show reply STATUS with parent TWEET connected above... page scrolled to reply.
 -add isReply to Tweet?
@@ -68,14 +84,5 @@ Click on reply, should show reply STATUS with parent TWEET connected above... pa
 Multiple replies to one tweet in feed:
 -what happens if multiple replies to one tweet? just show one reply and one reference to the parent on the feed
 -replies under status: chains of replies (2+ generations) get chained with the reply connector under status, show up to 3 total tweets chained? with link below to show more?
-
-Rework application layout, make containers react components
-
-Use Bootstrap (like Twitter)
-
-somewhat randomly, when clicking a lot of likes and whatnot, after page refresh:
-Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-
-if isRetweeted, drop down to undo retweet
 
 Eventually I need to figure out my sessions, current_user. As of now, I can't logout of one and back in as another and have it show what it should.

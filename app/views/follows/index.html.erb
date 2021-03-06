@@ -1,13 +1,1 @@
-<h1><%= @follow_type %></h1>
-
-<% if @follow_type == "followers" %>
-    <% @user.followers.each do |u| %>
-        <p><%= u.username %> <span><%= button_to "Follow", controller: "follows", action: "create", followed_user_id: u.id, method: "post" %></span></p>
-        <p><%= u.handle %></p>
-    <% end %>
-<% elsif @follow_type == "following" %>
-    <% @user.followed_users.each do |u| %>
-        <p><%= u.username %> <span><%= button_to "Unfollow", follow_path(id: current_user.id, followed_user_id: u.id), method: "delete" %></span></p>
-        <p><%= u.handle %></p>
-    <% end %>
-<% end %>
+<%= react_component("FollowList", {followers: @followers, followed_users: @followed_users, followers_user_follows: @followers_user_follows, user: @user, follow_type: @follow_type}) %>

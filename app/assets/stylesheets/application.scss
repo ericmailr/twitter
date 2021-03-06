@@ -286,6 +286,47 @@ a:hover {
   height: 18.75px;
 }
 
+.misc-svg {
+  width: 18.75px;
+  fill: currentColor;
+}
+
+.profile-description {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-description > * {
+  padding: 5px 0;
+}
+
+.username-handle > .username:hover {
+  text-decoration: none;
+}
+
+.username-handle > * {
+  margin: 0;
+}
+
+.username-handle > .username {
+  font-weight: 800;
+  font-size: 23px;
+}
+
+.follows > a {
+  padding-right: 20px;
+}
+
+.follows > a:hover {
+  text-decoration: underline;
+}
+
+.follow-number {
+  color: white;
+  font-weight: 800;
+}
+
 .option-count {
   font-size: 13px;
   line-height: 13px;
@@ -351,6 +392,68 @@ nav {
   background-color: RGB(var(--reply-color)); // sassc syntax error with rgb
 }
 
+.logout-user-card {
+  display: flex;
+  border-bottom: 1px solid rgba(136, 153, 166, 0.25);
+  padding-bottom: 12px;
+}
+
+.logout-user-card .avatar-container {
+  flex: 1;
+}
+
+.user-identifiers {
+  flex: 6;
+}
+
+.user-identifiers .handle {
+  margin-top: -5px;
+}
+
+#logout-modal {
+  padding: 15px 0;
+  background-color: black;
+  width: 300px;
+  position: absolute;
+  bottom: 60px;
+  left: -15px;
+  border-radius: 14px;
+  font-size: 15px;
+  display: none;
+  flex-direction: column;
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
+    rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+  z-index: 1;
+  color: white;
+}
+
+#logout-modal::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  left: 24px;
+  bottom: -6px;
+  background-color: black;
+  transform: rotate(45deg);
+  box-shadow: 2px 2px 5px -1px rgba(255, 255, 255, 0.2),
+    2px 2px 3px 0px rgba(255, 255, 255, 0.15);
+}
+
+#logout-modal .username:hover {
+  text-decoration: none;
+}
+
+.logout-container {
+  padding: 16px;
+}
+
+.logout-container:hover {
+  background-color: rgba(21, 24, 28, 0.9);
+  transition-property: background-color;
+  transition-duration: 0.2s;
+}
+
 .reply-color-background-hover:hover {
   background-color: rgb(26, 145, 218);
   transition-property: background-color;
@@ -371,18 +474,30 @@ nav {
   cursor: pointer;
   margin: 0;
   padding: 0;
+  border-bottom: 2px solid rgba(136, 153, 166, 0.25);
 }
 
 .tab-list > li {
-  padding-top: 10px;
-  padding-bottom: 15px;
   flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-list > li > a {
+  padding-top: 12px;
+  padding-bottom: 16px;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .tab-list > li:hover {
   background-color: rgba(29, 161, 242, 0.1);
+}
+
+.selected-tab {
+  color: RGB(var(--reply-color));
+  border-bottom: 3px solid RGB(var(--reply-color));
 }
 
 .status {
@@ -396,7 +511,7 @@ nav {
 }
 
 .status-tweeter {
-  flex: 8;
+  flex: 14;
 }
 
 .status-indent {
@@ -492,13 +607,29 @@ nav {
   height: 53px;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  padding-left: 10px;
 }
 
-#top-header > h1 {
+#top-header > a {
+  cursor: pointer;
+}
+
+#header-title h1 {
   font-size: 19px;
   font-weight: 800;
-  margin: 0 10px;
+  margin: 0 15px;
+}
+
+#header-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tiny-note {
+  font-size: 12px;
+  margin: 0;
 }
 
 #divider {
@@ -591,7 +722,7 @@ nav {
 }
 
 #search-container {
-  flex: 3;
+  flex: 2;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -654,16 +785,35 @@ nav {
 .suggested-follow {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(136, 153, 166, 0.25);
   padding: 12px;
 }
 
+.suggested-follow:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
 .suggested-follow-avatar {
-  flex: 2;
+  flex: 1;
+}
+
+.suggested-section .suggested-follow-avatar {
+  flex: 3;
+}
+
+.suggested-follow-content {
+  flex: 14;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .suggested-follow-handle {
-  flex: 5;
+  flex: 10;
 }
 
 .suggested-follow-handle > a {
@@ -679,14 +829,14 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 3;
+  flex: 1;
   font-weight: 700;
   background-color: inherit;
   color: RGB(var(--reply-color));
-  padding: 4px 12px 8px 12px;
+  padding: 4px 10px 8px 10px;
   border-radius: 30px;
   border-style: solid;
-  border-width: 1px;
+  border-width: 1.5px;
   border-color: RGB(var(--reply-color));
   cursor: pointer;
   transition-property: background-color;

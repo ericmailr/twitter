@@ -29,9 +29,9 @@ function Status(props) {
 
       <div className="status-updated-at font-secondary">{props.updatedAt}</div>
 
-      {props.tweet.retweets.length + props.likesCount > 0 && (
+      {props.retweetsCount + props.likesCount > 0 && (
         <div className="status-stats">
-          <Stats type="Retweets" count={props.tweet.retweets.length} />
+          <Stats type="Retweets" count={props.retweetsCount} />
           <Stats type="Quote Tweets" count={props.tweet.quote_tweets.length} />
           <Stats type="Likes" count={props.likesCount} />
         </div>
@@ -56,7 +56,13 @@ Status.propTypes = {
   updatedAt: PropTypes.string,
   updatedAtBrief: PropTypes.string,
   isLiked: PropTypes.bool,
-  // should add typechecking for toggleLike and others i think ?
+  isRetweeted: PropTypes.bool,
+  toggleLike: PropTypes.func,
+  toggleRetweet: PropTypes.func,
+  likesCount: PropTypes.number,
+  retweetsCount: PropTypes.number,
+  isParent: PropTypes.bool,
+  isReply: PropTypes.bool,
 };
 
 export default Status;

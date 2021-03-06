@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ReplyModal from "./modals/ReplyModal";
+import ComposeModal from "./modals/ComposeModal";
 import ReactDOM from "react-dom";
 
 const bodyColor = document.body.style.backgroundColor;
@@ -58,7 +58,7 @@ function Reply(props) {
     <React.Fragment>
       {showModal &&
         ReactDOM.createPortal(
-          <ReplyModal
+          <ComposeModal
             showModal={showModal}
             toggleModal={toggleModal}
             tweet={props.tweet}
