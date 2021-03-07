@@ -148,23 +148,23 @@ function Nav(props) {
               </span>
             </div>
           </li>
-          <li>
-            <div
-              onMouseOver={mouseEnterColor}
-              onMouseLeave={mouseLeaveColor}
-              onClick={showLogoutModal}
-              style={{ position: "relative" }}>
-              <span className="svg-background">
-                <img
-                  className="nav-avatar"
-                  src={AvatarImg}
-                  alt="default avatar"
-                />
-              </span>
-              <LogoutModal username={props.username} handle={props.handle} />
-            </div>
-          </li>
         </ul>
+        <div id="nav-logout">
+          <div
+            onMouseOver={mouseEnterColor}
+            onMouseLeave={mouseLeaveColor}
+            onClick={showLogoutModal}
+            style={{ position: "relative" }}>
+            <span className="svg-background">
+              <img
+                className="nav-avatar"
+                src={AvatarImg}
+                alt="default avatar"
+              />
+            </span>
+            <LogoutModal username={props.username} handle={props.handle} />
+          </div>
+        </div>
       </nav>
     </React.Fragment>
   );

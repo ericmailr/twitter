@@ -21,11 +21,7 @@ function Status(props) {
           </a>
         </div>
       </div>
-      <a
-        className="status-content"
-        href={Routes.status_path(props.tweet.user.handle, props.tweet.id)}>
-        {props.tweet.content}
-      </a>
+      <div className="status-content">{props.tweet.content}</div>
 
       <div className="status-updated-at font-secondary">{props.updatedAt}</div>
 

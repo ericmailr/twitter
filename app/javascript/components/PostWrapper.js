@@ -20,7 +20,8 @@ function PostWrapper(props) {
     });
   }, []);
 
-  const toggleLike = async () => {
+  const toggleLike = async (e) => {
+    e.stopPropagation();
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");

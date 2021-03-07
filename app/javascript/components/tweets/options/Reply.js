@@ -39,7 +39,7 @@ function Reply(props) {
         !modalElement.contains(e.target) ||
         exitModalElement.contains(e.target)
       ) {
-        toggleModal();
+        toggleModal(e);
         document
           .getElementById("nav-container")
           .removeEventListener("click", exitModalHandler);
@@ -50,7 +50,8 @@ function Reply(props) {
     }
   };
 
-  const toggleModal = () => {
+  const toggleModal = (e) => {
+    e.stopPropagation();
     setShowModal(!showModal);
   };
 
@@ -58,12 +59,7 @@ function Reply(props) {
     <React.Fragment>
       {showModal &&
         ReactDOM.createPortal(
-          <ComposeModal
-            showModal={showModal}
-            toggleModal={toggleModal}
-            tweet={props.tweet}
-            updatedAt={props.updatedAt}
-          />,
+          <ComposeModal tweet={props.tweet} updatedAt={props.updatedAt} />,
           document.getElementById("modal-container")
         )}
       <div className="option-container">

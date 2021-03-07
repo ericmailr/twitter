@@ -41,7 +41,7 @@ function FollowList(props) {
             <a href={Routes.following_path(props.user.handle)}>Following</a>
           </li>
         </ul>
-        <div id="tweets">
+        <div>
           <PostList posts={followerList} />
         </div>
       </div>

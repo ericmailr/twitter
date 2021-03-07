@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 function Like(props) {
   return (
-    <div className="option-container" onClick={props.toggleLike}>
+    <div className="option-container">
       <div
         className="option-container-text"
         onMouseOver={props.mouseEnterColor}
         onMouseLeave={props.mouseLeaveColor}>
-        <span className="svg-background">
+        <span className="svg-background" onClick={props.toggleLike}>
           <svg className="tweet-options-svg like-svg" viewBox="0 0 24 24">
             <g>
               <path

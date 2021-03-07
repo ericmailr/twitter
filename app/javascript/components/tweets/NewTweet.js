@@ -15,8 +15,9 @@ function NewTweet(props) {
     }
   };
 
-  const submit = async () => {
-    let newTweetClassElementIndex = props.parentTweet ? 1 : 0;
+  const submit = async (e) => {
+    let textAreaValue =
+      e.currentTarget.parentElement.parentElement.firstChild.value;
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
@@ -25,9 +26,7 @@ function NewTweet(props) {
       method: "POST",
       body: JSON.stringify({
         parent_id: props.parentTweet ? props.parentTweet.id : null,
-        content: document.getElementsByClassName("new-tweet-input")[
-          newTweetClassElementIndex
-        ].value,
+        content: textAreaValue,
       }),
       headers: {
         Accept: "application/json",

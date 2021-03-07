@@ -4,40 +4,19 @@ Eric Miller
 Twitter clone
 
 - Ruby version
-  ruby 2.3.4p301
+  ruby 2.7.0p0
 - Database creation
   sqlite
-
-- Features / Structure
-
-/signup: hit next, sent you verification code (enter it) skip this for now.
-
-/home: tweets index
-/notifications: mentions
-/bookmarks: extra liked tweets
-/username (profile): tweets tab, comments tab (instead of "tweets & replies" maybe), likes tab
-search?
-who to follow
+- Guest login: Username: guest, Password: password123
 
 - Unimplemented Features
   /dm's
   /lists
   /explore: shows trending hashtags
   settings
-  no media
+  media
 
-- How I set up my ActiveRecord Associations:
-
-DRY: Don't Repeat Yourself
-
-CHANGING TWEET MODEL SETUP
-
-just make them all tweets... simplifying ancestry stuff. new columns for quote_id
-content is nil for retweets
-
-(Cons: all the same class, empty extra columns)
-
-OR
+- Thoughts on ActiveRecord Associations setup:
 
 Single Table Inheritance with subclasses
 Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
@@ -56,17 +35,20 @@ https://github.com/rails/rails/pull/39341
 
 TODO NEXT:
 
-profile avatar, background image
+profile avatar, background image, follow button
 
-signout popup
-
-FIX SESSIONS
+avatar modal
 
 rework application.html.erb and make everything a react component
 
-add quote-tweet function
+clicking on likes, retweets should pop up a modal showing users
 
-fix search
+add quote-tweet function
+clicking on quote_tweets loads new page showing each one (comment plus quote)
+
+abbreviate handles in suggested-section when too long
+
+make search index pretty
 
 add delete tweet option
 
@@ -74,15 +56,10 @@ Add signup
 
 Expand Nav with Labels
 
-Fix back button on TopHeader to not just go back a page
+Make back button on TopHeader not just go back a page
 
 Work on Responsiveness
-
-Click on reply, should show reply STATUS with parent TWEET connected above... page scrolled to reply.
--add isReply to Tweet?
 
 Multiple replies to one tweet in feed:
 -what happens if multiple replies to one tweet? just show one reply and one reference to the parent on the feed
 -replies under status: chains of replies (2+ generations) get chained with the reply connector under status, show up to 3 total tweets chained? with link below to show more?
-
-Eventually I need to figure out my sessions, current_user. As of now, I can't logout of one and back in as another and have it show what it should.

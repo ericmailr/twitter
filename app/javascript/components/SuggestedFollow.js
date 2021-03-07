@@ -69,7 +69,7 @@ function SuggestedFollow(props) {
             <span className={"username"}>{props.user.username}</span>
             <span className={"font-secondary handle"}>
               {" @"}
-              {props.user.handle}
+              {props.user.handle.slice(0, 10) + "..."}
             </span>
           </a>
         </div>

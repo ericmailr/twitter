@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "../Avatar";
 import StatusReplyHeader from "../statuses/StatusReplyHeader";
@@ -6,12 +6,30 @@ import TweetOptions from "./TweetOptions";
 import ActionHeader from "./ActionHeader";
 
 function Tweet(props) {
+  const clickTweetHandler = (e) => {
+    if (!e.target.closest("#modal")) {
+      window.location.href = Routes.status_path(
+        props.user.handle,
+        props.tweet.id
+      );
+    }
+  };
+
+  const addStopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <div
+      onClick={!props.newReply ? clickTweetHandler : null}
       className={
         props.isReply ? "post-container" : "post-container post-border"
       }
-      style={props.newReply && { paddingTop: "10px" }}>
+      style={{
+        paddingTop: props.newReply ? "10px" : "",
+        cursor: props.newReply ? "auto" : "",
+        marginBottom: props.isParent ? "-5px" : "",
+      }}>
       {props.actionHeader && (
         <ActionHeader
           username={props.user.username}
@@ -26,8 +44,10 @@ function Tweet(props) {
         <div className="tweet-content">
           <div className="tweet">
             <div>
-              <div>
-                <a href={Routes.profile_path(props.tweet.user.handle)}>
+              <div className="tweet-header">
+                <a
+                  href={Routes.profile_path(props.tweet.user.handle)}
+                  onClick={addStopPropagation}>
                   <span className={"username"}>
                     {props.tweet.user.username}
                   </span>
@@ -45,13 +65,7 @@ function Tweet(props) {
               {props.replyingTo && (
                 <StatusReplyHeader parentHandle={props.replyingTo} />
               )}
-              <a
-                href={Routes.status_path(
-                  props.tweet.user.handle,
-                  props.tweet.id
-                )}>
-                {props.tweet.content}
-              </a>
+              <div>{props.tweet.content}</div>
             </div>
           </div>
           {props.newReply && (

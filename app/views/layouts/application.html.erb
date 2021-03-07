@@ -16,11 +16,6 @@
         <div id="main-container">
           <%= react_component("Nav", {handle: current_user.handle, username: current_user.username}, {id: "nav-container"}) %>
           <div id="tweets">
-            <% flash.each do |type, msg| %>
-              <div>
-                <%= msg %>
-              </div>
-            <% end %>
             <%= yield %>
           </div>
           <div id="search-container">

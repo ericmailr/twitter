@@ -36,8 +36,6 @@ function ComposeModal(props) {
 }
 
 ComposeModal.propTypes = {
-  showModal: PropTypes.bool,
-  toggleModal: PropTypes.func,
   tweet: PropTypes.object,
   updatedAt: PropTypes.string,
 };

@@ -25,7 +25,7 @@ function LogoutModal(props) {
         data-method="delete"
         href={Routes.logout_path()}
         className="logout-container">
-        Log out <span className={"font-secondary handle"}>@{props.handle}</span>
+        Log out <span className={"handle"}>@{props.handle}</span>
       </a>
       <div className="logout-modal-triangle"></div>
     </div>
