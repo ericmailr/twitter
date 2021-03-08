@@ -6,7 +6,7 @@ Twitter clone
 - Ruby version
   ruby 2.7.0p0
 - Database creation
-  sqlite
+  postgresql
 - Guest login: Username: guest, Password: password123
 
 - Unimplemented Features
