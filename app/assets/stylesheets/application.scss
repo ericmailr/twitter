@@ -939,7 +939,7 @@ nav {
   justify-content: space-around;
   align-items: flex-start;
   border-bottom: 1px solid rgba(136, 153, 166, 0.25);
-  padding: 12px;
+  padding: 10px 8px;
 }
 
 .suggested-follow:hover {
@@ -950,22 +950,41 @@ nav {
 }
 
 .suggested-follow-avatar {
+  display: flex;
   flex: 1;
 }
 
+.suggested-follow-avatar .avatar {
+  height: 59px;
+  width: 59px;
+}
+
 .suggested-section .suggested-follow-avatar {
-  flex: 3;
+  display: flex;
+  flex: 1;
+}
+
+.suggested-section .avatar {
+  height: 48px;
+  width: 48px;
+}
+
+.suggested-section .suggested-follow-content {
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 1 75%;
 }
 
 .suggested-follow-content {
-  flex: 14;
+  flex: 1 1 95%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
 .suggested-follow-handle {
-  flex: 10;
+  display: flex;
+  flex: 1 1 85%;
 }
 
 .suggested-follow-handle > a {
@@ -981,8 +1000,11 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
   font-weight: 700;
+  flex: 1 1 15%;
+  //min-width: 79px;
+  //max-width: 101px;
+  max-width: 79px;
   background-color: inherit;
   color: RGB(var(--reply-color));
   padding: 4px 10px 8px 10px;

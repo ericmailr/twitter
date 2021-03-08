@@ -16,7 +16,7 @@ function Login() {
   const addInputFocusListeners = (() => {
     usernameDiv.lastElementChild.addEventListener("focus", colorInputs);
     usernameDiv.lastElementChild.addEventListener("blur", decolorInputs);
-    passwordDiv.lastElementChild.addEventListener("click", colorInputs);
+    passwordDiv.lastElementChild.addEventListener("focus", colorInputs);
     passwordDiv.lastElementChild.addEventListener("blur", decolorInputs);
   })();
   return <React.Fragment></React.Fragment>;

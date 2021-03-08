@@ -20,6 +20,7 @@ function SuggestedFollow(props) {
       .getAttribute("content");
     let msg = "";
     if (!followState.isFollowed) {
+      console.log("follow happnin");
       msg = await fetch("/follows", {
         method: "POST",
         body: JSON.stringify({
@@ -56,6 +57,12 @@ function SuggestedFollow(props) {
     e.currentTarget.classList.remove("follow-button-hover");
   };
 
+  const truncate = (string) => {
+    let maxLength = 15;
+    let truncated = string.slice(0, maxLength - 1);
+    return string.length > maxLength ? truncated + "..." : truncated;
+  };
+
   return (
     <div
       className="suggested-follow tweet-container"
@@ -66,10 +73,10 @@ function SuggestedFollow(props) {
       <div className="suggested-follow-content">
         <div className="suggested-follow-handle">
           <a href={Routes.profile_path(props.user.handle)}>
-            <span className={"username"}>{props.user.username}</span>
+            <span className={"username"}>{truncate(props.user.username)}</span>
             <span className={"font-secondary handle"}>
               {" @"}
-              {props.user.handle.slice(0, 10) + "..."}
+              {truncate(props.user.handle)}
             </span>
           </a>
         </div>
@@ -77,7 +84,12 @@ function SuggestedFollow(props) {
           className={"follow-button " + followState.buttonClass}
           onClick={toggleFollow}
           onMouseEnter={followButtonEnterStyle}
-          onMouseLeave={followButtonLeaveStyle}>
+          onMouseLeave={followButtonLeaveStyle}
+          style={
+            followState.isFollowed
+              ? { maxWidth: "101px" }
+              : { maxWidth: "79px" }
+          }>
           {followState.isFollowed ? "Following" : "Follow"}
         </div>
       </div>

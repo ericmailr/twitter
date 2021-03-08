@@ -37,8 +37,7 @@ class TweetsController < ApplicationController
     def index
         if (current_user) 
             @tweet = Tweet.new
-            tweets = Tweet.includes(:likers, :retweeters).where(user_id: (current_user.followed_users << current_user).map {|u| u.id}).to_a
-            #includes user?
+            tweets = Tweet.includes(:likers, :retweeters).where(user_id: (current_user.followed_users).map {|u| u.id}).to_a + current_user.tweets.to_a
             likes = Like.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
             retweets = Retweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
             quote_tweets = QuoteTweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a

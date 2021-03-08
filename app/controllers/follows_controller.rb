@@ -1,7 +1,7 @@
 class FollowsController < ApplicationController
     def create
         @user = User.find(params[:followed_user_id])
-        Follow.create(follower_id: current_user.id, followed_user_id: @user.id)
+        follow = Follow.create(follower_id: current_user.id, followed_user_id: @user.id)
         respond_to do |format|
             msg = { :status => "ok", :isFollowed => current_user.followed_users.include?(@user)}
             format.json  { render :json => msg } 
