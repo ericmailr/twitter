@@ -37,6 +37,8 @@ TODO NEXT:
 
 profile avatar, background image, follow button
 
+current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen
+
 avatar modal
 
 rework application.html.erb and make everything a react component
