@@ -47,10 +47,15 @@ class TweetsController < ApplicationController
             @posts.map! do |post|
                 postHash = {:postType => post.class.name.downcase, :updatedAt => tweet_updated_at_formatted_brief(post.updated_at)}
                 if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name) 
+                  if parents_already_posted.include?(post.tweet)
+                    postHash = nil
+                  else
                     postHash[:post] = LikeSerializer.new(post)
                     postHash[:isLiked] = post.tweet.likers.include?(current_user)
                     postHash[:isRetweeted] = post.tweet.retweeters.include?(current_user)
+                    postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)  
                     parents_already_posted << post.tweet
+                  end
                 elsif parents_already_posted.include?(post.parent) || parents_already_posted.include?(post)
                     postHash = nil
                 else
@@ -67,7 +72,6 @@ class TweetsController < ApplicationController
                     end
                 end
                 if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name)
-                    postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)  
                 end
                 postHash
            end.compact!
