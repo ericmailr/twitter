@@ -1,39 +1,34 @@
-# README
+# Twitter Clone
 
 Eric Miller
-Twitter clone
 
-- Ruby version
-  ruby 2.7.0p0
-- Database creation
-  postgresql
+[Try it out here](https://twitter-clone-ericmiller.herokuapp.com/
+)
+
 - Guest login: Username: guest, Password: password123
+- 
+- Ruby version: 2.7.0p0
+- Database:  postgresql
 
-- Unimplemented Features
-  /dm's
-  /lists
-  /explore: shows trending hashtags
-  settings
-  media
+## Implemented Features
 
-- Thoughts on ActiveRecord Associations setup:
+- Tweets
+- Likes
+- Retweets
+- Follow other users
+- See profiles
+- Search posts
 
-Single Table Inheritance with subclasses
-Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
-(Cons: empty extra columns)
+## Features in progress
 
-Potentially overkill...?
-What is the benefit over just leaving inheritance out of it and just removing Retweet/QuoteTweet classes?
-It does seem easier to grab retweets, quote_tweets without needing another column for og tweet id to find quote_tweets since they're all the same class. Very small benefit though.
+- signup / create account
+- Quote Tweets
+- Edit Avatar Image
+- User popups on hover
+- media
+- dm
 
-OR
-
-NOT COMING UNTIL RAILS 6.1
-Rails Delegated types? STI with delegated child companion object
-https://belighted.com/blog/implementing-multiple-table-inheritance-in-rails
-https://github.com/rails/rails/pull/39341
-
-TODO NEXT:
+## Personal TODO 
 
 profile avatar, background image, follow button
 
@@ -61,6 +56,26 @@ Expand Nav with Labels
 Make back button on TopHeader not just go back a page
 
 Work on Responsiveness
+
+## PERSONAL Notes on Project
+
+- Thoughts on ActiveRecord Associations setup:
+
+Single Table Inheritance with subclasses
+Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
+(Cons: empty extra columns)
+
+Potentially overkill...?
+What is the benefit over just leaving inheritance out of it and just removing Retweet/QuoteTweet classes?
+It does seem easier to grab retweets, quote_tweets without needing another column for og tweet id to find quote_tweets since they're all the same class. Very small benefit though.
+
+OR
+
+NOT COMING UNTIL RAILS 6.1
+Rails Delegated types? STI with delegated child companion object
+https://belighted.com/blog/implementing-multiple-table-inheritance-in-rails
+https://github.com/rails/rails/pull/39341
+
 
 Multiple replies to one tweet in feed:
 -what happens if multiple replies to one tweet? just show one reply and one reference to the parent on the feed
