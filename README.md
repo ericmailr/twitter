@@ -6,13 +6,13 @@ Eric Miller
 )
 
 - Guest login: Username: guest, Password: password123
-- 
 - Ruby version: 2.7.0p0
 - Database:  postgresql
 
 ## Implemented Features
 
 - Tweets
+- Replies
 - Likes
 - Retweets
 - Follow other users
@@ -28,7 +28,7 @@ Eric Miller
 - media
 - dm
 
-## Personal TODO 
+## My todo list 
 
 profile avatar, background image, follow button
 
@@ -57,7 +57,7 @@ Make back button on TopHeader not just go back a page
 
 Work on Responsiveness
 
-## PERSONAL Notes on Project
+## Personal Project Design Notes
 
 - Thoughts on ActiveRecord Associations setup:
 
