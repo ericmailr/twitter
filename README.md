@@ -2,6 +2,8 @@
 
 Eric Miller
 
+![Twitter Clone Screenshot](./app/assets/images/twitter.png)
+
 [Try it out here](https://twitter-clone-ericmiller.herokuapp.com/
 )
 
@@ -30,36 +32,36 @@ Eric Miller
 
 ## My todo list 
 
-profile avatar, background image, follow button
+- profile avatar, background image, follow button
 
-current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen
+- current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen
 
-avatar modal
+- avatar modal
 
-rework application.html.erb and make everything a react component
+- rework application.html.erb and make everything a react component
 
-clicking on likes, retweets should pop up a modal showing users
+- clicking on likes, retweets should pop up a modal showing users
 
-add quote-tweet function
+- add quote-tweet function
 clicking on quote_tweets loads new page showing each one (comment plus quote)
 
-abbreviate handles in suggested-section when too long
+- abbreviate handles in suggested-section when too long
 
-make search index pretty
+- make search index pretty
 
-add delete tweet option
+- add delete tweet option
 
-Add signup
+- Add signup
 
-Expand Nav with Labels
+- Expand Nav with Labels
 
-Make back button on TopHeader not just go back a page
+- Make back button on TopHeader not just go back a page
 
-Work on Responsiveness
+- Work on Responsiveness
 
 ## Personal Project Design Notes
 
-- Thoughts on ActiveRecord Associations setup:
+### Thoughts on ActiveRecord Associations setup:
 
 Single Table Inheritance with subclasses
 Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
@@ -76,6 +78,7 @@ Rails Delegated types? STI with delegated child companion object
 https://belighted.com/blog/implementing-multiple-table-inheritance-in-rails
 https://github.com/rails/rails/pull/39341
 
+### Other
 
 Multiple replies to one tweet in feed:
 -what happens if multiple replies to one tweet? just show one reply and one reference to the parent on the feed
