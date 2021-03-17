@@ -497,6 +497,7 @@ a:hover {
   justify-content: right;
   flex: 1;
   height: 100vh;
+  z-index: 1;
 }
 
 #nav-container ul {
@@ -572,7 +573,7 @@ nav {
   flex-direction: column;
   box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px,
     rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
-  z-index: 2;
+  z-index: 1;
   color: white;
 }
 
