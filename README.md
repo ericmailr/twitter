@@ -4,12 +4,11 @@ Eric Miller
 
 ![Twitter Clone Screenshot](./app/assets/images/twitter.png)
 
-[Try it out here](https://twitter-clone-ericmiller.herokuapp.com/
-)
+[Try it out here](https://twitter-clone-ericmiller.herokuapp.com/)
 
 - Guest login: Username: guest, Password: password123
 - Ruby version: 2.7.0p0
-- Database:  postgresql
+- Database: postgresql
 
 ## Implemented Features
 
@@ -30,7 +29,9 @@ Eric Miller
 - media
 - dm
 
-## My todo list 
+## My todo list
+
+- is "liked" action header working? first tweet isn't showing it...
 
 - profile avatar, background image, follow button
 
@@ -43,7 +44,7 @@ Eric Miller
 - clicking on likes, retweets should pop up a modal showing users
 
 - add quote-tweet function
-clicking on quote_tweets loads new page showing each one (comment plus quote)
+  clicking on quote_tweets loads new page showing each one (comment plus quote)
 
 - abbreviate handles in suggested-section when too long
 
