@@ -131,6 +131,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   flex: 4;
   width: 100%;
 }
@@ -227,9 +228,19 @@ a:hover {
   color: white;
 }
 
+// should really change this so all button hovers are in the same rule
+#login-submit .reply-color-background-hover:hover {
+  background-color: rgb(26, 145, 218);
+}
+
+#login-options {
+  color: RGB(var(--reply-color));
+  display: flex;
+  justify-content: center;
+}
+
 #login-bird-svg {
   height: 40px;
-  align-self: flex-start;
 }
 
 #modal-container {

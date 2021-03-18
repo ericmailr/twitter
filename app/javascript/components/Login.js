@@ -54,7 +54,14 @@ function Login(props) {
             type="submit"
             name="commit"
             value="Log in"
+            className="reply-color-background-hover"
             data-disable-with="Log in"></input>
+        </div>
+        <div id="login-options">
+          {/* onClick signup modal, name, email, date of birth, NEXT choose a handle, username, and password i guess*/}
+          <a>
+            <span> Sign up for Twitter</span>
+          </a>
         </div>
       </form>
     </div>
