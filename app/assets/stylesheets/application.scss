@@ -861,10 +861,11 @@ nav {
 }
 
 .header-svg {
-  flex: 1;
+  //flex: 1;
   display: flex;
   justify-content: center;
   margin: 0 10px;
+  width: 48px;
 }
 
 .header-svg > span {
