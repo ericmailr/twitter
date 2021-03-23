@@ -9,7 +9,7 @@ function Tweet(props) {
   const clickTweetHandler = (e) => {
     if (!e.target.closest("#modal")) {
       window.location.href = Routes.status_path(
-        props.user.handle,
+        props.tweet.user.handle,
         props.tweet.id
       );
     }
