@@ -79,7 +79,7 @@ function Nav(props) {
   };
 
   return (
-    <React.Fragment>
+    <div id="nav-container">
       {showModal &&
         ReactDOM.createPortal(
           <ComposeModal showModal={showModal} toggleModal={toggleModal} />,
@@ -121,7 +121,7 @@ function Nav(props) {
           </li>
           <li>
             <a
-              href={Routes.profile_path(props.handle)}
+              href={Routes.profile_path(props.user.handle)}
               onMouseOver={mouseEnterColor}
               onMouseLeave={mouseLeaveColor}>
               <span className="svg-background">
@@ -162,17 +162,19 @@ function Nav(props) {
                 alt="default avatar"
               />
             </span>
-            <LogoutModal username={props.username} handle={props.handle} />
+            <LogoutModal
+              username={props.user.username}
+              handle={props.user.handle}
+            />
           </div>
         </div>
       </nav>
-    </React.Fragment>
+    </div>
   );
 }
 
 Nav.propTypes = {
-  handle: PropTypes.string,
-  username: PropTypes.string,
+  user: PropTypes.object,
 };
 
 export default Nav;

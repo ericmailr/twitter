@@ -5,7 +5,7 @@ import PostList from "./PostList";
 function ProfilePostList(props) {
   let postList = {};
 
-  if (props.post_types === "tweets") {
+  if (props.postTypes === "tweets") {
     postList = (
       <PostList
         posts={props.posts.filter((postHash) => {
@@ -13,7 +13,7 @@ function ProfilePostList(props) {
         })}
       />
     );
-  } else if (props.post_types === "with_replies") {
+  } else if (props.postTypes === "with_replies") {
     postList = (
       <PostList
         posts={props.posts.filter((postHash) => {
@@ -23,13 +23,13 @@ function ProfilePostList(props) {
         })}
       />
     );
-  } else if (props.post_types === "media") {
+  } else if (props.postTypes === "media") {
     postList = (
       <div style={{ textAlign: "center", fontSize: "26px" }}>
         Under construction
       </div>
     );
-  } else if (props.post_types === "likes") {
+  } else if (props.postTypes === "likes") {
     postList = (
       <PostList
         posts={props.posts.filter((postHash) => {
@@ -44,19 +44,19 @@ function ProfilePostList(props) {
   return (
     <div>
       <ul className="tab-list">
-        <li className={props.post_types === "tweets" ? "selected-tab" : ""}>
+        <li className={props.postTypes === "tweets" ? "selected-tab" : ""}>
           <a href={Routes.profile_path(props.user.handle)}>Tweets</a>
         </li>
         <li
-          className={props.post_types === "with_replies" ? "selected-tab" : ""}>
+          className={props.postTypes === "with_replies" ? "selected-tab" : ""}>
           <a href={Routes.profile_with_replies_path(props.user.handle)}>
             Tweets & Replies
           </a>
         </li>
-        <li className={props.post_types === "media" ? "selected-tab" : ""}>
+        <li className={props.postTypes === "media" ? "selected-tab" : ""}>
           <a href={Routes.profile_media_path(props.user.handle)}>Media</a>
         </li>
-        <li className={props.post_types === "likes" ? "selected-tab" : ""}>
+        <li className={props.postTypes === "likes" ? "selected-tab" : ""}>
           <a href={Routes.profile_likes_path(props.user.handle)}>Likes</a>
         </li>
       </ul>
@@ -67,7 +67,7 @@ function ProfilePostList(props) {
 
 ProfilePostList.propTypes = {
   posts: PropTypes.array,
-  post_types: PropTypes.string,
+  postTypes: PropTypes.string,
   user: PropTypes.object,
 };
 

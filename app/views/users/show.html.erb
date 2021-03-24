@@ -1,1 +1,1 @@
-<%= react_component("Profile", {posts: @posts, user: UserSerializer.new(@user), user_created_at: date_formatted(@user.created_at), post_types: @post_types}) %>
+<%= react_component("App", {mainContentType: @mainContentType, posts: @posts, user: UserSerializer.new(@user), postTypes: @postTypes} ) %>

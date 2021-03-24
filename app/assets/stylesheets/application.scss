@@ -498,7 +498,6 @@ a:hover {
 
 #container {
   display: flex;
-  //  justify-content: space-between;
 }
 
 #nav-container {
@@ -756,7 +755,7 @@ nav {
   //min-height: 20px;
 }
 
-#tweets {
+#main-content {
   margin-left: 150px; //same as nav-container width
   flex: 6;
   display: flex;
@@ -1048,7 +1047,7 @@ nav {
   #search-container {
     display: none;
   }
-  #tweets {
+  #main-content {
     margin-left: 0;
   }
   #modal {

@@ -32,10 +32,7 @@ function Profile(props) {
               <circle cx="12" cy="17.486" r="1.285"></circle>
             </g>
           </svg>
-          <span className="font-secondary">
-            {" "}
-            Joined {props.user_created_at}{" "}
-          </span>
+          <span className="font-secondary"> Joined {props.userCreatedAt} </span>
         </div>
         <div className="follows font-secondary">
           <a href={Routes.following_path(props.user.handle)}>
@@ -52,7 +49,7 @@ function Profile(props) {
       </div>
       <ProfilePostList
         posts={props.posts}
-        post_types={props.post_types}
+        postTypes={props.postTypes}
         user={props.user}
       />
     </React.Fragment>
@@ -62,8 +59,8 @@ function Profile(props) {
 Profile.propTypes = {
   posts: PropTypes.array,
   user: PropTypes.object,
-  user_created_at: PropTypes.string,
-  post_types: PropTypes.string,
+  userCreatedAt: PropTypes.string,
+  postTypes: PropTypes.string,
 };
 
 export default Profile;

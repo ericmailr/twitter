@@ -1,6 +1,1 @@
-<% if current_user %>
-  <%= react_component("TopHeader", {header: "Home"}) %>
-  <%= react_component("tweets/NewTweet", {rows: 1}) %>
-  <div id="divider"></div>
-  <%= react_component("PostList", {posts: @posts}) %>
-<% end %>
+<%= react_component("App", {mainContentType: @mainContentType, posts: @posts, current_user: current_user, authenticity_token: form_authenticity_token, flash: flash[:alert]} ) %>

@@ -24,6 +24,7 @@ class TweetsController < ApplicationController
     end
 
     def show
+        @mainContentType = "Tweet"
         @tweet = Tweet.find(params[:id])
         respond_to do |format|
             format.json do
@@ -35,14 +36,13 @@ class TweetsController < ApplicationController
     end
 
     def index
+      @mainContentType = "Home"
         if (current_user) 
-            @tweet = Tweet.new
             tweets = Tweet.includes(:likers, :retweeters).where(user_id: (current_user.followed_users).map {|u| u.id}).to_a + current_user.tweets.to_a
             likes = Like.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
             retweets = Retweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
             quote_tweets = QuoteTweet.where(user_id: current_user.followed_users.map {|u| u.id}).to_a
             @posts = (tweets + likes + retweets + quote_tweets).sort_by {|post| post.updated_at}.reverse
-            #@posts = Post.where(user_id: current_user.followed_users.map {|u| u.id}).order(updated_at: :desc).to_a
             parents_already_posted = []
             @posts.map! do |post|
                 postHash = {:postType => post.class.name.downcase, :updatedAt => tweet_updated_at_formatted_brief(post.updated_at)}
