@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        @main_content_type = "Profile"
         @user = User.find_by!(handle: params[:handle])
         @tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
         @posts = @tweets.sort_by(&:updated_at).reverse.to_a

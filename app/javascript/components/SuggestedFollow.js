@@ -20,7 +20,6 @@ function SuggestedFollow(props) {
       .getAttribute("content");
     let msg = "";
     if (!followState.isFollowed) {
-      console.log("follow happnin");
       msg = await fetch("/follows", {
         method: "POST",
         body: JSON.stringify({

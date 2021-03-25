@@ -2,57 +2,58 @@ import React from "react";
 import PropTypes from "prop-types";
 import Nav from "./Nav";
 import Login from "./Login";
-import MainContent from "./MainContent";
 import DiscoverSection from "./DiscoverSection";
+import Home from "./Home";
+import Tweet from "./Tweet";
+import Profile from "./Profile";
 
 /* don't forget, you can destructure props like so const {current_user, authenticity_token, etc.} = props */
 function App(props) {
-  const generateMainContentProps = () => {
-    let mainContentProps = null;
+  const getMainComponent = () => {
+    let mainComponent = null;
     switch (props.mainContentType) {
       case "Home":
-        mainContentProps = {
-          mainContentType: props.mainContentType,
-          posts: props.posts,
-        };
+        mainComponent = <Home posts={props.posts} />;
         break;
       case "Tweet":
-        mainContentProps = {
-          mainContentType: props.mainContentType,
-          tweet: props.tweet,
-          tweetIsLiked: props.tweetIsLiked,
-          children: props.children,
-        };
+        mainComponent = (
+          <Tweet
+            tweet={props.tweet}
+            tweetIsLiked={props.tweetIsLiked}
+            children={props.children}
+          />
+        );
         break;
-      case "profile":
-        mainContentProps = {
-          mainContentType: props.mainContentType,
-          user: props.user,
-          postTypes: props.postTypes,
-        };
-        break;
+      case "Profile":
+        return (
+          <Profile
+            posts={props.posts}
+            user={props.user}
+            userCreatedAt={props.user.created_at}
+            postTypes={props.postTypes}
+          />
+        );
       default:
-        mainContentProps = {
-          mainContentType: props.mainContentType,
-          posts: props.posts,
-        };
+        mainComponent = <Home posts={props.posts} />;
     }
-    return mainContentProps;
+    return mainComponent;
   };
+
   return (
     <div id="container">
-      <Nav user={props.current_user} />
       {!props.current_user ? (
         <Login
           authenticity_token={props.authenticity_token}
           flash={props.flash}
         />
       ) : (
-        <div id="main-container">
-          {/* just pass render the right component here inside #main-content div */}
-          <MainContent {...generateMainContentProps()} />
-          <DiscoverSection followable_users={props.followable_users} />
-        </div>
+        <React.Fragment>
+          <Nav user={props.current_user} />
+          <div id="main-container">
+            <div id="main-content">{getMainComponent()}</div>
+            <DiscoverSection followable_users={props.followable_users} />
+          </div>
+        </React.Fragment>
       )}
       <div id="modal-container"></div>
     </div>

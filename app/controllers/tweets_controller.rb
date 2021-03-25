@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
     end
 
     def show
-        @mainContentType = "Tweet"
+        @main_content_type = "Tweet"
         @tweet = Tweet.find(params[:id])
         respond_to do |format|
             format.json do
@@ -36,7 +36,7 @@ class TweetsController < ApplicationController
     end
 
     def index
-      @mainContentType = "Home"
+      @main_content_type = "Home"
         if (current_user) 
             tweets = Tweet.includes(:likers, :retweeters).where(user_id: (current_user.followed_users).map {|u| u.id}).to_a + current_user.tweets.to_a
             likes = Like.where(user_id: current_user.followed_users.map {|u| u.id}).to_a

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import PostWrapper from "./PostWrapper";
 import SuggestedFollow from "./SuggestedFollow";
-//rename MainList?
 
 function PostList(props) {
   return (

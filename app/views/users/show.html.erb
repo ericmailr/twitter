@@ -1,1 +1,1 @@
-<%= react_component("App", {mainContentType: @mainContentType, posts: @posts, user: UserSerializer.new(@user), postTypes: @postTypes, followable_users: get_followable_users()} ) %>
+<%= react_component("App", {mainContentType: @main_content_type, current_user: UserSerializer.new(current_user), posts: @posts, user: UserSerializer.new(@user), postTypes: @post_types, followable_users: get_followable_users()} ) %>
