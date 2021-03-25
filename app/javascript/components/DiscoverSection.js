@@ -23,7 +23,7 @@ function DiscoverSection(props) {
           />
         </div>
       </form>
-      <SuggestedSection followable_users={[]} />
+      <SuggestedSection followable_users={props.followable_users} />
     </div>
   );
 }

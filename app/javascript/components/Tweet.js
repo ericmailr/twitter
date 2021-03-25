@@ -14,7 +14,7 @@ function Tweet(props) {
         isLiked={props.tweetIsLiked}
         postType="status"
       />
-      {props.tweet.children.map((reply) => {
+      {props.children.map((reply) => {
         return (
           <PostWrapper
             key={reply.id}
@@ -31,6 +31,7 @@ function Tweet(props) {
 
 Tweet.propTypes = {
   tweet: PropTypes.object,
+  children: PropTypes.array,
   tweetIsLiked: PropTypes.bool,
 };
 

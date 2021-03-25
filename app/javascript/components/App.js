@@ -7,21 +7,21 @@ import DiscoverSection from "./DiscoverSection";
 
 /* don't forget, you can destructure props like so const {current_user, authenticity_token, etc.} = props */
 function App(props) {
-  console.log("in App");
   const generateMainContentProps = () => {
     let mainContentProps = null;
     switch (props.mainContentType) {
-      case "tweets#index":
+      case "Home":
         mainContentProps = {
           mainContentType: props.mainContentType,
           posts: props.posts,
         };
         break;
-      case "tweets#show":
+      case "Tweet":
         mainContentProps = {
           mainContentType: props.mainContentType,
           tweet: props.tweet,
           tweetIsLiked: props.tweetIsLiked,
+          children: props.children,
         };
         break;
       case "profile":
@@ -51,7 +51,7 @@ function App(props) {
         <div id="main-container">
           {/* just pass render the right component here inside #main-content div */}
           <MainContent {...generateMainContentProps()} />
-          <DiscoverSection />
+          <DiscoverSection followable_users={props.followable_users} />
         </div>
       )}
       <div id="modal-container"></div>
@@ -67,6 +67,7 @@ App.propTypes = {
   posts: PropTypes.array,
   tweet: PropTypes.object,
   tweetIsLiked: PropTypes.bool,
+  children: PropTypes.array,
   user: PropTypes.object,
   postTypes: PropTypes.string,
   followable_users: PropTypes.array,

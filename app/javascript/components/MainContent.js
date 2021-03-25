@@ -8,12 +8,16 @@ function MainContent(props) {
   const renderMainContent = () => {
     let mainContentType = null;
     switch (props.mainContentType) {
-      case "tweets#index":
+      case "Home":
         mainContentType = <Home posts={props.posts} />;
         break;
-      case "tweets#show":
+      case "Tweet":
         mainContentType = (
-          <Tweet tweet={props.tweet} tweetIsLiked={props.tweetIsLiked} />
+          <Tweet
+            tweet={props.tweet}
+            tweetIsLiked={props.tweetIsLiked}
+            children={props.children}
+          />
         );
         break;
       case "profile":
@@ -39,6 +43,7 @@ MainContent.propTypes = {
   posts: PropTypes.array,
   tweet: PropTypes.object,
   tweetIsLiked: PropTypes.bool,
+  children: PropTypes.array,
   user: PropTypes.object,
   postTypes: PropTypes.string,
 };

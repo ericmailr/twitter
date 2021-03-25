@@ -6,7 +6,6 @@ class User < ApplicationRecord
     has_many :tweets, dependent: :destroy
     has_many :retweets, dependent: :destroy
     
-    #added 2/23
     has_many :quote_tweets, dependent: :destroy
     
     has_many :received_follows, foreign_key: :followed_user_id, class_name: "Follow", dependent: :destroy
@@ -14,11 +13,8 @@ class User < ApplicationRecord
     has_many :given_follows, foreign_key: :follower_id, class_name: "Follow", dependent: :destroy
     has_many :followed_users, through: :given_follows
     
-    #has_many :likes, foreign_key: :liker_id, dependent: :destroy
     has_many :likes, dependent: :destroy
     
-    #has_many :liked_tweets, class_name: "Tweet", through: :likes, source: :tweet
-
     before_create :create_remember_token
     scope :followable_users, ->(user) { where.not(id: (user.followed_users + [user]).map(&:id))}
 
