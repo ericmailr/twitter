@@ -47,6 +47,29 @@ function SignupModal(props) {
             data-disable-with="Log in"></input>
         </div>
       </form>
+
+      {/* <h1>Sign up</h1>
+
+<%= form_for @user do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %><br>
+    <%= f.label :email %>
+    <%= f.text_field :email %><br>
+    <%= f.label :username %>
+    <%= f.text_field :username %><br>
+    <%= f.label :handle %>
+    <%= f.text_field :handle %><br>
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
+    <%= f.label :birthday, 'Date of Birth' %>
+    <div id='birthday-disclaimer'>
+        This will not be shown publicly. Confirm your age to receive the appropriate experience.
+    </div>
+    <div id='date-select'>
+        <%= f.date_select :birthday, order: [:month, :day, :year], start_year: Date.today.year, end_year: 1900, include_blank: true %>
+    </div>
+    <%= f.submit 'Sign up!' %>
+<% end %>*/}
     </div>
   );
 }

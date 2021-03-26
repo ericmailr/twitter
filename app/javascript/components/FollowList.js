@@ -1,44 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PostList from "./PostList";
-import TopHeader from "./TopHeader";
 
-function FollowList(props) {
-  let followerList = {};
-  if (props.follow_type === "followers") {
-    followerList = props.followers;
-  } else if (props.follow_type === "following") {
-    followerList = props.followed_users;
-  } else if (props.follow_type === "followers_you_know") {
-    followerList = props.followers_user_follows;
-  } else {
-    return null;
-  }
-
+function FollowList({ follow_type, follows, user: { handle } }) {
+  let followerList = follows[follow_type];
   return (
     <React.Fragment>
-      <TopHeader
-        header={props.user.username}
-        goBack={true}
-        tweetCount={props.user.tweetCount}
-      />
       <div>
         <ul className="tab-list">
           <li
             className={
-              props.follow_type === "followers_you_know" ? "selected-tab" : ""
+              follow_type === "followers_you_know" ? "selected-tab" : ""
             }>
-            <a href={Routes.followers_you_know_path(props.user.handle)}>
+            <a href={Routes.followers_you_know_path(handle)}>
               Followers you know
             </a>
           </li>
-          <li
-            className={props.follow_type === "followers" ? "selected-tab" : ""}>
-            <a href={Routes.followers_path(props.user.handle)}>Followers</a>
+          <li className={follow_type === "followers" ? "selected-tab" : ""}>
+            <a href={Routes.followers_path(handle)}>Followers</a>
           </li>
-          <li
-            className={props.follow_type === "following" ? "selected-tab" : ""}>
-            <a href={Routes.following_path(props.user.handle)}>Following</a>
+          <li className={follow_type === "following" ? "selected-tab" : ""}>
+            <a href={Routes.following_path(handle)}>Following</a>
           </li>
         </ul>
         <div>
@@ -50,10 +32,8 @@ function FollowList(props) {
 }
 
 FollowList.propTypes = {
-  followers: PropTypes.array,
-  followed_users: PropTypes.array,
-  followers_user_follows: PropTypes.array,
   user: PropTypes.object,
+  follows: PropTypes.object,
   follow_type: PropTypes.string,
 };
 

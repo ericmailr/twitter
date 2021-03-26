@@ -9,49 +9,63 @@ import Profile from "./Profile";
 
 /* don't forget, you can destructure props like so const {current_user, authenticity_token, etc.} = props */
 function App(props) {
+  const {
+    mainContentType,
+    current_user,
+    authenticity_token,
+    flash,
+    posts,
+    follows,
+    tweet,
+    tweetIsLiked,
+    children,
+    user,
+    postTypes,
+    followable_users,
+  } = props;
   const getMainComponent = () => {
     let mainComponent = null;
-    switch (props.mainContentType) {
+    switch (mainContentType) {
       case "Home":
-        mainComponent = <Home posts={props.posts} />;
+        mainComponent = <Home posts={posts} />;
         break;
       case "Tweet":
         mainComponent = (
           <Tweet
-            tweet={props.tweet}
-            tweetIsLiked={props.tweetIsLiked}
-            children={props.children}
+            tweet={tweet}
+            tweetIsLiked={tweetIsLiked}
+            children={children}
           />
         );
         break;
       case "Profile":
         return (
           <Profile
-            posts={props.posts}
-            user={props.user}
-            userCreatedAt={props.user.created_at}
-            postTypes={props.postTypes}
+            posts={posts}
+            user={user}
+            userCreatedAt={user.created_at}
+            postTypes={postTypes}
+            follows={follows}
           />
         );
       default:
-        mainComponent = <Home posts={props.posts} />;
+        mainComponent = <Home posts={posts} />;
     }
     return mainComponent;
   };
 
   return (
     <div id="container">
-      {!props.current_user ? (
-        <Login
-          authenticity_token={props.authenticity_token}
-          flash={props.flash}
-        />
+      {!current_user ? (
+        {
+          /*<Login authenticity_token={authenticity_token} flash={flash} />*/
+        }
       ) : (
         <React.Fragment>
-          <Nav user={props.current_user} />
+          <Nav user={current_user} />
           <div id="main-container">
             <div id="main-content">{getMainComponent()}</div>
-            <DiscoverSection followable_users={props.followable_users} />
+            <DiscoverSection followable_users={followable_users} />
           </div>
         </React.Fragment>
       )}
@@ -66,6 +80,7 @@ App.propTypes = {
   authenticity_token: PropTypes.string,
   flash: PropTypes.string,
   posts: PropTypes.array,
+  follows: PropTypes.object,
   tweet: PropTypes.object,
   tweetIsLiked: PropTypes.bool,
   children: PropTypes.array,

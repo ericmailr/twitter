@@ -3,24 +3,24 @@ import PropTypes from "prop-types";
 import TopHeader from "./TopHeader";
 import PostWrapper from "./PostWrapper";
 
-function Tweet(props) {
+function Tweet({ tweet, tweetIsLiked, children }) {
   return (
     <React.Fragment>
-      <TopHeader header="Tweet" />
+      <TopHeader header="Tweet" goBack={true} />
       <PostWrapper
-        tweet={props.tweet}
-        updatedAt={props.tweet.updated_at_full}
-        updatedAtBrief={props.tweet.updated_at_brief}
-        isLiked={props.tweetIsLiked}
+        tweet={tweet}
+        updatedAt={tweet.updated_at_full}
+        updatedAtBrief={tweet.updated_at_brief}
+        isLiked={tweetIsLiked}
         postType="status"
       />
-      {props.children.map((reply) => {
+      {children.map((reply) => {
         return (
           <PostWrapper
             key={reply.id}
             tweet={reply}
             updatedAt={reply.updated_at_brief}
-            replyingTo={props.tweet.user.handle}
+            replyingTo={tweet.user.handle}
             postType="tweet"
           />
         );

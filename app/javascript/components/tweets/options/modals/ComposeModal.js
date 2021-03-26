@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Tweet from "../../Tweet";
-import Avatar from "../../../Avatar";
 import NewTweet from "../../NewTweet";
 
 function ComposeModal(props) {
-  /* href={Routes.new_tweet_path({ parent_id: props.tweetId }) */
-  // fetch new_tweet_path and then run form_for here, post tweets path to create
-
   return (
     <div id="modal" className="tweet-spacing">
       <div className="exit-modal">

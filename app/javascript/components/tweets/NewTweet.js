@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Avatar from "../Avatar";
 
 function NewTweet(props) {
+  /* href={Routes.new_tweet_path({ parent_id: props.tweetId }) */
+  // fetch new_tweet_path and then run form_for here, post tweets path to create
   const [submitButtonClasses, setSubmitButtonClasses] = useState(
     "unsubmittable-button"
   );

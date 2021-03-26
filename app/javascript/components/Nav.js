@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ComposeModal from "./tweets/options/modals/ComposeModal";
 import AvatarImg from "./../assets/avatar.png";
-import SignoutModal from "./LogoutModal";
 import ReactDOM from "react-dom";
 import LogoutModal from "./LogoutModal";
 
