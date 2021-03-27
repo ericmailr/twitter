@@ -27,7 +27,6 @@ function Nav(props) {
       document.getElementById("modal-container").style.display = "none";
     }
   });
-  //need a better understanding of useEffect, particularly second argument
 
   const showLogoutModal = (e) => {
     let logoutModal = e.currentTarget.children[1];

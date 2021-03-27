@@ -12,11 +12,11 @@ function PostWrapper(props) {
     // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
     setLikeState({
       likesCount: json.likesCount,
-      isLiked: props.isLiked,
+      isLiked: json.isLiked,
     });
     setRetweetState({
       retweetsCount: json.retweetsCount,
-      isRetweeted: props.isRetweeted,
+      isRetweeted: json.isRetweeted,
     });
   }, []);
 
@@ -128,8 +128,6 @@ PostWrapper.propTypes = {
   tweet: PropTypes.object,
   user: PropTypes.object,
   updatedAt: PropTypes.string,
-  isLiked: PropTypes.bool,
-  isRetweeted: PropTypes.bool,
   actionHeader: PropTypes.string,
   postType: PropTypes.string,
 };

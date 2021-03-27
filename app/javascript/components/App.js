@@ -7,20 +7,19 @@ import Home from "./Home";
 import Tweet from "./Tweet";
 import Profile from "./Profile";
 
-/* don't forget, you can destructure props like so const {current_user, authenticity_token, etc.} = props */
 function App(props) {
   const {
     mainContentType,
     current_user,
     authenticity_token,
+    content,
     flash,
     posts,
-    follows,
     tweet,
     tweetIsLiked,
     children,
     user,
-    postTypes,
+    contentType,
     followable_users,
   } = props;
   const getMainComponent = () => {
@@ -41,11 +40,10 @@ function App(props) {
       case "Profile":
         return (
           <Profile
-            posts={posts}
+            content={content}
             user={user}
             userCreatedAt={user.created_at}
-            postTypes={postTypes}
-            follows={follows}
+            contentType={contentType}
           />
         );
       default:
@@ -80,12 +78,12 @@ App.propTypes = {
   authenticity_token: PropTypes.string,
   flash: PropTypes.string,
   posts: PropTypes.array,
-  follows: PropTypes.object,
+  content: PropTypes.object,
+  contentType: PropTypes.string,
   tweet: PropTypes.object,
   tweetIsLiked: PropTypes.bool,
   children: PropTypes.array,
   user: PropTypes.object,
-  postTypes: PropTypes.string,
   followable_users: PropTypes.array,
 };
 

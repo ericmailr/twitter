@@ -56,6 +56,8 @@ Eric Miller
 
 - Expand Nav with Labels
 
+- Don't re-render nav when navigating different links
+
 - Make back button on TopHeader not just go back a page
 
 - Work on Responsiveness

@@ -9,11 +9,12 @@ class FollowsController < ApplicationController
     end
 
     def index
-        @follow_type = params[:follow_type]
+        @content_type = params[:content_type]
         @user = User.find_by(handle: params[:handle])
-        @followed_users = @user.followed_users.select{|user| user != current_user}.to_a.map!{ |user| {:user => user, :postType => "user"}}
-        @followers = @user.followers.select{|user| user != current_user}.to_a.map!{|user| {:user => user, :postType => "user"}}
-        @followers_user_follows = (current_user.followed_users & @user.followers).to_a.map!{|user| {:user => user, :postType => "user"}}
+        followed_users = @user.followed_users.select{|user| user != current_user}.to_a.map!{ |user| {:user => user, :postType => "user"}}
+        followers = @user.followers.select{|user| user != current_user}.to_a.map!{|user| {:user => user, :postType => "user"}}
+        followers_user_follows = (current_user.followed_users & @user.followers).to_a.map!{|user| {:user => user, :postType => "user"}}
+        @content = {following: followed_users, followers: followers, followers_you_know: followers_user_follows}
         respond_to do |format|
             format.json do 
                 msg = { :status => "ok", :isFollowed => current_user.followed_users.include?(@user) }

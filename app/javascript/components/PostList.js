@@ -9,21 +9,17 @@ function PostList(props) {
       {props.posts.map((postHash) => {
         if (postHash.postType === "reply") {
           return (
-            <React.Fragment key={postHash.parent.id}>
+            <React.Fragment key={postHash.post.id}>
               <PostWrapper
                 tweet={postHash.parent}
-                updatedAt={postHash.parentUpdatedAt}
+                updatedAt={postHash.parent.updatedAt}
                 user={postHash.post.user}
-                isLiked={postHash.isParentLiked}
-                isRetweeted={postHash.isParentRetweeted}
                 actionHeader={"reply"}
                 postType={"reply-parent"}
               />
               <PostWrapper
                 tweet={postHash.post}
                 updatedAt={postHash.updatedAt}
-                isLiked={postHash.isLiked}
-                isRetweeted={postHash.isRetweeted}
                 postType={"reply"}
               />
             </React.Fragment>
@@ -37,14 +33,10 @@ function PostList(props) {
             <PostWrapper
               key={postHash.post.id}
               tweet={
-                postHash.postType != "tweet"
-                  ? postHash.quoted_tweet
-                  : postHash.post
+                postHash.quoted_tweet ? postHash.quoted_tweet : postHash.post
               }
               user={postHash.post.user}
-              updatedAt={postHash.updatedAt}
-              isLiked={postHash.isLiked}
-              isRetweeted={postHash.isRetweeted}
+              updatedAt={postHash.post.updated_at_brief}
               actionHeader={
                 !["tweet", "like"].includes(postHash.postType)
                   ? postHash.postType

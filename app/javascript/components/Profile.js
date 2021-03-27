@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ProfilePostList from "./ProfilePostList";
-import FollowList from "./FollowList";
+import ProfilePostContent from "./ProfilePostContent";
+import ProfileFollowContent from "./ProfileFollowContent";
 import TopHeader from "./TopHeader";
 import ProfileCard from "./ProfileCard";
 
 function Profile(props) {
-  const { posts, user, follows, userCreatedAt, postTypes } = props;
+  const { posts, user, content, follows, userCreatedAt, contentType } = props;
   return (
     <React.Fragment>
       <TopHeader
@@ -14,15 +14,21 @@ function Profile(props) {
         goBack={true}
         tweetCount={props.user.tweetCount}
       />
-      {follows ? (
-        <FollowList follows={follows} user={user} follow_type={postTypes} />
+      {["following", "followers", "followers_you_know"].includes(
+        contentType
+      ) ? (
+        <ProfileFollowContent
+          content={content}
+          user={user}
+          contentType={contentType}
+        />
       ) : (
         <React.Fragment>
           <ProfileCard user={user} userCreatedAt={userCreatedAt} />
-          <ProfilePostList
-            posts={props.posts}
-            postTypes={props.postTypes}
+          <ProfilePostContent
+            contentType={contentType}
             user={props.user}
+            content={content}
           />
         </React.Fragment>
       )}
@@ -31,11 +37,11 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  posts: PropTypes.array,
   follows: PropTypes.object,
+  content: PropTypes.object,
   user: PropTypes.object,
   userCreatedAt: PropTypes.string,
-  postTypes: PropTypes.string,
+  contentType: PropTypes.string,
 };
 
 export default Profile;

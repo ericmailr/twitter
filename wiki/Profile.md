@@ -1,16 +1,23 @@
 # Profile
+	### props
+	- posts
+	- user
+	- userCreatedAt
+	- postTypes
 
-## HeaderNavigation
+	## TopHeader
 
-## [ProfileCard](ProfileCard)
+	## ProfilePostList
+	
+		## [ProfileCard](ProfileCard)
+		
+		## PostList
+		
+	*OR*
+	
+	## FollowList
+	
+	
 
-## MainTabs
 
-## [Content](Content)
-
-### props
-- posts (array)
-- user (object)
-- user_created_at (string)
-- post_types (string)
 

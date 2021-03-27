@@ -11,11 +11,10 @@ Rails.application.routes.draw do
   resources :retweets, only: [:new, :create, :destroy]
 
   #as: defines *_path and *_url
-  get ":handle/following", to: "follows#index", defaults: {follow_type: "following"}, as: "following"
-  get ":handle/followers", to: "follows#index", defaults: {follow_type: "followers"}, as: "followers"
-  get ":handle/followers_you_know", to: "follows#index", defaults: {follow_type: "followers_you_know"}, as: "followers_you_know"
+  get ":handle/following", to: "follows#index", defaults: {content_type: "following"}, as: "following"
+  get ":handle/followers", to: "follows#index", defaults: {content_type: "followers"}, as: "followers"
+  get ":handle/followers_you_know", to: "follows#index", defaults: {content_type: "followers_you_know"}, as: "followers_you_know"
 
-  get "tweets", to: "tweets#index", as: "tweets"
   get "home", to: "tweets#index", as: "home"
   post "tweets", to: "tweets#create"
   get "signup", to: "users#new", as: "signup"
@@ -25,10 +24,10 @@ Rails.application.routes.draw do
   
   delete "follows/:followed_user_id", to: "follows#destroy", as: "follow"
   
-  get ":handle", to: "users#show", defaults: {post_types: "tweets"}, as: "profile"
-  get ":handle/with_replies", to: "users#show", defaults: {post_types: "with_replies"}, as: "profile_with_replies"
-  get ":handle/media", to: "users#show", defaults: {post_types: "media"}, as: "profile_media"
-  get ":handle/likes", to: "users#show", defaults: {post_types: "likes"}, as: "profile_likes"
+  get ":handle", to: "users#show", defaults: {content_type: "tweets"}, as: "profile"
+  get ":handle/with_replies", to: "users#show", defaults: {content_type: "with_replies"}, as: "profile_with_replies"
+  get ":handle/media", to: "users#show", defaults: {content_type: "media"}, as: "profile_media"
+  get ":handle/likes", to: "users#show", defaults: {content_type: "likes"}, as: "profile_likes"
 
   get ":handle/status/:id", to: "tweets#show", as: "status"
 end

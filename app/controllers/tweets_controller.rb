@@ -6,6 +6,7 @@ class TweetsController < ApplicationController
             @parent_id = params[:parent_id]
             @tweet.parent = Tweet.find(params[:parent_id])
         end
+        head :ok #respond to http request with blank message, don't render view
     end
 
     def create
@@ -28,11 +29,12 @@ class TweetsController < ApplicationController
         @tweet = Tweet.find(params[:id])
         respond_to do |format|
             format.json do
-                msg = { :status => "ok", :message => "Success!", :likesCount => @tweet.likes.count, :retweetsCount => @tweet.retweets.count }
+                msg = { :status => "ok", :message => "Success!", :likesCount => @tweet.likes.count, :retweetsCount => @tweet.retweets.count, :isLiked => @tweet.likers.include?(current_user), :isRetweeted => @tweet.retweeters.include?(current_user) }
                 render :json => msg
             end
             format.html {  }
         end
+        @content = {tweet: @tweet}
     end
 
     def index
@@ -75,6 +77,7 @@ class TweetsController < ApplicationController
                 end
                 postHash
            end.compact!
+           @content = {posts: @posts}
         else
             redirect_to login_path
         end
