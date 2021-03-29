@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root to: "posts#index"
 
   resources :users, only: [:new, :create, :show, :destroy]
-  #resources :sessions, only: [:new, :create, :destroy]
   resources :follows, only: [:create]
   resources :tweets, only: [:new, :show]
   resources :likes, only: [:create, :destroy]
@@ -18,8 +17,6 @@ Rails.application.routes.draw do
   get "home", to: "posts#index", as: "home"
   post "tweets", to: "tweets#create"
   get "signup", to: "users#new", as: "signup"
-  #get "login", to: "sessions#new", as: "login"
-  #delete "logout", to: "sessions#destroy", as: "logout"
   get "search", to: "search#index", as: "search"
   
   delete "follows/:followed_user_id", to: "follows#destroy", as: "follow"

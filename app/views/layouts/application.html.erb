@@ -11,6 +11,10 @@
     <%= javascript_pack_tag 'application' %>
   </head>
   <body>
+    <% if false %>
+      <%= flash[:notice] %>
+      <%= flash[:alert] %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

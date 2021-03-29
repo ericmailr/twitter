@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 #      @current_user = nil
 #    end
 #  end
+
+# devise redirect to new session on sign_out
+def after_sign_out_path_for(resource)
+ session_path(resource)
+end
+
   protected
 
   def configure_permitted_parameters

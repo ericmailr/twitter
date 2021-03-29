@@ -24,7 +24,8 @@ function Login({ authenticity_token, flash }) {
           </g>
         </svg>
         <h1>Log in to Twitter</h1>
-        <div className="flash-msg">{flash}</div>
+        <div className="flash-alert">{flash.alert}</div>
+        <div className="flash-notice">{flash.notice}</div>
       </div>
       <form id="login-form" action="/users/sign_in" method="post">
         <input
@@ -69,7 +70,7 @@ function Login({ authenticity_token, flash }) {
 }
 Login.propTypes = {
   authenticity_token: PropTypes.string,
-  flash: PropTypes.string,
+  flash: PropTypes.object,
 };
 
 export default Login;

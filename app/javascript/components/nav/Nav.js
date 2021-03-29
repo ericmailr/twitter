@@ -30,9 +30,11 @@ function Nav(props) {
 
   const showLogoutModal = (e) => {
     let logoutModal = e.currentTarget.children[1];
-    logoutModal.style.display = "flex";
+    logoutModal.style.opacity = "1";
+    logoutModal.style.visibility = "visible";
     const hideLogoutModal = (e) => {
-      logoutModal.style.display = "none";
+      logoutModal.style.opacity = "0";
+      logoutModal.style.visibility = "hidden";
       document.body.removeEventListener("click", hideLogoutModal, true);
     };
     document.body.addEventListener("click", hideLogoutModal, true);

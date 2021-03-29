@@ -1,4 +1,6 @@
 class RetweetsController < ApplicationController
+    before_action :authenticate_user!
+
     #instance variables: @retweet, @og_tweet, etc
     def new
         @retweet = Retweet.new
