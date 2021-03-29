@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Login(props) {
+function Login({ authenticity_token, flash }) {
   const colorInputs = (e) => {
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
@@ -24,13 +24,13 @@ function Login(props) {
           </g>
         </svg>
         <h1>Log in to Twitter</h1>
-        <div className="flash-msg">{props.flash}</div>
+        <div className="flash-msg">{flash}</div>
       </div>
       <form id="login-form" action="/users/sign_in" method="post">
         <input
           type="hidden"
           name="authenticity_token"
-          value={props.authenticity_token}></input>
+          value={authenticity_token}></input>
         <div id="login-username">
           <input
             type="text"
@@ -67,7 +67,6 @@ function Login(props) {
     </div>
   );
 }
-
 Login.propTypes = {
   authenticity_token: PropTypes.string,
   flash: PropTypes.string,

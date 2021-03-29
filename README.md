@@ -31,6 +31,8 @@ Eric Miller
 
 ## My todo list
 
+- RSpec
+
 - is "liked" action header working? first tweet isn't showing it...
 
 - profile avatar, background image, follow button
@@ -39,14 +41,10 @@ Eric Miller
 
 - avatar modal
 
-- rework application.html.erb and make everything a react component
-
 - clicking on likes, retweets should pop up a modal showing users
 
 - add quote-tweet function
   clicking on quote_tweets loads new page showing each one (comment plus quote)
-
-- abbreviate handles in suggested-section when too long
 
 - make search index pretty
 
@@ -62,17 +60,17 @@ Eric Miller
 
 - Work on Responsiveness
 
+- Devise: https://github.com/heartcombo/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address
+
 ## Personal Project Design Notes
 
 ### Thoughts on ActiveRecord Associations setup:
 
 Single Table Inheritance with subclasses
-Tweets Retweets and QuoteTweets are subclasses of Post (post is what tweet is now)
+Tweets Retweets QuoteTweets Likes are subclasses of Post
 (Cons: empty extra columns)
-
 Potentially overkill...?
 What is the benefit over just leaving inheritance out of it and just removing Retweet/QuoteTweet classes?
-It does seem easier to grab retweets, quote_tweets without needing another column for og tweet id to find quote_tweets since they're all the same class. Very small benefit though.
 
 OR
 

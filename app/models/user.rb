@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     validates :email, :handle, :username, uniqueness: { case_sensitive: false }, presence: true
-    #validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true #so username can't have @
+    validates_format_of :username, with: /^[a-zA-Z0-9_\. ]*$/, :multiline => true #so username can't have @ and potentially be someone else's email
 
     has_many :tweets, dependent: :destroy
     has_many :retweets, dependent: :destroy
