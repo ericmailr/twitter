@@ -25,27 +25,30 @@ class UsersController < ApplicationController
         posts.each do |post|
             postHash = {postType: post.class.name.downcase}
             if post.class.name == "Tweet"
-                if post.parent
+                if post.parent && !already_included.include?(post.parent)
                     postHash[:parent] = TweetSerializer.new(post.parent)
                     postHash[:post] = TweetSerializer.new(post)
                     postHash[:postType] = 'reply'
                     with_replies << postHash
-                elsif !already_included.include?(post)
+                    already_included << post.parent
+                elsif !post.parent && !already_included.include?(post)
                     postHash[:post] = TweetSerializer.new(post)
                     tweets << postHash
+                    with_replies << postHash
+                    already_included << post
                 end
-            elsif ["Retweet", "QuoteTweet", "Like"].include?(post.class.name)
+            elsif ["Retweet", "QuoteTweet", "Like"].include?(post.class.name) && !already_included.include?(post.tweet)
                 postHash[:post] = PostSerializer.new(post)
                 postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)
                 if post.class.name == "Like"
                     likes << postHash
                 else
                     tweets << postHash
+                    with_replies << postHash
                     already_included << post
                 end
             end
-            postHash
-       end.compact!
+       end
        @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
     end
 

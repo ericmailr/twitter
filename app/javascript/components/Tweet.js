@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TopHeader from "./TopHeader";
-import PostWrapper from "./PostWrapper";
+import PostWrapper from "./posts/PostWrapper";
 
 function Tweet({ tweet, tweetIsLiked, children }) {
   return (

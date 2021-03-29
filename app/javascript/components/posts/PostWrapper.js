@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Status from "./statuses/Status";
-import Tweet from "./tweets/Tweet";
+import Status from "./Status";
+import Tweet from "./Tweet";
 
 function PostWrapper(props) {
   const [likeState, setLikeState] = useState([]);

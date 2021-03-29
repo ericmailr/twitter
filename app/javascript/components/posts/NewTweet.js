@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Avatar from "../Avatar";
+import Avatar from "../users/Avatar";
 
 function NewTweet(props) {
   /* href={Routes.new_tweet_path({ parent_id: props.tweetId }) */

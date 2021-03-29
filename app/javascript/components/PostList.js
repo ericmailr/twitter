@@ -1,25 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PostWrapper from "./PostWrapper";
-import SuggestedFollow from "./SuggestedFollow";
+import PostWrapper from "./posts/PostWrapper";
+import SuggestedFollow from "./discover/SuggestedFollow";
 
-function PostList(props) {
+function PostList({ posts, contentType }) {
   return (
     <React.Fragment>
-      {props.posts.map((postHash) => {
+      {posts.map((postHash) => {
         if (postHash.postType === "reply") {
           return (
             <React.Fragment key={postHash.post.id}>
               <PostWrapper
                 tweet={postHash.parent}
-                updatedAt={postHash.parent.updatedAt}
+                updatedAt={postHash.parent.updated_at_brief}
                 user={postHash.post.user}
-                actionHeader={"reply"}
+                actionHeader={contentType === "with_replies" ? "" : "reply"}
                 postType={"reply-parent"}
               />
               <PostWrapper
                 tweet={postHash.post}
-                updatedAt={postHash.updatedAt}
+                updatedAt={postHash.post.updated_at_brief}
                 postType={"reply"}
               />
             </React.Fragment>
@@ -36,9 +36,13 @@ function PostList(props) {
                 postHash.quoted_tweet ? postHash.quoted_tweet : postHash.post
               }
               user={postHash.post.user}
-              updatedAt={postHash.post.updated_at_brief}
+              updatedAt={
+                postHash.quoted_tweet
+                  ? postHash.quoted_tweet.updated_at_brief
+                  : postHash.post.updated_at_brief
+              }
               actionHeader={
-                !["tweet", "like"].includes(postHash.postType)
+                !["tweet"].includes(postHash.postType)
                   ? postHash.postType
                   : null
               }
@@ -53,6 +57,7 @@ function PostList(props) {
 
 PostList.propTypes = {
   posts: PropTypes.array,
+  contentType: PropTypes.string,
 };
 
 export default PostList;

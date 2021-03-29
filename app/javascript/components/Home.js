@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TopHeader from "./TopHeader";
-import NewTweet from "./tweets/NewTweet";
+import NewTweet from "./posts/NewTweet";
 import PostList from "./PostList";
 
 function Home(props) {

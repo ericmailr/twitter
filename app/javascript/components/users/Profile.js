@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import ProfilePostContent from "./ProfilePostContent";
 import ProfileFollowContent from "./ProfileFollowContent";
-import TopHeader from "./TopHeader";
+import TopHeader from "../TopHeader";
 import ProfileCard from "./ProfileCard";
 
 function Profile(props) {
-  const { posts, user, content, follows, userCreatedAt, contentType } = props;
+  const { user, content, userCreatedAt, contentType } = props;
   return (
     <React.Fragment>
       <TopHeader

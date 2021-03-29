@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-import PostWrapper from "../PostWrapper";
+import PostWrapper from "./PostWrapper";
 
 function Reply(props) {
   return (

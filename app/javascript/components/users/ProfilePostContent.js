@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PostList from "./PostList";
+import PostList from "../PostList";
 import TabList from "./TabList";
 
 function ProfilePostContent({ contentType, content, user: { handle } }) {
@@ -32,7 +32,7 @@ function ProfilePostContent({ contentType, content, user: { handle } }) {
       {contentType === "media" ? (
         <h1 style={{ textAlign: "center" }}>Under Construction</h1>
       ) : (
-        <PostList posts={content[contentType]} />
+        <PostList posts={content[contentType]} contentType={contentType} />
       )}
     </div>
   );

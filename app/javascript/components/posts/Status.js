@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Avatar from "../../assets/avatar.png";
-import TweetOptions from "../tweets/TweetOptions";
+import TweetOptions from "./TweetOptions";
 import Stats from "./Stats";
 
 function Status(props) {

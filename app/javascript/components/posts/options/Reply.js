@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ComposeModal from "./modals/ComposeModal";
+import ComposeModal from "../ComposeModal";
 import ReactDOM from "react-dom";
 
 const bodyColor = document.body.style.backgroundColor;

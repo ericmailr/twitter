@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tweet from "../../Tweet";
-import NewTweet from "../../NewTweet";
+import Tweet from "./Tweet";
+import NewTweet from "./NewTweet";
 
 function ComposeModal(props) {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Avatar from "./Avatar";
+import Avatar from "../users/Avatar";
 
 function SuggestedFollow(props) {
   const [followState, setFollowState] = useState({});

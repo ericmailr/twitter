@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "../Avatar";
-import StatusReplyHeader from "../statuses/StatusReplyHeader";
+import Avatar from "../users/Avatar";
+import StatusReplyHeader from "./StatusReplyHeader";
 import TweetOptions from "./TweetOptions";
 import ActionHeader from "./ActionHeader";
 

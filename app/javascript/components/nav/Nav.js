@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import ComposeModal from "./tweets/options/modals/ComposeModal";
-import AvatarImg from "./../assets/avatar.png";
+import ComposeModal from "../posts/ComposeModal";
+import AvatarImg from "../../assets/avatar.png";
 import ReactDOM from "react-dom";
 import LogoutModal from "./LogoutModal";
 
@@ -75,7 +75,7 @@ function Nav(props) {
     e.currentTarget.firstChild.style.backgroundColor = "";
     e.currentTarget.firstChild.classList.remove("svg-hover");
   };
-
+  /* component for svg's */
   return (
     <div id="nav-container">
       {showModal &&

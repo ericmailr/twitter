@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Tweet from "./tweets/Tweet";
+import Tweet from "./Tweet";
 
 function QuoteTweet(props) {
   return (

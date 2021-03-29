@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Nav from "./Nav";
+import Nav from "./nav/Nav";
 import Login from "./Login";
-import DiscoverSection from "./DiscoverSection";
+import DiscoverSection from "./discover/DiscoverSection";
 import Home from "./Home";
 import Tweet from "./Tweet";
-import Profile from "./Profile";
+import Profile from "./users/Profile";
 
 function App(props) {
   const {
@@ -14,7 +14,6 @@ function App(props) {
     authenticity_token,
     content,
     flash,
-    posts,
     tweet,
     tweetIsLiked,
     children,
@@ -26,7 +25,7 @@ function App(props) {
     let mainComponent = null;
     switch (mainContentType) {
       case "Home":
-        mainComponent = <Home posts={posts} />;
+        mainComponent = <Home posts={content.posts} />;
         break;
       case "Tweet":
         mainComponent = (
@@ -47,7 +46,7 @@ function App(props) {
           />
         );
       default:
-        mainComponent = <Home posts={posts} />;
+        mainComponent = <Home posts={content.posts} />;
     }
     return mainComponent;
   };
@@ -77,7 +76,6 @@ App.propTypes = {
   current_user: PropTypes.object,
   authenticity_token: PropTypes.string,
   flash: PropTypes.string,
-  posts: PropTypes.array,
   content: PropTypes.object,
   contentType: PropTypes.string,
   tweet: PropTypes.object,

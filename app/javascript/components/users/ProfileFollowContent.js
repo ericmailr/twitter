@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PostList from "./PostList";
+import PostList from "../PostList";
 import TabList from "./TabList";
 
 function ProfileFollowContent({ contentType, content, user: { handle } }) {
