@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TopHeader from "./TopHeader";
 import PostWrapper from "./posts/PostWrapper";
 
-function Tweet({ tweet, tweetIsLiked, children }) {
+function StatusPage({ tweet, tweetIsLiked, children }) {
   return (
     <React.Fragment>
       <TopHeader header="Tweet" goBack={true} />
@@ -29,10 +29,10 @@ function Tweet({ tweet, tweetIsLiked, children }) {
   );
 }
 
-Tweet.propTypes = {
+StatusPage.propTypes = {
   tweet: PropTypes.object,
   children: PropTypes.array,
   tweetIsLiked: PropTypes.bool,
 };
 
-export default Tweet;
+export default StatusPage;

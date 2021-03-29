@@ -4,7 +4,7 @@ import Nav from "./nav/Nav";
 import Login from "./Login";
 import DiscoverSection from "./discover/DiscoverSection";
 import Home from "./Home";
-import Tweet from "./Tweet";
+import StatusPage from "./StatusPage";
 import Profile from "./users/Profile";
 
 function App(props) {
@@ -29,7 +29,7 @@ function App(props) {
         break;
       case "Tweet":
         mainComponent = (
-          <Tweet
+          <StatusPage
             tweet={tweet}
             tweetIsLiked={tweetIsLiked}
             children={children}
@@ -53,19 +53,13 @@ function App(props) {
 
   return (
     <div id="container">
-      {!current_user ? (
-        {
-          /*<Login authenticity_token={authenticity_token} flash={flash} />*/
-        }
-      ) : (
-        <React.Fragment>
-          <Nav user={current_user} />
-          <div id="main-container">
-            <div id="main-content">{getMainComponent()}</div>
-            <DiscoverSection followable_users={followable_users} />
-          </div>
-        </React.Fragment>
-      )}
+      <React.Fragment>
+        <Nav user={current_user} />
+        <div id="main-container">
+          <div id="main-content">{getMainComponent()}</div>
+          <DiscoverSection followable_users={followable_users} />
+        </div>
+      </React.Fragment>
       <div id="modal-container"></div>
     </div>
   );

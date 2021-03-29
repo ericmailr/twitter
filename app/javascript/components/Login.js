@@ -26,7 +26,7 @@ function Login(props) {
         <h1>Log in to Twitter</h1>
         <div className="flash-msg">{props.flash}</div>
       </div>
-      <form id="login-form" action="/sessions" method="post">
+      <form id="login-form" action="/users/sign_in" method="post">
         <input
           type="hidden"
           name="authenticity_token"
@@ -34,7 +34,7 @@ function Login(props) {
         <div id="login-username">
           <input
             type="text"
-            name="username"
+            name="user[login]"
             id="username"
             defaultValue="guest"
             onFocus={colorInputs}
@@ -43,7 +43,7 @@ function Login(props) {
         <div id="login-password">
           <input
             type="password"
-            name="password"
+            name="user[password]"
             id="password"
             defaultValue="password123"
             onFocus={colorInputs}

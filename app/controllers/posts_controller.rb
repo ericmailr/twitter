@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @main_content_type = "Home"
     if (current_user) 
