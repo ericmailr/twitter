@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import ComposeModal from "../posts/ComposeModal";
 import AvatarImg from "../../assets/avatar.png";
-import ReactDOM from "react-dom";
 import LogoutModal from "./LogoutModal";
 
-const bodyColor = document.body.style.backgroundColor;
-function Nav(props) {
-  const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    if (showModal) {
-      document.addEventListener("keyup", exitModalHandler);
-      document
-        .getElementsByClassName("exit-svg-container")[0]
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("nav-container")
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("modal-container")
-        .addEventListener("click", exitModalHandler);
-      document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
-      document.getElementById("modal-container").style.display = "flex";
-    } else {
-      document.body.style.backgroundColor = bodyColor;
-      document.getElementById("modal-container").style.display = "none";
-    }
-  });
-
+function Nav({ user, toggleModal }) {
   const showLogoutModal = (e) => {
     let logoutModal = e.currentTarget.children[1];
     logoutModal.style.opacity = "1";
@@ -38,32 +14,6 @@ function Nav(props) {
       document.body.removeEventListener("click", hideLogoutModal, true);
     };
     document.body.addEventListener("click", hideLogoutModal, true);
-  };
-
-  const exitModalHandler = (e) => {
-    if ((e.type === "keyup" && e.key === "Escape") || e.type === "click") {
-      let modalElement = document.getElementById("modal");
-      let exitModalElement = document.getElementsByClassName(
-        "exit-svg-container"
-      )[0];
-      if (
-        e.type === "keyup" ||
-        !modalElement.contains(e.target) ||
-        exitModalElement.contains(e.target)
-      ) {
-        toggleModal();
-        document
-          .getElementById("nav-container")
-          .removeEventListener("click", exitModalHandler);
-        document
-          .getElementById("modal-container")
-          .removeEventListener("click", exitModalHandler);
-      }
-    }
-  };
-
-  const toggleModal = () => {
-    setShowModal(!showModal);
   };
 
   const mouseEnterColor = (e) => {
@@ -80,11 +30,6 @@ function Nav(props) {
   /* component for svg's */
   return (
     <div id="nav-container">
-      {showModal &&
-        ReactDOM.createPortal(
-          <ComposeModal showModal={showModal} toggleModal={toggleModal} />,
-          document.getElementById("modal-container")
-        )}
       <nav>
         <ul>
           <li>
@@ -121,7 +66,7 @@ function Nav(props) {
           </li>
           <li>
             <a
-              href={Routes.profile_path(props.user.handle)}
+              href={Routes.profile_path(user.handle)}
               onMouseOver={mouseEnterColor}
               onMouseLeave={mouseLeaveColor}>
               <span className="svg-background">
@@ -136,7 +81,11 @@ function Nav(props) {
             </a>
           </li>
           <li>
-            <div className="nav-compose" onClick={toggleModal}>
+            <div
+              className="nav-compose"
+              onClick={() => {
+                toggleModal("compose-new");
+              }}>
               <span className="svg-background svg-hover reply-color-background-hover">
                 <svg className="nav-svg" viewBox="0 0 24 24">
                   <g>
@@ -162,10 +111,7 @@ function Nav(props) {
                 alt="default avatar"
               />
             </span>
-            <LogoutModal
-              username={props.user.username}
-              handle={props.user.handle}
-            />
+            <LogoutModal username={user.username} handle={user.handle} />
           </div>
         </div>
       </nav>
@@ -175,6 +121,7 @@ function Nav(props) {
 
 Nav.propTypes = {
   user: PropTypes.object,
+  toggleModal: PropTypes.func,
 };
 
 export default Nav;

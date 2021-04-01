@@ -1,73 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import ComposeModal from "../ComposeModal";
-import ReactDOM from "react-dom";
 
-const bodyColor = document.body.style.backgroundColor;
 function Reply(props) {
-  const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    if (showModal) {
-      document.addEventListener("keyup", exitModalHandler);
-      document
-        .getElementsByClassName("exit-svg-container")[0]
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("nav-container")
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("modal-container")
-        .addEventListener("click", exitModalHandler);
-      // add/remove classes with different color instead? easier to change later
-      document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
-      document.getElementById("modal-container").style.display = "flex";
-    } else {
-      document.body.style.backgroundColor = bodyColor;
-      document.getElementById("modal-container").style.display = "none";
-    }
-  });
-  //need a better understanding of useEffect, particularly second argument
-
-  const exitModalHandler = (e) => {
-    if ((e.type === "keyup" && e.key === "Escape") || e.type === "click") {
-      let modalElement = document.getElementById("modal");
-      let exitModalElement = document.getElementsByClassName(
-        "exit-svg-container"
-      )[0];
-      if (
-        e.type === "keyup" ||
-        !modalElement.contains(e.target) ||
-        exitModalElement.contains(e.target)
-      ) {
-        toggleModal(e);
-        document
-          .getElementById("nav-container")
-          .removeEventListener("click", exitModalHandler);
-        document
-          .getElementById("modal-container")
-          .removeEventListener("click", exitModalHandler);
-      }
-    }
-  };
-
-  const toggleModal = (e) => {
-    e.stopPropagation();
-    setShowModal(!showModal);
-  };
-
   return (
     <React.Fragment>
-      {showModal &&
-        ReactDOM.createPortal(
-          <ComposeModal tweet={props.tweet} updatedAt={props.updatedAt} />,
-          document.getElementById("modal-container")
-        )}
       <div className="option-container">
         <div
-          className="option-container-text"
+          className="option-container-text reply-compose"
           onMouseOver={props.mouseEnterColor}
           onMouseLeave={props.mouseLeaveColor}
-          onClick={toggleModal}>
+          onClick={(e) => {
+            e.stopPropagation();
+            props.toggleModal("compose-reply", {
+              tweet: props.tweet,
+              updatedAt: props.updatedAt,
+            });
+          }}>
           <span className="svg-background">
             <svg className="tweet-options-svg reply-svg" viewBox="0 0 24 24">
               <g>
@@ -93,6 +41,7 @@ Reply.propTypes = {
   updatedAt: PropTypes.string,
   mouseEnterColor: PropTypes.func,
   mouseLeaveColor: PropTypes.func,
+  toggleModal: PropTypes.func,
 };
 
 export default Reply;

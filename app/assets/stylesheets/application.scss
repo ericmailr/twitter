@@ -25,7 +25,7 @@ body {
   color: rgb(217, 217, 217);
   font-family: "Open Sans", "Roboto", sans-serif;
   font-size: 15px;
-  min-height: 100vh;
+  //min-height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -250,14 +250,14 @@ a:hover {
 #modal-container {
   position: fixed;
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
   display: none;
   justify-content: center;
   align-items: flex-start;
+  z-index: 2;
 }
 
 #modal {
@@ -768,7 +768,7 @@ nav {
 #main-content {
   margin-left: 150px; //same as nav-container width
   flex: 6;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }

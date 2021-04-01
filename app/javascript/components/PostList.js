@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PostWrapper from "./posts/PostWrapper";
 import SuggestedFollow from "./discover/SuggestedFollow";
 
-function PostList({ posts, contentType }) {
+function PostList({ posts, contentType, toggleModal }) {
   return (
     <React.Fragment>
       {posts.map((postHash) => {
@@ -16,11 +16,13 @@ function PostList({ posts, contentType }) {
                 user={postHash.post.user}
                 actionHeader={contentType === "with_replies" ? "" : "reply"}
                 postType={"reply-parent"}
+                toggleModal={toggleModal}
               />
               <PostWrapper
                 tweet={postHash.post}
                 updatedAt={postHash.post.updated_at_brief}
                 postType={"reply"}
+                toggleModal={toggleModal}
               />
             </React.Fragment>
           );
@@ -47,6 +49,7 @@ function PostList({ posts, contentType }) {
                   : null
               }
               postType={postHash.postType}
+              toggleModal={toggleModal}
             />
           );
         }
@@ -58,6 +61,7 @@ function PostList({ posts, contentType }) {
 PostList.propTypes = {
   posts: PropTypes.array,
   contentType: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default PostList;

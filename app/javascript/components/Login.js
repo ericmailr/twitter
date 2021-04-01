@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ReactDOM from "react-dom";
+import SignupModal from "./SignupModal";
 
 function Login({ authenticity_token, flash }) {
   const colorInputs = (e) => {
@@ -11,6 +13,18 @@ function Login({ authenticity_token, flash }) {
     e.currentTarget.parentElement.classList.remove("focused");
     e.currentTarget.parentElement.style.border =
       "2px solid rgba(136, 153, 166, 0.25)";
+  };
+
+  const showSignupModal = (e) => {
+    let signupModal = e.currentTarget.children[1];
+    signupModal.style.opacity = "1";
+    signupModal.style.visibility = "visible";
+    const hideSignupModal = (e) => {
+      signupModal.style.opacity = "0";
+      signupModal.style.visibility = "hidden";
+      document.body.removeEventListener("click", hideSignupModal, true);
+    };
+    document.body.addEventListener("click", hideSignupModal, true);
   };
 
   return (
@@ -58,11 +72,18 @@ function Login({ authenticity_token, flash }) {
             className="reply-color-background-hover"
             data-disable-with="Log in"></input>
         </div>
-        <div id="login-options">
+        <div id="login-options" onClick={showSignupModal}>
           {/* onClick signup modal, name, email, date of birth, NEXT choose a handle, username, and password i guess*/}
           <a>
             <span> Sign up for Twitter</span>
           </a>
+          {/*ReactDOM.createPortal(
+            <SignupModal
+              colorInputs={colorInputs}
+              decolorInputs={decolorInputs}
+            />,
+            document.getElementById("modal-container")
+          )*/}
         </div>
       </form>
     </div>

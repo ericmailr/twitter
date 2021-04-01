@@ -37,6 +37,7 @@ function TweetOptions(props) {
         updatedAt={props.updatedAt}
         mouseEnterColor={mouseEnterColor}
         mouseLeaveColor={mouseLeaveColor}
+        toggleModal={props.toggleModal}
       />
       <Retweet
         tweetId={props.tweet.id}
@@ -77,6 +78,7 @@ TweetOptions.propTypes = {
   retweetsCount: PropTypes.number,
   newParent: PropTypes.object,
   updatedAt: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default TweetOptions;

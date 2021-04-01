@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TopHeader from "./TopHeader";
 import PostWrapper from "./posts/PostWrapper";
 
-function StatusPage({ tweet, tweetIsLiked, children }) {
+function StatusPage({ tweet, tweetIsLiked, children, toggleModal }) {
   return (
     <React.Fragment>
       <TopHeader header="Tweet" goBack={true} />
@@ -13,6 +13,7 @@ function StatusPage({ tweet, tweetIsLiked, children }) {
         updatedAtBrief={tweet.updated_at_brief}
         isLiked={tweetIsLiked}
         postType="status"
+        toggleModal={toggleModal}
       />
       {children.map((reply) => {
         return (
@@ -22,6 +23,7 @@ function StatusPage({ tweet, tweetIsLiked, children }) {
             updatedAt={reply.updated_at_brief}
             replyingTo={tweet.user.handle}
             postType="tweet"
+            toggleModal={toggleModal}
           />
         );
       })}
@@ -33,6 +35,7 @@ StatusPage.propTypes = {
   tweet: PropTypes.object,
   children: PropTypes.array,
   tweetIsLiked: PropTypes.bool,
+  toggleModal: PropTypes.func,
 };
 
 export default StatusPage;

@@ -5,6 +5,7 @@ import Tweet from "./Tweet";
 function QuoteTweet(props) {
   return (
     <div>
+      {console.log("quote tweet")}
       <Tweet
         tweet={props.comment}
         user={props.comment.retweeter}

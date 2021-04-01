@@ -4,6 +4,10 @@ import Status from "./Status";
 import Tweet from "./Tweet";
 
 function PostWrapper(props) {
+  const csrf = document
+    .querySelector("meta[name='csrf-token']")
+    .getAttribute("content");
+
   const [likeState, setLikeState] = useState([]);
   const [retweetState, setRetweetState] = useState([]);
   useEffect(async () => {
@@ -22,9 +26,6 @@ function PostWrapper(props) {
 
   const toggleLike = async (e) => {
     e.stopPropagation();
-    const csrf = document
-      .querySelector("meta[name='csrf-token']")
-      .getAttribute("content");
     let msg = "";
     if (!likeState.isLiked) {
       msg = await fetch("/likes", {
@@ -57,9 +58,6 @@ function PostWrapper(props) {
 
   const toggleRetweet = async (e) => {
     e.stopPropagation();
-    const csrf = document
-      .querySelector("meta[name='csrf-token']")
-      .getAttribute("content");
     let msg = "";
     if (!retweetState.isRetweeted) {
       msg = await fetch("/retweets", {
@@ -106,19 +104,24 @@ function PostWrapper(props) {
           isRetweeted={retweetState.isRetweeted}
           isParent={props.postType === "reply-parent"}
           isReply={props.postType === "reply"}
+          toggleModal={props.toggleModal}
         />
       ) : (
-        <Tweet
-          {...props}
-          toggleLike={toggleLike}
-          toggleRetweet={toggleRetweet}
-          likesCount={likeState.likesCount}
-          isLiked={likeState.isLiked}
-          retweetsCount={retweetState.retweetsCount}
-          isRetweeted={retweetState.isRetweeted}
-          isParent={props.postType === "reply-parent"}
-          isReply={props.postType === "reply"}
-        />
+        <React.Fragment>
+          <Tweet
+            {...props}
+            toggleLike={toggleLike}
+            toggleRetweet={toggleRetweet}
+            likesCount={likeState.likesCount}
+            isLiked={likeState.isLiked}
+            retweetsCount={retweetState.retweetsCount}
+            isRetweeted={retweetState.isRetweeted}
+            isParent={props.postType === "reply-parent"}
+            isReply={props.postType === "reply"}
+            isInModal={false}
+            toggleModal={props.toggleModal}
+          />
+        </React.Fragment>
       )}
     </React.Fragment>
   );
@@ -130,6 +133,7 @@ PostWrapper.propTypes = {
   updatedAt: PropTypes.string,
   actionHeader: PropTypes.string,
   postType: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default PostWrapper;

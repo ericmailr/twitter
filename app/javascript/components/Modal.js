@@ -1,70 +1,33 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import React from "react";
 import PropTypes from "prop-types";
+import ComposeModal from "./posts/ComposeModal";
 
-function Modal() {
-  const bodyColor = document.body.style.backgroundColor;
-  const [showModal, setShowModal] = useState(false);
-  useEffect(() => {
-    if (showModal) {
-      document.addEventListener("keyup", exitModalHandler);
-      document
-        .getElementsByClassName("exit-svg-container")[0]
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("nav-container")
-        .addEventListener("click", exitModalHandler);
-      document
-        .getElementById("modal-container")
-        .addEventListener("click", exitModalHandler);
-      document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
-      document.getElementById("modal-container").style.display = "flex";
-    } else {
-      document.body.style.backgroundColor = bodyColor;
-      document.getElementById("modal-container").style.display = "none";
+function Modal({ modalState: { modalType, modalProps } }) {
+  const getModal = () => {
+    let modal;
+    switch (modalType) {
+      case "none":
+        modal = null;
+        break;
+      case "compose-new":
+        modal = <ComposeModal id="modal" />;
+        break;
+      case "compose-reply":
+        modal = <ComposeModal id="modal" tweet={modalProps.tweet} />;
+        break;
+      case "signup":
+        modal = <SignupModal id="modal" />;
+        break;
+      default:
+        modal = null;
     }
-  });
-
-  const showLogoutModal = (e) => {
-    let logoutModal = e.currentTarget.children[1];
-    logoutModal.style.display = "flex";
-    const hideLogoutModal = (e) => {
-      logoutModal.style.display = "none";
-      document.body.removeEventListener("click", hideLogoutModal, true);
-    };
-    document.body.addEventListener("click", hideLogoutModal, true);
+    return modal;
   };
 
-  const exitModalHandler = (e) => {
-    if ((e.type === "keyup" && e.key === "Escape") || e.type === "click") {
-      let modalElement = document.getElementById("modal");
-      let exitModalElement = document.getElementsByClassName(
-        "exit-svg-container"
-      )[0];
-      if (
-        e.type === "keyup" ||
-        !modalElement.contains(e.target) ||
-        exitModalElement.contains(e.target)
-      ) {
-        toggleModal();
-        document
-          .getElementById("nav-container")
-          .removeEventListener("click", exitModalHandler);
-        document
-          .getElementById("modal-container")
-          .removeEventListener("click", exitModalHandler);
-      }
-    }
-  };
-
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  return <div></div>;
+  return <React.Fragment>{getModal()}</React.Fragment>;
 }
 
 Modal.propTypes = {
-  modalType: PropTypes.string,
+  modalState: PropTypes.object,
 };
 export default Modal;

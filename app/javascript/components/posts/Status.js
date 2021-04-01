@@ -42,6 +42,7 @@ function Status(props) {
         isStatusOption={true}
         toggleLike={props.toggleLike}
         toggleRetweet={props.toggleRetweet}
+        toggleModal={props.toggleModal}
       />
     </div>
   );
@@ -59,6 +60,7 @@ Status.propTypes = {
   retweetsCount: PropTypes.number,
   isParent: PropTypes.bool,
   isReply: PropTypes.bool,
+  toggleModal: PropTypes.func,
 };
 
 export default Status;
