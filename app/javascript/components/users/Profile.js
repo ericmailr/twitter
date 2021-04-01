@@ -6,7 +6,7 @@ import TopHeader from "../TopHeader";
 import ProfileCard from "./ProfileCard";
 
 function Profile(props) {
-  const { user, content, userCreatedAt, contentType } = props;
+  const { user, content, userCreatedAt, contentType, toggleModal } = props;
   return (
     <React.Fragment>
       <TopHeader
@@ -21,6 +21,7 @@ function Profile(props) {
           content={content}
           user={user}
           contentType={contentType}
+          toggleModal={toggleModal}
         />
       ) : (
         <React.Fragment>
@@ -29,6 +30,7 @@ function Profile(props) {
             contentType={contentType}
             user={props.user}
             content={content}
+            toggleModal={toggleModal}
           />
         </React.Fragment>
       )}
@@ -42,6 +44,7 @@ Profile.propTypes = {
   user: PropTypes.object,
   userCreatedAt: PropTypes.string,
   contentType: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default Profile;

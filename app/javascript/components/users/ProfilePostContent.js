@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import PostList from "../PostList";
 import TabList from "./TabList";
 
-function ProfilePostContent({ contentType, content, user: { handle } }) {
+function ProfilePostContent({
+  contentType,
+  content,
+  user: { handle },
+  toggleModal,
+}) {
   const tabArray = [
     {
       contentType: "tweets",
@@ -32,7 +37,11 @@ function ProfilePostContent({ contentType, content, user: { handle } }) {
       {contentType === "media" ? (
         <h1 style={{ textAlign: "center" }}>Under Construction</h1>
       ) : (
-        <PostList posts={content[contentType]} contentType={contentType} />
+        <PostList
+          posts={content[contentType]}
+          contentType={contentType}
+          toggleModal={toggleModal}
+        />
       )}
     </div>
   );
@@ -42,6 +51,7 @@ ProfilePostContent.propTypes = {
   content: PropTypes.object,
   contentType: PropTypes.string,
   user: PropTypes.object,
+  toggleModal: PropTypes.func,
 };
 
 export default ProfilePostContent;

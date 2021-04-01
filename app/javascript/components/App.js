@@ -96,6 +96,7 @@ function App(props) {
             user={user}
             userCreatedAt={user.created_at}
             contentType={contentType}
+            toggleModal={toggleModal}
           />
         );
       default:

@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import PostList from "../PostList";
 import TabList from "./TabList";
 
-function ProfileFollowContent({ contentType, content, user: { handle } }) {
+function ProfileFollowContent({
+  contentType,
+  content,
+  user: { handle },
+  toggleModal,
+}) {
   const tabArray = [
     {
       contentType: "followers_you_know",
@@ -25,7 +30,7 @@ function ProfileFollowContent({ contentType, content, user: { handle } }) {
     <div>
       <div>
         <TabList tabArray={tabArray} contentType={contentType} />
-        <PostList posts={content[contentType]} />
+        <PostList posts={content[contentType]} toggleModal={toggleModal} />
       </div>
     </div>
   );
@@ -35,6 +40,7 @@ ProfileFollowContent.propTypes = {
   user: PropTypes.object,
   content: PropTypes.object,
   contentType: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default ProfileFollowContent;
