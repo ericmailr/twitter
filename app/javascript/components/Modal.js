@@ -15,9 +15,6 @@ function Modal({ modalState: { modalType, modalProps } }) {
       case "compose-reply":
         modal = <ComposeModal id="modal" tweet={modalProps.tweet} />;
         break;
-      case "signup":
-        modal = <SignupModal id="modal" />;
-        break;
       default:
         modal = null;
     }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import Nav from "./nav/Nav";
 import Login from "./Login";
@@ -51,7 +50,7 @@ function App(props) {
       if (
         e.type === "keyup" ||
         !modalElement.contains(e.target) ||
-        exitModalElement.contains(e.target)
+        (exitModalElement !== null && exitModalElement.contains(e.target))
       ) {
         setModal({
           modalType: "none",
@@ -69,6 +68,17 @@ function App(props) {
 
   const toggleModal = (modalType, modalProps) => {
     setModal({ modalType: modalType, modalProps: modalProps });
+  };
+
+  const colorInputs = (e) => {
+    e.currentTarget.parentElement.classList.add("focused");
+    e.currentTarget.parentElement.style.border =
+      "2px solid RGB(var(--reply-color))";
+  };
+  const decolorInputs = (e) => {
+    e.currentTarget.parentElement.classList.remove("focused");
+    e.currentTarget.parentElement.style.border =
+      "2px solid rgba(136, 153, 166, 0.25)";
   };
 
   const getMainComponent = () => {

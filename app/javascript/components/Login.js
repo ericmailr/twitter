@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
-import SignupModal from "./SignupModal";
 
-function Login({ authenticity_token, flash }) {
+function Login({ authenticity_token, flash, toggleModal }) {
   const colorInputs = (e) => {
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
@@ -26,7 +24,6 @@ function Login({ authenticity_token, flash }) {
     };
     document.body.addEventListener("click", hideSignupModal, true);
   };
-
   return (
     <div id="login-container">
       <div id="login-top">
@@ -72,8 +69,7 @@ function Login({ authenticity_token, flash }) {
             className="reply-color-background-hover"
             data-disable-with="Log in"></input>
         </div>
-        <div id="login-options" onClick={showSignupModal}>
-          {/* onClick signup modal, name, email, date of birth, NEXT choose a handle, username, and password i guess*/}
+        <div id="login-options">
           <a>
             <span> Sign up for Twitter</span>
           </a>
@@ -92,6 +88,7 @@ function Login({ authenticity_token, flash }) {
 Login.propTypes = {
   authenticity_token: PropTypes.string,
   flash: PropTypes.object,
+  toggleModal: PropTypes.func,
 };
 
 export default Login;

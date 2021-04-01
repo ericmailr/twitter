@@ -1,12 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function SignupModal({
-  decolorInputs,
-  colorInputs,
-  flash,
-  authenticity_token,
-}) {
+function Signup({ decolorInputs, colorInputs, flash, authenticity_token }) {
   return (
     <div>
       <div>
@@ -80,7 +75,7 @@ function SignupModal({
   );
 }
 
-SignupModal.propTypes = {
+Signup.propTypes = {
   colorInputs: PropTypes.func,
   decolorInputs: PropTypes.func,
   flash: PropTypes.object,
