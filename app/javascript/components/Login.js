@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Login({ authenticity_token, flash, toggleModal }) {
+function Login({ authenticity_token, flash }) {
   const colorInputs = (e) => {
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
@@ -13,17 +13,6 @@ function Login({ authenticity_token, flash, toggleModal }) {
       "2px solid rgba(136, 153, 166, 0.25)";
   };
 
-  const showSignupModal = (e) => {
-    let signupModal = e.currentTarget.children[1];
-    signupModal.style.opacity = "1";
-    signupModal.style.visibility = "visible";
-    const hideSignupModal = (e) => {
-      signupModal.style.opacity = "0";
-      signupModal.style.visibility = "hidden";
-      document.body.removeEventListener("click", hideSignupModal, true);
-    };
-    document.body.addEventListener("click", hideSignupModal, true);
-  };
   return (
     <div id="login-container">
       <div id="login-top">
@@ -35,8 +24,8 @@ function Login({ authenticity_token, flash, toggleModal }) {
           </g>
         </svg>
         <h1>Log in to Twitter</h1>
-        <div className="flash-alert">{flash.alert}</div>
-        <div className="flash-notice">{flash.notice}</div>
+        {flash.alert && <div className="flash-alert">{flash.alert}</div>}
+        {flash.notice && <div className="flash-notice">{flash.notice}</div>}
       </div>
       <form id="login-form" action="/users/sign_in" method="post">
         <input
@@ -70,16 +59,9 @@ function Login({ authenticity_token, flash, toggleModal }) {
             data-disable-with="Log in"></input>
         </div>
         <div id="login-options">
-          <a>
+          <a href="/users/sign_up">
             <span> Sign up for Twitter</span>
           </a>
-          {/*ReactDOM.createPortal(
-            <SignupModal
-              colorInputs={colorInputs}
-              decolorInputs={decolorInputs}
-            />,
-            document.getElementById("modal-container")
-          )*/}
         </div>
       </form>
     </div>

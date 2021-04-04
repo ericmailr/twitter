@@ -54,7 +54,7 @@ function NewTweet(props) {
             onInput={readySubmitButton}
           />
           <div className="submit-new-tweet-container">
-            <div className="submit-options"></div>
+            <div className="submit-button-spacer"></div>
             <div
               className={"submit-button " + submitButtonClasses}
               onClick={submit}>

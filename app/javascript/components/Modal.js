@@ -10,10 +10,10 @@ function Modal({ modalState: { modalType, modalProps } }) {
         modal = null;
         break;
       case "compose-new":
-        modal = <ComposeModal id="modal" />;
+        modal = <ComposeModal />;
         break;
       case "compose-reply":
-        modal = <ComposeModal id="modal" tweet={modalProps.tweet} />;
+        modal = <ComposeModal tweet={modalProps.tweet} />;
         break;
       default:
         modal = null;

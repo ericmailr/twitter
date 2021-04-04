@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "posts#index"
+  #root to: "posts#index"
+  authenticated :user do
+    root to: 'posts#index', as: :authenticated_root
+  end
+  root to: redirect('/users/sign_in')
 
-  resources :users, only: [:new, :create, :show, :destroy]
+  resources :users, only: [:show, :destroy]
   resources :follows, only: [:create]
   resources :tweets, only: [:new, :show]
   resources :likes, only: [:create, :destroy]
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
 
   get "home", to: "posts#index", as: "home"
   post "tweets", to: "tweets#create"
-  get "signup", to: "users#new", as: "signup"
+  #get "signup", to: "users#new", as: "signup"
   get "search", to: "search#index", as: "search"
   
   delete "follows/:followed_user_id", to: "follows#destroy", as: "follow"

@@ -1,16 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  #helper_method makes current_user method available for use in view/
-  #helper_method :current_user
-
-#  def current_user
-#    if session[:user_id]
-#      @current_user ||= User.find(session[:user_id])
-#    else
-#      @current_user = nil
-#    end
-#  end
 
 # devise redirect to new session on sign_out
 def after_sign_out_path_for(resource)

@@ -31,15 +31,17 @@ Eric Miller
 
 ## My todo list
 
-- RSpec
+- Add signup
 
-- is "liked" action header working? first tweet isn't showing it...
+- RSpec
 
 - profile avatar, background image, follow button
 
+- is "liked" action header working? first tweet isn't showing it...
+
 - current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen
 
-- avatar modal
+- avatar popup
 
 - clicking on likes, retweets should pop up a modal showing users
 
@@ -49,8 +51,6 @@ Eric Miller
 - make search index pretty
 
 - add delete tweet option
-
-- Add signup
 
 - Expand Nav with Labels
 

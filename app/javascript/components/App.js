@@ -7,8 +7,9 @@ import Home from "./Home";
 import StatusPage from "./StatusPage";
 import Profile from "./users/Profile";
 import Modal from "./Modal";
+import Signup from "./Signup";
 
-const bodyColor = document.body.style.backgroundColor;
+//const bodyColor = document.body.style.backgroundColor;
 function App(props) {
   const {
     mainContentType,
@@ -27,16 +28,17 @@ function App(props) {
     modalType: "none",
     modalProps: {},
   });
+
   useEffect(() => {
     if (modalState.modalType !== "none") {
       document.body.addEventListener("keyup", exitModalHandler);
       document
         .getElementById("modal-container")
         .addEventListener("click", exitModalHandler);
-      document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
+      //document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
       document.getElementById("modal-container").style.display = "flex";
     } else {
-      document.body.style.backgroundColor = bodyColor;
+      //document.body.style.backgroundColor = bodyColor;
       document.getElementById("modal-container").style.display = "none";
     }
   });
@@ -109,6 +111,7 @@ function App(props) {
             toggleModal={toggleModal}
           />
         );
+        break;
       default:
         mainComponent = <Home posts={content.posts} />;
     }
@@ -125,10 +128,17 @@ function App(props) {
             <DiscoverSection followable_users={followable_users} />
           </div>
         </React.Fragment>
+      ) : mainContentType === "Signup" ? (
+        <Signup
+          authenticity_token={authenticity_token}
+          flash={flash}
+          colorInputs={colorInputs}
+          decolorInputs={decolorInputs}
+        />
       ) : (
         <Login authenticity_token={authenticity_token} flash={flash} />
       )}
-      <div id="modal-container">
+      <div id="modal-container" className="form-container">
         <Modal modalState={modalState} />
       </div>
     </div>

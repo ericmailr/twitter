@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
     include ApplicationHelper
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: :show
+=begin
     def new
         @user = User.new
     end
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
             redirect_to signup_path
         end
     end
+=end
 
     def show
         @main_content_type = "Profile"
