@@ -16,9 +16,9 @@ default: &default
   cache_manifest: false
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
-  static_assets_extensions:
+  static_assets_extension:
     - .jpg
     - .jpeg
     - .png

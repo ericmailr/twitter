@@ -15,8 +15,9 @@
 
 /* */
 @import "bootstrap";
-@import "/\*";
+//@import "/\*";
 @import "colors.scss";
+@import "sessions.scss";
 
 html,
 body {
@@ -276,6 +277,7 @@ a:hover {
   border-radius: 30px;
   display: flex;
   justify-content: center;
+  white-space: nowrap;
 }
 
 .submittable-button {
@@ -515,6 +517,7 @@ nav {
   background-color: rgba(21, 24, 28, 0.9);
   transition-property: background-color;
   transition-duration: 0.2s;
+  cursor: pointer;
 }
 
 .reply-color-background-hover:hover {

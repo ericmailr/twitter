@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import FormInput from "./FormInput";
 
 function Login({ authenticity_token, flash }) {
   const colorInputs = (e) => {
@@ -32,24 +33,8 @@ function Login({ authenticity_token, flash }) {
           type="hidden"
           name="authenticity_token"
           value={authenticity_token}></input>
-        <div id="login-username">
-          <input
-            type="text"
-            name="user[login]"
-            id="username"
-            defaultValue="guest"
-            onFocus={colorInputs}
-            onBlur={decolorInputs}></input>
-        </div>
-        <div id="login-password">
-          <input
-            type="password"
-            name="user[password]"
-            id="password"
-            defaultValue="password123"
-            onFocus={colorInputs}
-            onBlur={decolorInputs}></input>
-        </div>
+        <FormInput id={"login-username"} inputName={"user[login]"} />
+        <FormInput id={"login-password"} inputName={"user[password]"} />
         <div id="login-submit">
           <input
             type="submit"

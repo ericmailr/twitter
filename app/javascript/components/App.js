@@ -9,7 +9,6 @@ import Profile from "./users/Profile";
 import Modal from "./Modal";
 import Signup from "./Signup";
 
-//const bodyColor = document.body.style.backgroundColor;
 function App(props) {
   const {
     mainContentType,
@@ -35,10 +34,8 @@ function App(props) {
       document
         .getElementById("modal-container")
         .addEventListener("click", exitModalHandler);
-      //document.body.style.backgroundColor = "rgba(110, 118, 125, 0.4)";
       document.getElementById("modal-container").style.display = "flex";
     } else {
-      //document.body.style.backgroundColor = bodyColor;
       document.getElementById("modal-container").style.display = "none";
     }
   });
@@ -73,6 +70,7 @@ function App(props) {
   };
 
   const colorInputs = (e) => {
+    console.log(e.currentTarget);
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
       "2px solid RGB(var(--reply-color))";

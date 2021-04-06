@@ -3,6 +3,19 @@ import PropTypes from "prop-types";
 import Avatar from "../users/Avatar";
 
 function LogoutModal(props) {
+  const signout = async () => {
+    const csrf = document
+      .querySelector("meta[name='csrf-token']")
+      .getAttribute("content");
+    let msg = await fetch("/users/sign_out", {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrf,
+      },
+    }).then(() => location.reload());
+  };
   return (
     <div id="logout-modal">
       <div className="logout-user-card">
@@ -21,12 +34,9 @@ function LogoutModal(props) {
           </div>
         </div>
       </div>
-      <a
-        data-method="delete"
-        href={"/users/sign_out"}
-        className="logout-container">
+      <div className="logout-container" onClick={signout}>
         Log out <span className={"handle"}>@{props.handle}</span>
-      </a>
+      </div>
       <div className="logout-modal-triangle"></div>
     </div>
   );

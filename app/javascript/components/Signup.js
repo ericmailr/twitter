@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
-import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
+import FormInput from "./FormInput";
 
-function Signup({ decolorInputs, colorInputs, flash, authenticity_token }) {
+function Signup({ flash, authenticity_token }) {
+  const [formPart, setFormPart] = useState(1);
   return (
     <div className="form-container">
-      <div className="form tweet-spacing">
+      <div className="form">
         <div className="form-header">
           <div className="signup-form-header-subcontainer"></div>
           <svg viewBox="0 0 24 24" id="login-bird-svg">
@@ -17,69 +18,60 @@ function Signup({ decolorInputs, colorInputs, flash, authenticity_token }) {
             </g>
           </svg>
           <div className="signup-form-header-subcontainer">
-            <Button buttonText={"Next"} />
+            {formPart === 1 ? (
+              <Button buttonText={"Next"} clickAction={setFormPart} />
+            ) : (
+              <Button buttonText={"Sign up!"} clickAction={setFormPart} />
+            )}
           </div>
         </div>
-        <form id="signup-form" className="scrollable">
-          <h1>Create your account</h1>
-          {flash.alert && <div className="flash-alert">{flash.alert}</div>}
-          {flash.notice && <div className="flash-notice">{flash.notice}</div>}
-          <input
-            type="hidden"
-            name="authenticity_token"
-            value={authenticity_token}></input>
-          <div id="signup-name">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              onFocus={colorInputs}
-              onBlur={colorInputs}></input>
-          </div>
-          <div id="signup-email">
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onFocus={colorInputs}
-              onBlur={decolorInputs}></input>
-          </div>
-          <div className="signup-birthday-container">
-            <div>Date of birth</div>
-            <div>
-              This will not be shown publicly. Confirm your own age, even if
-              this account is for a business, a pet, or something else.
-            </div>
-            <div className="birthday-input-container">
-              <MonthPicker />
-              <DayPicker />
-              <YearPicker />
-            </div>
-          </div>
-        </form>
-
-        {/* <h1>Sign up</h1>
-
-<%= form_for @user do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %><br>
-    <%= f.label :email %>
-    <%= f.text_field :email %><br>
-    <%= f.label :username %>
-    <%= f.text_field :username %><br>
-    <%= f.label :handle %>
-    <%= f.text_field :handle %><br>
-    <%= f.label :password %>
-    <%= f.password_field :password %><br>
-    <%= f.label :birthday, 'Date of Birth' %>
-    <div id='birthday-disclaimer'>
-        This will not be shown publicly. Confirm your age to receive the appropriate experience.
-    </div>
-    <div id='date-select'>
-        <%= f.date_select :birthday, order: [:month, :day, :year], start_year: Date.today.year, end_year: 1900, include_blank: true %>
-    </div>
-    <%= f.submit 'Sign up!' %>
-<% end %>*/}
+        <div id="signup-form-container">
+          <form id="signup-form" action="/users" method="post">
+            {formPart === 1 ? (
+              <React.Fragment>
+                <h1>Create your account</h1>
+                {flash.alert && (
+                  <div className="flash-alert">{flash.alert}</div>
+                )}
+                {flash.notice && (
+                  <div className="flash-notice">{flash.notice}</div>
+                )}
+                <FormInput id={"signup-name"} inputName={"name"} />
+                <FormInput id={"signup-email"} inputName={"email"} />
+                <div className="signup-birthday-container">
+                  <div className="signup-birthday-label">
+                    <h4>Date of birth</h4>
+                    <div>
+                      This will not be shown publicly. Confirm your own age,
+                      even if this account is for a business, a pet, or
+                      something else.
+                    </div>
+                  </div>
+                  <div className="birthday-input-container">
+                    <FormInput id={"birthday-month"} inputName={"month"} />
+                    <FormInput id={"birthday-day"} inputName={"day"} />
+                    <FormInput id={"birthday-year"} inputName={"year"} />
+                  </div>
+                </div>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <h1>Choose a password</h1>
+                {flash.alert && (
+                  <div className="flash-alert">{flash.alert}</div>
+                )}
+                {flash.notice && (
+                  <div className="flash-notice">{flash.notice}</div>
+                )}
+                <FormInput id={"signup-password"} inputName={"password"} />
+                <FormInput
+                  id={"signup-password-confirmation"}
+                  inputName={"password-confirmation"}
+                />
+              </React.Fragment>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -14,8 +14,8 @@
   left: 0;
   right: 0;
   justify-content: center;
-  align-items: flex-start;
-  z-index: 2;
+  // align-items: flex-start;
+  //z-index: 2;
   background-color: $outside-modal-background-color;
 }
 
@@ -24,12 +24,16 @@
   flex-direction: column;
   position: relative;
   background: rgb(0, 0, 0);
+  //height: 85vh;
+  //min-height: 85vh;
+  //width: 50vw;
+  //
+  min-height: 400px;
   height: 85vh;
-  min-height: 85vh;
-  max-width: 50vw;
+  width: 50vw;
+  //max-width: 80vw;
   top: 5%;
   border-radius: 16px;
-  align-items: stretch;
 }
 
 .form-header {
@@ -41,14 +45,9 @@
 .signup-form-header-subcontainer {
   flex: 8;
 }
-#login-form {
-  display: flex;
-  align-self: stretch;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: stretch;
-  flex: 5;
-  position: relative;
+
+#signup-form-container {
+  overflow-y: auto;
 }
 
 #signup-form {
@@ -56,9 +55,7 @@
   padding: 0 35px;
   flex-direction: column;
   justify-content: space-around;
-  align-items: stretch;
   position: relative;
-  flex: 5;
 }
 
 #signup-form > h1 {
@@ -69,6 +66,7 @@
 
 #signup-form > * {
   margin: 25px 0;
+  flex: 1;
 }
 
 #signup-form input {
@@ -83,50 +81,73 @@
   padding-bottom: 4px;
   align-self: flex-end;
   width: 100%;
+  display: flex;
+  padding: 2px;
+  height: 70px;
+  padding-top: 30px;
 }
 
-#signup-name {
+.input-with-label {
   display: flex;
+  justify-content: stretch;
   border-radius: 5px;
   border: 2px solid rgba(136, 153, 166, 0.25);
   padding: 2px;
   min-height: 70px;
 }
 
-#signup-email {
-  display: flex;
-  border-radius: 5px;
-  border: 2px solid rgba(136, 153, 166, 0.25);
-  padding: 2px;
-  min-height: 70px;
+.input-with-label::before {
+  color: $secondary-text-color;
+  font-size: 14px;
+  position: absolute;
+}
+
+.input-with-label.focused::before {
+  color: $main-blue;
+  font-size: 14px;
+  position: absolute;
+}
+
+#birthday-month::before {
+  content: "Month";
+}
+
+#birthday-day::before {
+  content: "Day";
+}
+
+#birthday-year::before {
+  content: "Year";
 }
 
 #signup-name::before {
   content: "Name";
-  color: rgb(136, 153, 166);
-  font-size: 14px;
-  position: absolute;
 }
 
 #signup-email::before {
   content: "Email";
-  color: rgb(136, 153, 166);
-  font-size: 14px;
-  position: absolute;
 }
 
-#signup-name.focused::before {
-  content: "Name";
-  color: RGB(var(--reply-color));
-  font-size: 14px;
-  position: absolute;
+#signup-password::before {
+  content: "Password";
 }
 
-#signup-email.focused::before {
-  content: "Email";
-  color: RGB(var(--reply-color));
-  font-size: 14px;
-  position: absolute;
+#signup-password-confirmation::before {
+  content: "Confirm Password";
+}
+
+.focused {
+  border: 2px solid $main-blue;
+}
+
+.signup-birthday-label {
+  margin-bottom: 20px;
+  color: $secondary-text-color;
+}
+
+.signup-birthday-label h4 {
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial;
+  color: $main-text-color;
 }
 
 .birthday-input-container {
@@ -137,13 +158,23 @@
   color: $main-text-color;
 }
 
-.birthday-input-container > select {
+.birthday-input-container > div {
   flex-grow: 1;
   margin: 0 20px;
   height: 70px;
   background-color: inherit;
   color: $main-text-color;
   font-size: 19px;
+}
+
+.birthday-input-container > div > select {
+  flex-grow: 1;
+  height: 70px;
+  background-color: inherit;
+  color: $main-text-color;
+  font-size: 19px;
+  border-style: none;
+  outline: none;
 }
 
 .birthday-input-container option {
@@ -198,44 +229,12 @@
   display: flex;
 }
 
-#login-username {
-  border-radius: 5px;
-  border: 2px solid rgba(136, 153, 166, 0.25);
-  padding: 2px;
-}
-
 #login-username::before {
   content: "Username";
-  color: rgb(136, 153, 166);
-  font-size: 14px;
-  position: absolute;
-}
-
-#login-username.focused::before {
-  content: "Username";
-  color: RGB(var(--reply-color));
-  font-size: 14px;
-  position: absolute;
-}
-
-#login-password {
-  border-radius: 5px;
-  border: 2px solid rgba(136, 153, 166, 0.25);
-  padding: 2px;
 }
 
 #login-password::before {
   content: "Password";
-  color: rgb(136, 153, 166);
-  font-size: 14px;
-  position: absolute;
-}
-
-#login-password.focused::before {
-  content: "Password";
-  color: RGB(var(--reply-color));
-  font-size: 14px;
-  position: absolute;
 }
 
 #login-form input {
@@ -249,7 +248,9 @@
   border: none;
   outline: none;
   align-self: flex-end;
+  min-height: 60px;
   padding-bottom: 4px;
+  padding-top: 30px;
 }
 
 #login-submit {
@@ -273,4 +274,10 @@
   color: RGB(var(--reply-color));
   display: flex;
   justify-content: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  .form {
+    width: 100vw;
+  }
 }
