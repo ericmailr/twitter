@@ -46,6 +46,7 @@ gem 'active_model_serializers'
 gem 'htmlbeautifier'
 gem 'bootstrap', '~> 5.0.0.alpha3'
 gem 'jquery-rails'
+gem 'devise', '~>4.7.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
