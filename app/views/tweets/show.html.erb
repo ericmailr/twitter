@@ -1,10 +1,1 @@
-<%= react_component("PostWrapper", {
-    tweet: TweetSerializer.new(@tweet), 
-    updatedAt: tweet_updated_at_formatted_full(@tweet.updated_at),
-    updatedAtBrief: tweet_updated_at_formatted_brief(@tweet.updated_at),
-    isLiked: @tweet.likers.include?(current_user),
-    postType: "status"
-    }) %>
-<% @tweet.children.each do |reply| %>
-  <%= react_component("PostWrapper", {tweet: TweetSerializer.new(reply), updatedAt: tweet_updated_at_formatted_brief(reply.updated_at), replyingTo: reply.parent.user.handle, postType: "tweet"}) %>
-<% end %>
+<%= react_component("App", {current_user: UserSerializer.new(current_user), mainContentType: @main_content_type, tweet: TweetSerializer.new(@tweet), children: @tweet.children.map{|reply| TweetSerializer.new(reply)}, tweetIsLiked: @tweet.likers.include?(current_user), followable_users: get_followable_users()} ) %>

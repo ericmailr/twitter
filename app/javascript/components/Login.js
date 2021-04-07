@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import FormInput from "./FormInput";
 
-function Login(props) {
+function Login({ authenticity_token, flash }) {
   const colorInputs = (e) => {
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
@@ -24,31 +25,16 @@ function Login(props) {
           </g>
         </svg>
         <h1>Log in to Twitter</h1>
-        <div className="flash-msg">{props.flash}</div>
+        {flash.alert && <div className="flash-alert">{flash.alert}</div>}
+        {flash.notice && <div className="flash-notice">{flash.notice}</div>}
       </div>
-      <form id="login-form" action="/sessions" method="post">
+      <form id="login-form" action="/users/sign_in" method="post">
         <input
           type="hidden"
           name="authenticity_token"
-          value={props.authenticity_token}></input>
-        <div id="login-username">
-          <input
-            type="text"
-            name="username"
-            id="username"
-            defaultValue="guest"
-            onFocus={colorInputs}
-            onBlur={decolorInputs}></input>
-        </div>
-        <div id="login-password">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            defaultValue="password123"
-            onFocus={colorInputs}
-            onBlur={decolorInputs}></input>
-        </div>
+          value={authenticity_token}></input>
+        <FormInput id={"login-username"} inputName={"user[login]"} />
+        <FormInput id={"login-password"} inputName={"user[password]"} />
         <div id="login-submit">
           <input
             type="submit"
@@ -58,8 +44,7 @@ function Login(props) {
             data-disable-with="Log in"></input>
         </div>
         <div id="login-options">
-          {/* onClick signup modal, name, email, date of birth, NEXT choose a handle, username, and password i guess*/}
-          <a>
+          <a href="/users/sign_up">
             <span> Sign up for Twitter</span>
           </a>
         </div>
@@ -67,10 +52,10 @@ function Login(props) {
     </div>
   );
 }
-
 Login.propTypes = {
   authenticity_token: PropTypes.string,
-  flash: PropTypes.string,
+  flash: PropTypes.object,
+  toggleModal: PropTypes.func,
 };
 
 export default Login;

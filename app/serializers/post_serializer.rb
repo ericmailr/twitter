@@ -1,7 +1,8 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :user 
-  attribute :tweet, if: :tweet?
+  attributes :id, :updated_at, :user, :tweet 
   
-  def tweet?
+  def user
+    return UserSerializer.new(object.user)
   end
+
 end

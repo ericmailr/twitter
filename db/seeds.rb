@@ -36,17 +36,6 @@ tweets = Tweet.create!([
     {content: "i'm full", user_id: users[1].id},
     {content: "i'm angry about politics!", user_id: users[2].id},
     {content: "the other side is dumb", user_id: users[2].id},
-    #{content: "Eric Miller might be the greatest web developer on the planet.", user_id: users[5].id},
-    #{content: "Just offered Eric Miller a position on our webdev team, $2mil / year. He's that good. Hope he accepts.", user_id: users[6].id},
-    #content: "This Eric Miller fella is a straight shooter.", user_id: users[7].id},
-    #{content: "Just ate a burrito. 10/10. Just like Eric Miller", user_id: users[5].id},
-    #{content: "Imagine if you had bought Gamestop at like 25 bucks a share. Guess what, you don't have to. Hire Eric Miller, you'll see similar returns", user_id: users[7].id},
-    #{content: "Have feedback on Eric's Twitter Clone or another project? He'd love to hear! Leave it below... or anywhere on this site.", user_id: users[6].id},
-    #{content: "Spent the day with my family and friends at Disneyland. Wish I had just spent it making websites with Eric Miller instead.", user_id: users[7].id},
-    #{content: "Achieved Enlightenment today. All I did was go to one of Eric Miller's websites. Kinda cool.", user_id: users[7].id},
-    #{content: "Profits for our company went up 234230% after hiring Eric Miller. Not bad.", user_id: users[5].id},
-    #{content: "Hmmm. Maye I should hire Eric Miller... Yes, I think I will.", user_id: users[4].id}
-    #
     {content: "Check out the webdev curriculum I finished at https://www.theodinproject.com/paths", user_id: users[3].id},
     {content: "Just ate a burrito. 10/10.", user_id: users[6].id},
     {content: "This Eric Miller fella is a straight shooter.", user_id: users[7].id},

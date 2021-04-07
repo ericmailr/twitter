@@ -1,1 +1,1 @@
-<%= react_component("FollowList", {followers: @followers, followed_users: @followed_users, followers_user_follows: @followers_user_follows, user: @user, follow_type: @follow_type}) %>
+<%= react_component("App", {mainContentType: "Profile", current_user: UserSerializer.new(current_user), content: @content, user: UserSerializer.new(@user), contentType: @content_type, followable_users: get_followable_users()} ) %>

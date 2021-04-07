@@ -21,6 +21,10 @@ module ApplicationHelper
     def tweet_updated_at_formatted_full(date)
        date.strftime("%l:%M %p · %b %e, %Y") 
     end
+    
+    def get_followable_users()
+        User.followable_users(current_user).order('RANDOM()').limit(3).map {|user| UserSerializer.new(user)}
+    end
 
-
+    module_function(:tweet_updated_at_formatted_brief, :tweet_updated_at_formatted_full)
 end

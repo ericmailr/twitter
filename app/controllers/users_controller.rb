@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
     include ApplicationHelper
+    before_action :authenticate_user!, only: :show
+=begin
     def new
         @user = User.new
     end
@@ -14,47 +16,43 @@ class UsersController < ApplicationController
             redirect_to signup_path
         end
     end
+=end
 
     def show
+        @main_content_type = "Profile"
         @user = User.find_by!(handle: params[:handle])
-        @tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
-        @posts = @tweets.sort_by(&:updated_at).reverse.to_a
-        @post_types = params[:post_types]
-        
-        parents_already_posted = []
-        @posts.map! do |post|
-            postHash = {:postType => post.class.name.downcase, :updatedAt => tweet_updated_at_formatted_brief(post.updated_at)}
-            if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name) 
-                if parents_already_posted.include?(post.tweet)
-                    postHash = nil
-                else
-                    postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)  
-                    postHash[:post] = LikeSerializer.new(post)
-                    postHash[:isLiked] = post.tweet.likers.include?(current_user)
-                    postHash[:isRetweeted] = post.tweet.retweeters.include?(current_user)
-                    parents_already_posted << post.tweet
-                end
-            elsif parents_already_posted.include?(post.parent) || parents_already_posted.include?(post)
-                postHash = nil
-            else
-                postHash[:post] = TweetSerializer.new(post)
-                postHash[:isLiked] = post.likers.include?(current_user)
-                postHash[:isRetweeted] = post.retweeters.include?(current_user)
-                if post.parent
-                    parents_already_posted << post.parent
+        @content_type = params[:content_type]
+        tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
+        posts = tweets.sort_by(&:updated_at).reverse.to_a
+        already_included, tweets, with_replies, likes = [], [], [], []
+        posts.each do |post|
+            postHash = {postType: post.class.name.downcase}
+            if post.class.name == "Tweet"
+                if post.parent && !already_included.include?(post.parent)
                     postHash[:parent] = TweetSerializer.new(post.parent)
-                    postHash[:parentUpdatedAt] = tweet_updated_at_formatted_brief(post.parent.updated_at)
-                    postHash[:isParentLiked] = post.parent.likers.include?(current_user)
-                    postHash[:isParentRetweeted] = post.parent.retweeters.include?(current_user)
-                    postHash[:postType] = "reply"
+                    postHash[:post] = TweetSerializer.new(post)
+                    postHash[:postType] = 'reply'
+                    with_replies << postHash
+                    already_included << post.parent
+                elsif !post.parent && !already_included.include?(post)
+                    postHash[:post] = TweetSerializer.new(post)
+                    tweets << postHash
+                    with_replies << postHash
+                    already_included << post
+                end
+            elsif ["Retweet", "QuoteTweet", "Like"].include?(post.class.name) && !already_included.include?(post.tweet)
+                postHash[:post] = PostSerializer.new(post)
+                postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)
+                if post.class.name == "Like"
+                    likes << postHash
+                else
+                    tweets << postHash
+                    with_replies << postHash
+                    already_included << post
                 end
             end
-            if ["Like", "Retweet", "QuoteTweet"].include?(post.class.name)
-               # postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)  
-            end
-            postHash
-       end.compact!
-     #  render component: "Profile", prerender: false, props: { posts: @posts, user: UserSerializer.new(@user), user_created_at: date_formatted(@user.created_at) } 
+       end
+       @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
     end
 
     private

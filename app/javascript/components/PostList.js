@@ -1,31 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PostWrapper from "./PostWrapper";
-import SuggestedFollow from "./SuggestedFollow";
-//rename MainList?
+import PostWrapper from "./posts/PostWrapper";
+import SuggestedFollow from "./discover/SuggestedFollow";
 
-function PostList(props) {
+function PostList({ posts, contentType, toggleModal }) {
   return (
     <React.Fragment>
-      {props.posts.map((postHash) => {
+      {posts.map((postHash) => {
         if (postHash.postType === "reply") {
           return (
-            <React.Fragment key={postHash.parent.id}>
+            <React.Fragment key={postHash.post.id}>
               <PostWrapper
                 tweet={postHash.parent}
-                updatedAt={postHash.parentUpdatedAt}
+                updatedAt={postHash.parent.updated_at_brief}
                 user={postHash.post.user}
-                isLiked={postHash.isParentLiked}
-                isRetweeted={postHash.isParentRetweeted}
-                actionHeader={"reply"}
+                actionHeader={contentType === "with_replies" ? "" : "reply"}
                 postType={"reply-parent"}
+                toggleModal={toggleModal}
               />
               <PostWrapper
                 tweet={postHash.post}
-                updatedAt={postHash.updatedAt}
-                isLiked={postHash.isLiked}
-                isRetweeted={postHash.isRetweeted}
+                updatedAt={postHash.post.updated_at_brief}
                 postType={"reply"}
+                toggleModal={toggleModal}
               />
             </React.Fragment>
           );
@@ -38,20 +35,21 @@ function PostList(props) {
             <PostWrapper
               key={postHash.post.id}
               tweet={
-                postHash.postType != "tweet"
-                  ? postHash.quoted_tweet
-                  : postHash.post
+                postHash.quoted_tweet ? postHash.quoted_tweet : postHash.post
               }
               user={postHash.post.user}
-              updatedAt={postHash.updatedAt}
-              isLiked={postHash.isLiked}
-              isRetweeted={postHash.isRetweeted}
+              updatedAt={
+                postHash.quoted_tweet
+                  ? postHash.quoted_tweet.updated_at_brief
+                  : postHash.post.updated_at_brief
+              }
               actionHeader={
-                !["tweet", "like"].includes(postHash.postType)
+                !["tweet"].includes(postHash.postType)
                   ? postHash.postType
                   : null
               }
               postType={postHash.postType}
+              toggleModal={toggleModal}
             />
           );
         }
@@ -62,6 +60,8 @@ function PostList(props) {
 
 PostList.propTypes = {
   posts: PropTypes.array,
+  contentType: PropTypes.string,
+  toggleModal: PropTypes.func,
 };
 
 export default PostList;

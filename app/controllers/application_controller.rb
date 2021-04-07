@@ -1,14 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  #helper_method makes current_user method available for use in view/
-  helper_method :current_user
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def current_user
-    if session[:user_id]
-      @current_user ||= User.find(session[:user_id])
-    else
-      @current_user = nil
-    end
+# devise redirect to new session on sign_out
+def after_sign_out_path_for(resource)
+ session_path(resource)
+end
+
+  protected
+
+  def configure_permitted_parameters
+    added_attrs = [:username, :email, :password, :password_confirmation, :remember_me]
+    devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
+    devise_parameter_sanitizer.permit :sign_in, keys: [:login, :password]
+    devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 
 end
