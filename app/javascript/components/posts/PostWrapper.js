@@ -10,18 +10,21 @@ function PostWrapper(props) {
 
   const [likeState, setLikeState] = useState([]);
   const [retweetState, setRetweetState] = useState([]);
-  useEffect(async () => {
-    let msg = await fetch(`/tweets/${props.tweet.id}`);
-    let json = await msg.json();
-    // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
-    setLikeState({
-      likesCount: json.likesCount,
-      isLiked: json.isLiked,
-    });
-    setRetweetState({
-      retweetsCount: json.retweetsCount,
-      isRetweeted: json.isRetweeted,
-    });
+  useEffect(() => {
+    const getTweetState = async () => {
+      let msg = await fetch(`/tweets/${props.tweet.id}`);
+      let json = await msg.json();
+      // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
+      setLikeState({
+        likesCount: json.likesCount,
+        isLiked: json.isLiked,
+      });
+      setRetweetState({
+        retweetsCount: json.retweetsCount,
+        isRetweeted: json.isRetweeted,
+      });
+    };
+    getTweetState();
   }, []);
 
   const toggleLike = async (e) => {
