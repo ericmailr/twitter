@@ -31,7 +31,9 @@ Eric Miller
 
 ## My todo list
 
-- Add signup
+- Liking and Retweeting seems to update slower now that I've moved async inside a function within useEffect... but only on Heroku deploy, not locally... not sure why yet.
+
+- Finish Signup form with Devise
 
 - RSpec
 
