@@ -9,7 +9,7 @@
 users = User.create!([
     {username: "douginator", handle: "doug", email: "doug@mail.com", password: "password"}, 
     {username: "cindy500", handle: "cindy", email: "cindy@mail.com", password: "password"},
-    {username: "fatmatt", handle: "matt", email: "matt@mail.com", password: "password"},
+    {username: "thatmatt", handle: "matt", email: "matt@mail.com", password: "password"},
     {username: "Eric Miller", handle: "eric", email: "eric@mail.com", password: "password"},
     {username: "guest", handle: "hiring_team", email: "recruiter@mail.com", password: "password123"},
     {username: "google_webdev", handle: "dont_be_evil", email: "google@mail.com", password: "password"},
@@ -41,7 +41,7 @@ tweets = Tweet.create!([
     {content: "This Eric Miller fella is a straight shooter.", user_id: users[7].id},
     {content: "Looking into Single Table Inheritance and Delegated Types with Rails right now.", user_id: users[5].id},
     {content: "Have a good day everyone!", user_id: users[7].id},
-    {content: "Have feedback on my Twitter Clone or another project? He'd love to hear! Leave it below... or anywhere on this site.", user_id: users[3].id},
+    {content: "Have feedback on my Twitter Clone or another project? I'd love to hear! Leave it below... or anywhere on this site.", user_id: users[3].id},
     {content: "Spent the day with my family and friends at Disneyland. Wish I had just spent it making websites with Eric Miller instead.", user_id: users[7].id},
     {content: "Check out this etch-a-sketch javascript app I made: https://ericmailr.github.io/etchsketch/", user_id: users[3].id},
     {content: "One step at a time.", user_id: users[5].id},
