@@ -29,29 +29,28 @@ Follow.create!([
 ])
 
 tweets = Tweet.create!([
-    {content: "my day is bad", user_id: users[0].id},
+    {content: "my day is good", user_id: users[0].id},
     {content: "lost my wallet", user_id: users[0].id},
-    {content: "my left foot exploded", user_id: users[0].id},
+    {content: "okay", user_id: users[0].id},
     {content: "my food is good", user_id: users[1].id},
     {content: "i'm full", user_id: users[1].id},
     {content: "i'm angry about politics!", user_id: users[2].id},
-    {content: "the other side is dumb", user_id: users[2].id},
+    {content: "hello", user_id: users[2].id},
     {content: "Check out the webdev curriculum I finished at https://www.theodinproject.com/paths", user_id: users[3].id},
     {content: "Just ate a burrito. 10/10.", user_id: users[6].id},
     {content: "This Eric Miller fella is a straight shooter.", user_id: users[7].id},
-    {content: "Looking into Single Table Inheritance and Delegated Types with Rails right now.", user_id: users[5].id},
+    {content: "Looked into Single Table Inheritance and Delegated Types with Rails... weeks ago.", user_id: users[5].id},
     {content: "Have a good day everyone!", user_id: users[7].id},
     {content: "Have feedback on my Twitter Clone or another project? I'd love to hear! Leave it below... or anywhere on this site.", user_id: users[3].id},
     {content: "Spent the day with my family and friends at Disneyland. Wish I had just spent it making websites with Eric Miller instead.", user_id: users[7].id},
     {content: "Check out this etch-a-sketch javascript app I made: https://ericmailr.github.io/etchsketch/", user_id: users[3].id},
     {content: "One step at a time.", user_id: users[5].id},
-    {content: "Hmmm. Maye I should hire Eric Miller... Yes, I think I will.", user_id: users[4].id}
 
 ])
 
 tweet_comments = Tweet.create!([
-    {content: "your day is always bad", user_id: users[1].id, parent: tweets[0]},
-    {content: "sorry about your day, doug", user_id: users[2].id, parent: tweets[0]},
+    {content: "your day is good", user_id: users[1].id, parent: tweets[0]},
+    {content: "good day, doug", user_id: users[2].id, parent: tweets[0]},
     {content: "i stole it", user_id: users[2].id, parent: tweets[1]},
     {content: "like, real angry!", user_id: users[2].id, parent: tweets[5]}
 ])
