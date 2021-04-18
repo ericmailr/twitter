@@ -7,7 +7,7 @@ Eric Miller
 [Try it out here](https://twitter-clone-ericmiller.herokuapp.com/)
 
 - Guest login: Username: guest, Password: password123
-- Ruby version: 2.7.0p0
+- Ruby version: 2.7.3
 - Database: postgresql
 
 ## Implemented Features
