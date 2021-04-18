@@ -31,7 +31,7 @@ Eric Miller
 
 ## My todo list
 
-- Liking and Retweeting seems to update slower now that I've moved async inside a function within useEffect... but only on Heroku deploy, not locally... not sure why yet.
+- Edit: now it's fine. Something with Heroku? Liking and Retweeting seems to update slower now that I've moved async inside a function within useEffect... but only on Heroku deploy, not locally... not sure why yet.
 
 - Finish Signup form with Devise
 
