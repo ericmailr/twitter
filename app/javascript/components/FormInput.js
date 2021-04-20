@@ -9,6 +9,8 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
     setSignupFieldValue(fieldName, e.currentTarget.value);
   };
 
+  // This component... do I need it?
+
   const getInputComponent = () => {
     switch (id) {
       case "login-username":
@@ -26,6 +28,30 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
             name="user[password]"
             id="password"
             defaultValue="password123"></input>
+        );
+      case "signup-handle":
+        return (
+          <input
+            type="text"
+            name="user[handle]"
+            value={signupFields.handle || ""}
+            id="signup-handle"
+            onChange={(e) =>
+              setSignupFieldValue("handle", e.currentTarget.value)
+            }
+          />
+        );
+      case "signup-username":
+        return (
+          <input
+            type="text"
+            name="user[username]"
+            value={signupFields.username || ""}
+            id="signup-username"
+            onChange={(e) =>
+              setSignupFieldValue("username", e.currentTarget.value)
+            }
+          />
         );
       case "signup-password":
         return (

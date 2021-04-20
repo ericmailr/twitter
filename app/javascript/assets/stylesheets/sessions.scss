@@ -127,7 +127,13 @@
 #signup-email::before {
   content: "Email";
 }
+#signup-username::before {
+  content: "Username";
+}
 
+#signup-handle::before {
+  content: "Handle";
+}
 #signup-password::before {
   content: "Password";
 }

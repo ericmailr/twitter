@@ -22,13 +22,12 @@ function Signup({ flash, authenticity_token }) {
     let msg = "";
     msg = await fetch("/users", {
       method: "POST",
-      //handle and username can't be blank
       body: JSON.stringify({
         authenticity_token: authenticity_token,
         user: {
           name: signupFields.name,
-          username: "madeup",
-          handle: "madeuphandle",
+          username: signupFields.username,
+          handle: signupFields.handle,
           email: signupFields.email,
           password: signupFields.password,
           password_confirmation: signupFields.password_confirmation,
@@ -134,6 +133,19 @@ function Signup({ flash, authenticity_token }) {
                 {flash.notice && (
                   <div className="flash-notice">{flash.notice}</div>
                 )}
+                <FormInput
+                  id={"signup-username"}
+                  inputName={"username"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
+                />
+                <FormInput
+                  id={"signup-handle"}
+                  inputName={"handle"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
+                />
+
                 <FormInput
                   id={"signup-password"}
                   inputName={"password"}
