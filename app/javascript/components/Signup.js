@@ -4,7 +4,47 @@ import Button from "./Button";
 import FormInput from "./FormInput";
 
 function Signup({ flash, authenticity_token }) {
+  const csrf = document
+    .querySelector("meta[name='csrf-token']")
+    .getAttribute("content");
+
   const [formPart, setFormPart] = useState(1);
+  // useState for name, email, bday{month, day, year}, password, confirm password
+  const [signupFields, setSignupFields] = useState({});
+
+  const setSignupFieldValue = (fieldName, fieldValue) => {
+    // switch case with validation checks
+    // ACTUALLY, just do validation checks in onChange in FormInput
+    setSignupFields({ ...signupFields, [fieldName]: fieldValue });
+  };
+
+  const submitSignupForm = async () => {
+    let msg = "";
+    msg = await fetch("/users", {
+      method: "POST",
+      //handle and username can't be blank
+      body: JSON.stringify({
+        authenticity_token: authenticity_token,
+        user: {
+          name: signupFields.name,
+          username: "madeup",
+          handle: "madeuphandle",
+          email: signupFields.email,
+          password: signupFields.password,
+          password_confirmation: signupFields.password_confirmation,
+        },
+        commit: "Sign up",
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrf,
+      },
+    });
+    let json = await msg.json();
+    console.log(JSON.stringify(json));
+  };
+
   return (
     <div className="form-container">
       <div className="form">
@@ -19,9 +59,13 @@ function Signup({ flash, authenticity_token }) {
           </svg>
           <div className="signup-form-header-subcontainer">
             {formPart === 1 ? (
-              <Button buttonText={"Next"} clickAction={setFormPart} />
+              <Button buttonText={"Next"} clickAction={() => setFormPart(2)} />
             ) : (
-              <Button buttonText={"Sign up!"} clickAction={setFormPart} />
+              <Button
+                buttonText={"Sign up!"}
+                type="submit"
+                clickAction={submitSignupForm}
+              />
             )}
           </div>
         </div>
@@ -29,6 +73,7 @@ function Signup({ flash, authenticity_token }) {
           <form id="signup-form" action="/users" method="post">
             {formPart === 1 ? (
               <React.Fragment>
+                <div>{JSON.stringify(signupFields)}</div>
                 <h1>Create your account</h1>
                 {flash.alert && (
                   <div className="flash-alert">{flash.alert}</div>
@@ -36,8 +81,18 @@ function Signup({ flash, authenticity_token }) {
                 {flash.notice && (
                   <div className="flash-notice">{flash.notice}</div>
                 )}
-                <FormInput id={"signup-name"} inputName={"name"} />
-                <FormInput id={"signup-email"} inputName={"email"} />
+                <FormInput
+                  id={"signup-name"}
+                  inputName={"name"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
+                />
+                <FormInput
+                  id={"signup-email"}
+                  inputName={"email"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
+                />
                 <div className="signup-birthday-container">
                   <div className="signup-birthday-label">
                     <h4>Date of birth</h4>
@@ -48,14 +103,30 @@ function Signup({ flash, authenticity_token }) {
                     </div>
                   </div>
                   <div className="birthday-input-container">
-                    <FormInput id={"birthday-month"} inputName={"month"} />
-                    <FormInput id={"birthday-day"} inputName={"day"} />
-                    <FormInput id={"birthday-year"} inputName={"year"} />
+                    <FormInput
+                      id={"birthday-month"}
+                      inputName={"month"}
+                      setSignupFieldValue={setSignupFieldValue}
+                      signupFields={signupFields}
+                    />
+                    <FormInput
+                      id={"birthday-day"}
+                      inputName={"day"}
+                      setSignupFieldValue={setSignupFieldValue}
+                      signupFields={signupFields}
+                    />
+                    <FormInput
+                      id={"birthday-year"}
+                      inputName={"year"}
+                      setSignupFieldValue={setSignupFieldValue}
+                      signupFields={signupFields}
+                    />
                   </div>
                 </div>
               </React.Fragment>
             ) : (
               <React.Fragment>
+                <div>{JSON.stringify(signupFields)}</div>
                 <h1>Choose a password</h1>
                 {flash.alert && (
                   <div className="flash-alert">{flash.alert}</div>
@@ -63,10 +134,17 @@ function Signup({ flash, authenticity_token }) {
                 {flash.notice && (
                   <div className="flash-notice">{flash.notice}</div>
                 )}
-                <FormInput id={"signup-password"} inputName={"password"} />
+                <FormInput
+                  id={"signup-password"}
+                  inputName={"password"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
+                />
                 <FormInput
                   id={"signup-password-confirmation"}
                   inputName={"password-confirmation"}
+                  setSignupFieldValue={setSignupFieldValue}
+                  signupFields={signupFields}
                 />
               </React.Fragment>
             )}

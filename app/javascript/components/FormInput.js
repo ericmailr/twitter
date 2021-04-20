@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import PropTypes from "prop-types";
 
-function FormInput({ id, inputName }) {
+function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
   const [inputClassHash, setInputClassHash] = useState({});
+
+  const handleInputChange = (e, fieldName) => {
+    setSignupFieldValue(fieldName, e.currentTarget.value);
+  };
+
   const getInputComponent = () => {
     switch (id) {
       case "login-username":
@@ -14,7 +19,6 @@ function FormInput({ id, inputName }) {
             id="username"
             defaultValue="guest"></input>
         );
-        break;
       case "login-password":
         return (
           <input
@@ -23,38 +27,81 @@ function FormInput({ id, inputName }) {
             id="password"
             defaultValue="password123"></input>
         );
-        break;
       case "signup-password":
         return (
           <input
             type="password"
+            value={signupFields.password || ""}
             name="signup-password"
-            id="signup-password"></input>
+            id="signup-password"
+            onChange={(e) =>
+              setSignupFieldValue("password", e.currentTarget.value)
+            }></input>
         );
-        break;
       case "signup-password-confirmation":
         return (
           <input
             type="password"
+            value={signupFields.password_confirmation || ""}
             name="signup-password-confirmation"
-            id="signup-password-confirmation"></input>
+            id="signup-password-confirmation"
+            onChange={(e) =>
+              setSignupFieldValue(
+                "password_confirmation",
+                e.currentTarget.value
+              )
+            }></input>
         );
-        break;
       case "signup-name":
-        return <input type="text" name="name" id="name"></input>;
-        break;
+        return (
+          <input
+            type="text"
+            value={signupFields.name || ""}
+            name="name"
+            id="name"
+            onChange={(e) =>
+              setSignupFieldValue("name", e.currentTarget.value)
+            }></input>
+        );
       case "signup-email":
-        return <input type="email" name="email" id="email"></input>;
-        break;
+        return (
+          <input
+            type="email"
+            value={signupFields.email || ""}
+            name="email"
+            id="email"
+            onChange={(e) =>
+              setSignupFieldValue("email", e.currentTarget.value)
+            }></input>
+        );
       case "birthday-month":
-        return <MonthPicker onChange={(month) => {}} />;
-        break;
+        return (
+          <MonthPicker
+            value={signupFields.birthMonth || ""}
+            onChange={(birthMonth) => {
+              setSignupFieldValue("birthMonth", birthMonth);
+            }}
+          />
+        );
       case "birthday-day":
-        return <DayPicker onChange={(day) => {}} />;
-        break;
+        return (
+          <DayPicker
+            value={signupFields.birthDay || ""}
+            onChange={(birthDay) => {
+              setSignupFieldValue("birthDay", birthDay);
+            }}
+          />
+        );
       case "birthday-year":
-        return <YearPicker reverse onChange={(year) => {}} />;
-        break;
+        return (
+          <YearPicker
+            reverse
+            value={signupFields.birthYear || ""}
+            onChange={(birthYear) => {
+              setSignupFieldValue("birthYear", birthYear);
+            }}
+          />
+        );
       default:
         null;
     }
@@ -80,6 +127,8 @@ function FormInput({ id, inputName }) {
 FormInput.propTypes = {
   id: PropTypes.string,
   inputName: PropTypes.string,
+  setSignupFieldValue: PropTypes.func,
+  signupFields: PropTypes.object,
 };
 
 export default FormInput;

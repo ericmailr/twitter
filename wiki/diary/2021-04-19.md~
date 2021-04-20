@@ -1,0 +1,8 @@
+## REACT: is it against best practice to pass a function that changes a value down to a child class
+
+- Did a little googling, I think it's okay?
+
+https://stackoverflow.com/questions/47012169/a-component-is-changing-an-uncontrolled-input-of-type-text-to-be-controlled-erro
+
+Got warning that react component was switching from uncontrolled to controlled. This is because my state value for the input field started at as undefined, which apparently makes the component uncontrolled. 
+Solution: set to "" either in useState or in input value attribute (i.e. value = {fieldValue || ''}
