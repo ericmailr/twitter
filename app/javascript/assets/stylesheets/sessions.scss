@@ -96,8 +96,13 @@
   min-height: 70px;
 }
 
+.input-error {
+  color: $error-red;
+  border-color: $error-red;
+}
+
 .input-with-label::before {
-  color: $secondary-text-color;
+  color: inherit;
   font-size: 14px;
   position: absolute;
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ buttonText, clickAction }) {
+function Button({ buttonText, clickAction, buttonClasses }) {
   return (
     <div className="button-container">
       <div className="submit-button-spacer"></div>
       <div
-        className="submit-button"
+        className={buttonClasses}
         onClick={() => {
           clickAction(2);
         }}>

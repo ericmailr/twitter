@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import FormInput from "./FormInput";
@@ -9,14 +9,210 @@ function Signup({ flash, authenticity_token }) {
     .getAttribute("content");
 
   const [formPart, setFormPart] = useState(1);
-  // useState for name, email, bday{month, day, year}, password, confirm password
+
+  // useState for name, email, bday{month, day, year}, username, handle, password, confirm password
   const [signupFields, setSignupFields] = useState({});
 
+  const [inputValidationMessages, setInputValidationMessages] = useState({
+    name: "",
+    email: "",
+    birthMonth: "",
+    birthDay: "",
+    birthYear: "",
+    username: "",
+    handle: "",
+    password: "",
+    password_confirmation: "",
+  });
+
   const setSignupFieldValue = (fieldName, fieldValue) => {
-    // switch case with validation checks
-    // ACTUALLY, just do validation checks in onChange in FormInput
     setSignupFields({ ...signupFields, [fieldName]: fieldValue });
   };
+
+  const [nextButtonClasses, setNextButtonClasses] = useState(
+    "submit-button unsubmittable-button"
+  );
+
+  const updateNextButtonClasses = () => {};
+
+  useEffect(() => {
+    let isFormPage1Ready = true;
+    if (
+      inputValidationMessages.name !== null ||
+      inputValidationMessages.email !== null ||
+      inputValidationMessages.birthMonth !== null ||
+      inputValidationMessages.birthDay !== null ||
+      inputValidationMessages.birthYear !== null
+    ) {
+      isFormPage1Ready = false;
+      setNextButtonClasses("submit-button unsubmittable-button");
+    } else {
+      if (isFormPage1Ready) {
+        setNextButtonClasses(
+          "submit-button submittable-button reply-color-background-hover"
+        );
+      }
+    }
+  }, [inputValidationMessages]);
+
+  useEffect(() => {
+    if (signupFields.name !== undefined && signupFields.name.length < 1) {
+      console.log("inside");
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          name: "What's your name?",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          name: null,
+        };
+      });
+    }
+  }, [signupFields.name]);
+
+  useEffect(() => {
+    if (
+      signupFields.email !== undefined &&
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        signupFields.email
+      )
+    ) {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          email: "Email is invalid.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...inputValidationMessages,
+          email: null,
+        };
+      });
+    }
+  }, [signupFields.email]);
+
+  useEffect(() => {
+    if (
+      signupFields.birthMonth !== undefined &&
+      signupFields.birthMonth === ""
+    ) {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthMonth: "Please select a birth month.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthMonth: null,
+        };
+      });
+    }
+  }, [signupFields.birthMonth]);
+
+  useEffect(() => {
+    if (signupFields.birthDay !== undefined && signupFields.birthDay === "") {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthDay: "Please select a birth day.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthDay: null,
+        };
+      });
+    }
+  }, [signupFields.birthDay]);
+
+  useEffect(() => {
+    if (signupFields.birthYear !== undefined && signupFields.birthYear === "") {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthYear: "Please select a birth year.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          birthYear: null,
+        };
+      });
+    }
+  }, [signupFields.birthYear]);
+
+  useEffect(() => {
+    if (
+      signupFields.username !== undefined &&
+      signupFields.username.length < 2
+    ) {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          username: "Username must be at least 2 characters.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...setInputValidationMessages,
+          username: null,
+        };
+      });
+    }
+  }, [signupFields.username]);
+
+  useEffect(() => {
+    if (signupFields.handle !== undefined && signupFields.handle.length < 2) {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          handle: "Your handle must be at least 2 characters.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          handle: null,
+        };
+      });
+    }
+  }, [signupFields.handle]);
+
+  useEffect(() => {
+    if (
+      signupFields.password !== undefined &&
+      signupFields.password.length < 6
+    ) {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          password: "Your password must be at least 6 characters.",
+        };
+      });
+    } else {
+      setInputValidationMessages((prevInputValidationMessages) => {
+        return {
+          ...prevInputValidationMessages,
+          password: null,
+        };
+      });
+    }
+  }, [signupFields.password]);
 
   const submitSignupForm = async () => {
     let msg = "";
@@ -41,6 +237,7 @@ function Signup({ flash, authenticity_token }) {
       },
     });
     let json = await msg.json();
+    // display the errors / validation messages
     console.log(JSON.stringify(json));
   };
 
@@ -58,7 +255,11 @@ function Signup({ flash, authenticity_token }) {
           </svg>
           <div className="signup-form-header-subcontainer">
             {formPart === 1 ? (
-              <Button buttonText={"Next"} clickAction={() => setFormPart(2)} />
+              <Button
+                buttonText={"Next"}
+                buttonClasses={nextButtonClasses}
+                clickAction={() => setFormPart(2)}
+              />
             ) : (
               <Button
                 buttonText={"Sign up!"}
@@ -72,7 +273,6 @@ function Signup({ flash, authenticity_token }) {
           <form id="signup-form" action="/users" method="post">
             {formPart === 1 ? (
               <React.Fragment>
-                <div>{JSON.stringify(signupFields)}</div>
                 <h1>Create your account</h1>
                 {flash.alert && (
                   <div className="flash-alert">{flash.alert}</div>
@@ -85,12 +285,14 @@ function Signup({ flash, authenticity_token }) {
                   inputName={"name"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={inputValidationMessages.name}
                 />
                 <FormInput
                   id={"signup-email"}
                   inputName={"email"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={inputValidationMessages.email}
                 />
                 <div className="signup-birthday-container">
                   <div className="signup-birthday-label">
@@ -107,56 +309,67 @@ function Signup({ flash, authenticity_token }) {
                       inputName={"month"}
                       setSignupFieldValue={setSignupFieldValue}
                       signupFields={signupFields}
+                      inputValidationMessage={
+                        inputValidationMessages.birthMonth
+                      }
                     />
                     <FormInput
                       id={"birthday-day"}
                       inputName={"day"}
                       setSignupFieldValue={setSignupFieldValue}
                       signupFields={signupFields}
+                      inputValidationMessage={inputValidationMessages.birthDay}
                     />
                     <FormInput
                       id={"birthday-year"}
                       inputName={"year"}
                       setSignupFieldValue={setSignupFieldValue}
                       signupFields={signupFields}
+                      inputValidationMessage={inputValidationMessages.birthYear}
                     />
                   </div>
                 </div>
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <div>{JSON.stringify(signupFields)}</div>
-                <h1>Choose a password</h1>
                 {flash.alert && (
                   <div className="flash-alert">{flash.alert}</div>
                 )}
                 {flash.notice && (
                   <div className="flash-notice">{flash.notice}</div>
                 )}
+                <h1>Choose a Username</h1>
                 <FormInput
                   id={"signup-username"}
                   inputName={"username"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={inputValidationMessages.username}
                 />
+                <h1>Choose a Handle</h1>
                 <FormInput
                   id={"signup-handle"}
                   inputName={"handle"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={inputValidationMessages.handle}
                 />
-
+                <h1>Choose a password</h1>
                 <FormInput
                   id={"signup-password"}
                   inputName={"password"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={inputValidationMessages.password}
                 />
                 <FormInput
                   id={"signup-password-confirmation"}
                   inputName={"password-confirmation"}
                   setSignupFieldValue={setSignupFieldValue}
                   signupFields={signupFields}
+                  inputValidationMessage={
+                    inputValidationMessages.password_confirmation
+                  }
                 />
               </React.Fragment>
             )}

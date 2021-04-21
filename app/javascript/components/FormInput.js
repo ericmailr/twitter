@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { YearPicker, MonthPicker, DayPicker } from "react-dropdown-date";
 import PropTypes from "prop-types";
 
-function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
+function FormInput({
+  id,
+  inputName,
+  setSignupFieldValue,
+  signupFields,
+  inputValidationMessage,
+}) {
   const [inputClassHash, setInputClassHash] = useState({});
-
   const handleInputChange = (e, fieldName) => {
     setSignupFieldValue(fieldName, e.currentTarget.value);
   };
@@ -19,7 +24,8 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
             type="text"
             name="user[login]"
             id="username"
-            defaultValue="guest"></input>
+            defaultValue="guest"
+          />
         );
       case "login-password":
         return (
@@ -27,8 +33,67 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
             type="password"
             name="user[password]"
             id="password"
-            defaultValue="password123"></input>
+            defaultValue="password123"
+          />
         );
+      case "signup-name":
+        return (
+          <input
+            type="text"
+            value={signupFields.name || ""}
+            name="name"
+            id={id}
+            className={
+              inputValidationMessage && inputValidationMessage.length > 0
+                ? "input-error"
+                : ""
+            }
+            onChange={(e) => {
+              setSignupFieldValue("name", e.currentTarget.value);
+            }}
+          />
+        );
+      case "signup-email":
+        return (
+          <input
+            type="email"
+            value={signupFields.email || ""}
+            name="email"
+            id="email"
+            onChange={(e) =>
+              setSignupFieldValue("email", e.currentTarget.value)
+            }
+          />
+        );
+      case "birthday-month":
+        return (
+          <MonthPicker
+            value={signupFields.birthMonth || ""}
+            onChange={(birthMonth) => {
+              setSignupFieldValue("birthMonth", birthMonth);
+            }}
+          />
+        );
+      case "birthday-day":
+        return (
+          <DayPicker
+            value={signupFields.birthDay || ""}
+            onChange={(birthDay) => {
+              setSignupFieldValue("birthDay", birthDay);
+            }}
+          />
+        );
+      case "birthday-year":
+        return (
+          <YearPicker
+            reverse
+            value={signupFields.birthYear || ""}
+            onChange={(birthYear) => {
+              setSignupFieldValue("birthYear", birthYear);
+            }}
+          />
+        );
+
       case "signup-handle":
         return (
           <input
@@ -62,7 +127,8 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
             id="signup-password"
             onChange={(e) =>
               setSignupFieldValue("password", e.currentTarget.value)
-            }></input>
+            }
+          />
         );
       case "signup-password-confirmation":
         return (
@@ -76,56 +142,7 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
                 "password_confirmation",
                 e.currentTarget.value
               )
-            }></input>
-        );
-      case "signup-name":
-        return (
-          <input
-            type="text"
-            value={signupFields.name || ""}
-            name="name"
-            id="name"
-            onChange={(e) =>
-              setSignupFieldValue("name", e.currentTarget.value)
-            }></input>
-        );
-      case "signup-email":
-        return (
-          <input
-            type="email"
-            value={signupFields.email || ""}
-            name="email"
-            id="email"
-            onChange={(e) =>
-              setSignupFieldValue("email", e.currentTarget.value)
-            }></input>
-        );
-      case "birthday-month":
-        return (
-          <MonthPicker
-            value={signupFields.birthMonth || ""}
-            onChange={(birthMonth) => {
-              setSignupFieldValue("birthMonth", birthMonth);
-            }}
-          />
-        );
-      case "birthday-day":
-        return (
-          <DayPicker
-            value={signupFields.birthDay || ""}
-            onChange={(birthDay) => {
-              setSignupFieldValue("birthDay", birthDay);
-            }}
-          />
-        );
-      case "birthday-year":
-        return (
-          <YearPicker
-            reverse
-            value={signupFields.birthYear || ""}
-            onChange={(birthYear) => {
-              setSignupFieldValue("birthYear", birthYear);
-            }}
+            }
           />
         );
       default:
@@ -133,20 +150,44 @@ function FormInput({ id, inputName, setSignupFieldValue, signupFields }) {
     }
   };
   return (
-    <div
-      id={id}
-      onFocus={() => {
-        setInputClassHash({
-          ...inputClassHash,
-          [inputName]: "focused",
-        });
-      }}
-      onBlur={() => {
-        setInputClassHash({ ...inputClassHash, [inputName]: "" });
-      }}
-      className={`input-with-label ${inputClassHash[inputName]}`}>
-      {getInputComponent()}
-    </div>
+    <>
+      <div
+        id={id}
+        onFocus={() => {
+          setInputClassHash({
+            ...inputClassHash,
+            [inputName]: inputValidationMessage
+              ? "focused input-error"
+              : "focused",
+          });
+        }}
+        onBlur={() => {
+          setInputClassHash({
+            ...inputClassHash,
+            [inputName]: inputValidationMessage ? "input-error" : "",
+          });
+        }}
+        className={`input-with-label ${inputClassHash[inputName]}`}>
+        {getInputComponent()}
+      </div>
+      <div
+        className={
+          inputValidationMessage && inputValidationMessage.length > 0
+            ? "input-error"
+            : ""
+        }
+        style={
+          inputValidationMessage && inputValidationMessage.length > 0
+            ? {
+                display: "block",
+                marginTop: "-15px",
+                marginLeft: "2px",
+              }
+            : { display: "none" }
+        }>
+        {inputValidationMessage}
+      </div>
+    </>
   );
 }
 
