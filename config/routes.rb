@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #root to: "posts#index"
   authenticated :user do
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   get "home", to: "posts#index", as: "home"
   post "tweets", to: "tweets#create"
-  #get "signup", to: "users#new", as: "signup"
+
   get "search", to: "search#index", as: "search"
   
   delete "follows/:followed_user_id", to: "follows#destroy", as: "follow"

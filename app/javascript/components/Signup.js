@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 import FormInput from "./FormInput";
@@ -25,194 +25,240 @@ function Signup({ flash, authenticity_token }) {
     password_confirmation: "",
   });
 
-  const setSignupFieldValue = (fieldName, fieldValue) => {
-    setSignupFields({ ...signupFields, [fieldName]: fieldValue });
-  };
-
   const [nextButtonClasses, setNextButtonClasses] = useState(
     "submit-button unsubmittable-button"
   );
 
-  const updateNextButtonClasses = () => {};
+  const [submitButtonClasses, setSubmitButtonClasses] = useState(
+    "submit-button unsubmittable-button"
+  );
+
+  const [isUserCreated, setIsUserCreated] = useState(false);
+
+  const setSignupFieldValue = (fieldName, fieldValue) => {
+    setSignupFields({ ...signupFields, [fieldName]: fieldValue });
+  };
+
+  const isNextButtonReady = () => {
+    return (
+      inputValidationMessages.name === null &&
+      inputValidationMessages.email === null &&
+      inputValidationMessages.birthMonth === null &&
+      inputValidationMessages.birthDay === null &&
+      inputValidationMessages.birthYear === null
+    );
+  };
+
+  const isSubmitButtonReady = () => {
+    return (
+      inputValidationMessages.username === null &&
+      inputValidationMessages.handle === null &&
+      inputValidationMessages.password === null &&
+      inputValidationMessages.password_confirmation === null
+    );
+  };
 
   useEffect(() => {
-    let isFormPage1Ready = true;
-    if (
-      inputValidationMessages.name !== null ||
-      inputValidationMessages.email !== null ||
-      inputValidationMessages.birthMonth !== null ||
-      inputValidationMessages.birthDay !== null ||
-      inputValidationMessages.birthYear !== null
-    ) {
-      isFormPage1Ready = false;
-      setNextButtonClasses("submit-button unsubmittable-button");
+    if (isNextButtonReady()) {
+      setNextButtonClasses(
+        "submit-button submittable-button reply-color-background-hover"
+      );
     } else {
-      if (isFormPage1Ready) {
-        setNextButtonClasses(
-          "submit-button submittable-button reply-color-background-hover"
-        );
-      }
+      setNextButtonClasses("submit-button unsubmittable-button");
+    }
+
+    if (isSubmitButtonReady()) {
+      setSubmitButtonClasses(
+        "submit-button submittable-button reply-color-background-hover"
+      );
+    } else {
+      setSubmitButtonClasses("submit-button unsubmittable-button");
     }
   }, [inputValidationMessages]);
 
   useEffect(() => {
-    if (signupFields.name !== undefined && signupFields.name.length < 1) {
-      console.log("inside");
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          name: "What's your name?",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          name: null,
-        };
-      });
+    if (signupFields.name !== undefined) {
+      if (signupFields.name.length < 1) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            name: "What's your name?",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            name: null,
+          };
+        });
+      }
     }
   }, [signupFields.name]);
 
   useEffect(() => {
-    if (
-      signupFields.email !== undefined &&
-      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        signupFields.email
-      )
-    ) {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          email: "Email is invalid.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...inputValidationMessages,
-          email: null,
-        };
-      });
+    if (signupFields.email !== undefined) {
+      if (
+        !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          signupFields.email
+        )
+      ) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            email: "Email is invalid.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...inputValidationMessages,
+            email: null,
+          };
+        });
+      }
     }
   }, [signupFields.email]);
 
   useEffect(() => {
-    if (
-      signupFields.birthMonth !== undefined &&
-      signupFields.birthMonth === ""
-    ) {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthMonth: "Please select a birth month.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthMonth: null,
-        };
-      });
+    if (signupFields.birthMonth !== undefined) {
+      if (signupFields.birthMonth === "") {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthMonth: "Please select a birth month.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthMonth: null,
+          };
+        });
+      }
     }
   }, [signupFields.birthMonth]);
 
   useEffect(() => {
-    if (signupFields.birthDay !== undefined && signupFields.birthDay === "") {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthDay: "Please select a birth day.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthDay: null,
-        };
-      });
+    if (signupFields.birthDay !== undefined) {
+      if (signupFields.birthDay === "") {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthDay: "Please select a birth day.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthDay: null,
+          };
+        });
+      }
     }
   }, [signupFields.birthDay]);
 
   useEffect(() => {
-    if (signupFields.birthYear !== undefined && signupFields.birthYear === "") {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthYear: "Please select a birth year.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          birthYear: null,
-        };
-      });
+    if (signupFields.birthYear !== undefined) {
+      if (signupFields.birthYear === "") {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthYear: "Please select a birth year.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            birthYear: null,
+          };
+        });
+      }
     }
   }, [signupFields.birthYear]);
 
   useEffect(() => {
-    if (
-      signupFields.username !== undefined &&
-      signupFields.username.length < 2
-    ) {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          username: "Username must be at least 2 characters.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...setInputValidationMessages,
-          username: null,
-        };
-      });
+    if (signupFields.username !== undefined) {
+      if (signupFields.username.length < 2) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            username: "Username must be at least 2 characters.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...setInputValidationMessages,
+            username: null,
+          };
+        });
+      }
     }
   }, [signupFields.username]);
 
   useEffect(() => {
-    if (signupFields.handle !== undefined && signupFields.handle.length < 2) {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          handle: "Your handle must be at least 2 characters.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          handle: null,
-        };
-      });
+    if (signupFields.handle !== undefined) {
+      if (signupFields.handle.length < 2) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            handle: "Your handle must be at least 2 characters.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            handle: null,
+          };
+        });
+      }
     }
   }, [signupFields.handle]);
 
   useEffect(() => {
-    if (
-      signupFields.password !== undefined &&
-      signupFields.password.length < 6
-    ) {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          password: "Your password must be at least 6 characters.",
-        };
-      });
-    } else {
-      setInputValidationMessages((prevInputValidationMessages) => {
-        return {
-          ...prevInputValidationMessages,
-          password: null,
-        };
-      });
+    if (signupFields.password !== undefined) {
+      if (signupFields.password.length < 6) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            password: "Your password must be at least 6 characters.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            password: null,
+          };
+        });
+      }
     }
   }, [signupFields.password]);
+
+  useEffect(() => {
+    if (signupFields.password_confirmation !== undefined) {
+      if (signupFields.password_confirmation !== signupFields.password) {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            password_confirmation: "Passwords don't match.",
+          };
+        });
+      } else {
+        setInputValidationMessages((prevInputValidationMessages) => {
+          return {
+            ...prevInputValidationMessages,
+            password_confirmation: null,
+          };
+        });
+      }
+    }
+  }, [signupFields.password_confirmation]);
 
   const submitSignupForm = async () => {
     let msg = "";
@@ -239,10 +285,19 @@ function Signup({ flash, authenticity_token }) {
     let json = await msg.json();
     // display the errors / validation messages
     console.log(JSON.stringify(json));
+    setIsUserCreated(true);
+
+    window.location.reload();
+    //https://github.com/heartcombo/devise/wiki/How-To:-Redirect-to-a-specific-page-on-successful-sign-up-(registration)
+    //not working
   };
 
   return (
-    <div className="form-container">
+    <div
+      className="form-container"
+      onClick={() => {
+        setIsUserCreated(true);
+      }}>
       <div className="form">
         <div className="form-header">
           <div className="signup-form-header-subcontainer"></div>
@@ -258,13 +313,14 @@ function Signup({ flash, authenticity_token }) {
               <Button
                 buttonText={"Next"}
                 buttonClasses={nextButtonClasses}
-                clickAction={() => setFormPart(2)}
+                clickAction={isNextButtonReady() ? () => setFormPart(2) : null}
               />
             ) : (
               <Button
                 buttonText={"Sign up!"}
                 type="submit"
-                clickAction={submitSignupForm}
+                buttonClasses={submitButtonClasses}
+                clickAction={isSubmitButtonReady() ? submitSignupForm : null}
               />
             )}
           </div>
