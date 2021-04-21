@@ -19,10 +19,10 @@ Eric Miller
 - Follow other users
 - See profiles
 - Search posts
+- Signup
 
 ## Features in progress
 
-- signup / create account
 - Quote Tweets
 - Edit Avatar Image
 - User popups on hover
@@ -31,15 +31,7 @@ Eric Miller
 
 ## My todo list
 
-- Edit: now it's fine. Something with Heroku? Liking and Retweeting seems to update slower now that I've moved async inside a function within useEffect... but only on Heroku deploy, not locally... not sure why yet.
-
-- Finish Signup form with Devise
-
-- RSpec
-
 - profile avatar, background image, follow button
-
-- is "liked" action header working? first tweet isn't showing it...
 
 - current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen
 
@@ -59,6 +51,8 @@ Eric Miller
 - Don't re-render nav when navigating different links
 
 - Make back button on TopHeader not just go back a page
+
+- RSpec
 
 - Work on Responsiveness
 
