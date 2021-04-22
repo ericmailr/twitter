@@ -22,6 +22,7 @@ function App(props) {
     user,
     contentType,
     followable_users,
+    errors,
   } = props;
   const [modalState, setModal] = useState({
     modalType: "none",
@@ -70,7 +71,6 @@ function App(props) {
   };
 
   const colorInputs = (e) => {
-    console.log(e.currentTarget);
     e.currentTarget.parentElement.classList.add("focused");
     e.currentTarget.parentElement.style.border =
       "2px solid RGB(var(--reply-color))";
@@ -132,6 +132,7 @@ function App(props) {
           flash={flash}
           colorInputs={colorInputs}
           decolorInputs={decolorInputs}
+          errors={errors}
         />
       ) : (
         <Login authenticity_token={authenticity_token} flash={flash} />
@@ -155,6 +156,7 @@ App.propTypes = {
   children: PropTypes.array,
   user: PropTypes.object,
   followable_users: PropTypes.array,
+  errors: PropTypes.object,
 };
 
 export default App;

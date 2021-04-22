@@ -31,6 +31,12 @@ Eric Miller
 
 ## My todo list
 
+- learn and use Higher Order Components
+
+- learn and use TypeScript
+
+- refactor Signup, FormInput and Button components a bit
+
 - profile avatar, background image, follow button
 
 - current_user avatar in newtweet should link to profile, and in mobile opens navigation as a modal halfway accross the screen

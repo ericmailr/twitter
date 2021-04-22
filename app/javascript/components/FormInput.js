@@ -41,7 +41,7 @@ function FormInput({
           <input
             type="text"
             value={signupFields.name || ""}
-            name="name"
+            name="user[name]"
             id={id}
             className={
               inputValidationMessage && inputValidationMessage.length > 0
@@ -58,7 +58,7 @@ function FormInput({
           <input
             type="email"
             value={signupFields.email || ""}
-            name="email"
+            name="user[email]"
             id="email"
             onChange={(e) =>
               setSignupFieldValue("email", e.currentTarget.value)
@@ -123,7 +123,7 @@ function FormInput({
           <input
             type="password"
             value={signupFields.password || ""}
-            name="signup-password"
+            name="user[password]"
             id="signup-password"
             onChange={(e) =>
               setSignupFieldValue("password", e.currentTarget.value)
@@ -135,7 +135,7 @@ function FormInput({
           <input
             type="password"
             value={signupFields.password_confirmation || ""}
-            name="signup-password-confirmation"
+            name="user[password_confirmation]"
             id="signup-password-confirmation"
             onChange={(e) =>
               setSignupFieldValue(

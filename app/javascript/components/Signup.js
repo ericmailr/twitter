@@ -3,15 +3,20 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 import FormInput from "./FormInput";
 
-function Signup({ flash, authenticity_token }) {
-  const csrf = document
-    .querySelector("meta[name='csrf-token']")
-    .getAttribute("content");
-
+function Signup({ flash, authenticity_token, errors }) {
   const [formPart, setFormPart] = useState(1);
 
-  // useState for name, email, bday{month, day, year}, username, handle, password, confirm password
-  const [signupFields, setSignupFields] = useState({});
+  const [signupFields, setSignupFields] = useState({
+    name: null,
+    email: null,
+    birthMonth: null,
+    birthDay: null,
+    birthYear: null,
+    username: null,
+    handle: null,
+    password: null,
+    password_confirmation: null,
+  });
 
   const [inputValidationMessages, setInputValidationMessages] = useState({
     name: "",
@@ -32,8 +37,6 @@ function Signup({ flash, authenticity_token }) {
   const [submitButtonClasses, setSubmitButtonClasses] = useState(
     "submit-button unsubmittable-button"
   );
-
-  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const setSignupFieldValue = (fieldName, fieldValue) => {
     setSignupFields({ ...signupFields, [fieldName]: fieldValue });
@@ -77,7 +80,7 @@ function Signup({ flash, authenticity_token }) {
   }, [inputValidationMessages]);
 
   useEffect(() => {
-    if (signupFields.name !== undefined) {
+    if (signupFields.name !== null) {
       if (signupFields.name.length < 1) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -89,7 +92,10 @@ function Signup({ flash, authenticity_token }) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
             ...prevInputValidationMessages,
-            name: null,
+            name:
+              errors.name && inputValidationMessages.name === ""
+                ? errors.name
+                : null,
           };
         });
       }
@@ -97,7 +103,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.name]);
 
   useEffect(() => {
-    if (signupFields.email !== undefined) {
+    if (signupFields.email !== null) {
       if (
         !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
           signupFields.email
@@ -112,8 +118,11 @@ function Signup({ flash, authenticity_token }) {
       } else {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
-            ...inputValidationMessages,
-            email: null,
+            ...prevInputValidationMessages,
+            email:
+              errors.email && inputValidationMessages.email === ""
+                ? errors.email
+                : null,
           };
         });
       }
@@ -121,7 +130,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.email]);
 
   useEffect(() => {
-    if (signupFields.birthMonth !== undefined) {
+    if (signupFields.birthMonth !== null) {
       if (signupFields.birthMonth === "") {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -141,7 +150,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.birthMonth]);
 
   useEffect(() => {
-    if (signupFields.birthDay !== undefined) {
+    if (signupFields.birthDay !== null) {
       if (signupFields.birthDay === "") {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -161,7 +170,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.birthDay]);
 
   useEffect(() => {
-    if (signupFields.birthYear !== undefined) {
+    if (signupFields.birthYear !== null) {
       if (signupFields.birthYear === "") {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -181,7 +190,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.birthYear]);
 
   useEffect(() => {
-    if (signupFields.username !== undefined) {
+    if (signupFields.username !== null) {
       if (signupFields.username.length < 2) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -192,8 +201,11 @@ function Signup({ flash, authenticity_token }) {
       } else {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
-            ...setInputValidationMessages,
-            username: null,
+            ...prevInputValidationMessages,
+            username:
+              errors.username && inputValidationMessages.username === ""
+                ? errors.username
+                : null,
           };
         });
       }
@@ -201,7 +213,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.username]);
 
   useEffect(() => {
-    if (signupFields.handle !== undefined) {
+    if (signupFields.handle !== null) {
       if (signupFields.handle.length < 2) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -213,7 +225,10 @@ function Signup({ flash, authenticity_token }) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
             ...prevInputValidationMessages,
-            handle: null,
+            handle:
+              errors.handle && inputValidationMessages.handle === ""
+                ? errors.handle
+                : null,
           };
         });
       }
@@ -221,7 +236,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.handle]);
 
   useEffect(() => {
-    if (signupFields.password !== undefined) {
+    if (signupFields.password !== null) {
       if (signupFields.password.length < 6) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -233,7 +248,10 @@ function Signup({ flash, authenticity_token }) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
             ...prevInputValidationMessages,
-            password: null,
+            password:
+              errors.password && inputValidationMessages.password === ""
+                ? errors.password
+                : null,
           };
         });
       }
@@ -241,7 +259,7 @@ function Signup({ flash, authenticity_token }) {
   }, [signupFields.password]);
 
   useEffect(() => {
-    if (signupFields.password_confirmation !== undefined) {
+    if (signupFields.password_confirmation !== null) {
       if (signupFields.password_confirmation !== signupFields.password) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
@@ -253,51 +271,19 @@ function Signup({ flash, authenticity_token }) {
         setInputValidationMessages((prevInputValidationMessages) => {
           return {
             ...prevInputValidationMessages,
-            password_confirmation: null,
+            password_confirmation:
+              errors.password_confirmation &&
+              inputValidationMessages.password_confirmation === ""
+                ? errors.password_confirmation
+                : null,
           };
         });
       }
     }
-  }, [signupFields.password_confirmation]);
-
-  const submitSignupForm = async () => {
-    let msg = "";
-    msg = await fetch("/users", {
-      method: "POST",
-      body: JSON.stringify({
-        authenticity_token: authenticity_token,
-        user: {
-          name: signupFields.name,
-          username: signupFields.username,
-          handle: signupFields.handle,
-          email: signupFields.email,
-          password: signupFields.password,
-          password_confirmation: signupFields.password_confirmation,
-        },
-        commit: "Sign up",
-      }),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "X-CSRF-Token": csrf,
-      },
-    });
-    let json = await msg.json();
-    // display the errors / validation messages
-    console.log(JSON.stringify(json));
-    setIsUserCreated(true);
-
-    window.location.reload();
-    //https://github.com/heartcombo/devise/wiki/How-To:-Redirect-to-a-specific-page-on-successful-sign-up-(registration)
-    //not working
-  };
+  }, [signupFields.password_confirmation, signupFields.password]);
 
   return (
-    <div
-      className="form-container"
-      onClick={() => {
-        setIsUserCreated(true);
-      }}>
+    <div className="form-container">
       <div className="form">
         <div className="form-header">
           <div className="signup-form-header-subcontainer"></div>
@@ -320,13 +306,21 @@ function Signup({ flash, authenticity_token }) {
                 buttonText={"Sign up!"}
                 type="submit"
                 buttonClasses={submitButtonClasses}
-                clickAction={isSubmitButtonReady() ? submitSignupForm : null}
               />
             )}
           </div>
         </div>
         <div id="signup-form-container">
-          <form id="signup-form" action="/users" method="post">
+          <form
+            id="signup-form"
+            action="/users"
+            method="post"
+            autoComplete="off">
+            <input
+              type="hidden"
+              name="authenticity_token"
+              value={authenticity_token}
+            />
             {formPart === 1 ? (
               <React.Fragment>
                 <h1>Create your account</h1>
@@ -356,7 +350,8 @@ function Signup({ flash, authenticity_token }) {
                     <div>
                       This will not be shown publicly. Confirm your own age,
                       even if this account is for a business, a pet, or
-                      something else.
+                      something else. Also, I'm not even saving it to my
+                      database yet...
                     </div>
                   </div>
                   <div className="birthday-input-container">
@@ -394,7 +389,17 @@ function Signup({ flash, authenticity_token }) {
                 {flash.notice && (
                   <div className="flash-notice">{flash.notice}</div>
                 )}
-                <h1>Choose a Username</h1>
+                <input
+                  type="hidden"
+                  name="user[name]"
+                  value={signupFields.name}
+                />
+                <input
+                  type="hidden"
+                  name="user[email]"
+                  value={signupFields.email}
+                />
+                <h2>Choose a Username</h2>
                 <FormInput
                   id={"signup-username"}
                   inputName={"username"}
@@ -402,7 +407,7 @@ function Signup({ flash, authenticity_token }) {
                   signupFields={signupFields}
                   inputValidationMessage={inputValidationMessages.username}
                 />
-                <h1>Choose a Handle</h1>
+                <h2>Choose a Handle</h2>
                 <FormInput
                   id={"signup-handle"}
                   inputName={"handle"}
@@ -410,7 +415,7 @@ function Signup({ flash, authenticity_token }) {
                   signupFields={signupFields}
                   inputValidationMessage={inputValidationMessages.handle}
                 />
-                <h1>Choose a password</h1>
+                <h2>Choose a password</h2>
                 <FormInput
                   id={"signup-password"}
                   inputName={"password"}
@@ -441,6 +446,7 @@ Signup.propTypes = {
   decolorInputs: PropTypes.func,
   flash: PropTypes.object,
   authenticity_token: PropTypes.string,
+  errors: PropTypes.object,
 };
 
 export default Signup;
