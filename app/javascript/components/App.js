@@ -86,7 +86,7 @@ function App(props) {
     switch (mainContentType) {
       case "Home":
         mainComponent = (
-          <Home posts={content.posts} toggleModal={toggleModal} />
+          <Home postsProp={content.posts} toggleModal={toggleModal} />
         );
         break;
       case "Tweet":
@@ -143,7 +143,7 @@ function App(props) {
     </div>
   );
 }
-
+// if I'm going to use rails as just an api, I don't need to pass all the content down as props
 App.propTypes = {
   mainContentType: PropTypes.string,
   current_user: PropTypes.object,

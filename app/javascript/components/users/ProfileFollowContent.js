@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import PostList from "../PostList";
 import TabList from "./TabList";
 
 function ProfileFollowContent({
   contentType,
-  content,
+  contentProp,
   user: { handle },
   toggleModal,
 }) {
+  const [content, setContent] = useState(contentProp);
+
+  const fetchFollowContent = async () => {
+    let msg = await fetch(`/${handle}/following`);
+    let json = await msg.json();
+    setContent(() => {
+      return json.content;
+    });
+  };
+
+  useEffect(() => {
+    fetchFollowContent();
+  }, []);
+
+  useEffect(() => {
+    const updateInterval = setInterval(() => {
+      fetchFollowContent();
+    }, 5000);
+    return () => {
+      clearInterval(updateInterval);
+    };
+  }, [content]);
+
   const tabArray = [
     {
       contentType: "followers_you_know",

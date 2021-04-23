@@ -18,7 +18,7 @@ function Profile(props) {
         contentType
       ) ? (
         <ProfileFollowContent
-          content={content}
+          contentProp={content}
           user={user}
           contentType={contentType}
           toggleModal={toggleModal}

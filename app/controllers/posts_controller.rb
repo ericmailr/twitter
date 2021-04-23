@@ -28,6 +28,14 @@ class PostsController < ApplicationController
             end
         end
        @content = {posts: posts_hashes}
+
+        respond_to do |format|
+            format.json do
+                msg = { :status => "ok", :message => "Success!", :content => @content }
+                render :json => msg
+            end
+            format.html {  }
+        end
     else
         redirect_to login_path
     end

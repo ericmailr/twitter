@@ -10,20 +10,39 @@ function PostWrapper(props) {
 
   const [likeState, setLikeState] = useState([]);
   const [retweetState, setRetweetState] = useState([]);
+
+  const [count, setCount] = useState(0);
+
+  const getTweetState = async () => {
+    let msg = await fetch(`/tweets/${props.tweet.id}`);
+    let json = await msg.json();
+    // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
+    setLikeState({
+      likesCount: json.likesCount,
+      isLiked: json.isLiked,
+    });
+    setRetweetState({
+      retweetsCount: json.retweetsCount,
+      isRetweeted: json.isRetweeted,
+    });
+  };
+
+  // api call every ten seconds to update like/retweet states
   useEffect(() => {
-    const getTweetState = async () => {
-      let msg = await fetch(`/tweets/${props.tweet.id}`);
-      let json = await msg.json();
-      // https://stackoverflow.com/a/54923969 (setState inside useEffect for fetching data)
-      setLikeState({
-        likesCount: json.likesCount,
-        isLiked: json.isLiked,
+    const updateInterval = setInterval(() => {
+      getTweetState();
+      setCount((previousCount) => {
+        return previousCount + 1;
       });
-      setRetweetState({
-        retweetsCount: json.retweetsCount,
-        isRetweeted: json.isRetweeted,
-      });
+      //console.log("fetching tweetState count: ", count);
+    }, 10000);
+
+    return () => {
+      clearInterval(updateInterval);
     };
+  }, [likeState, retweetState]);
+
+  useEffect(() => {
     getTweetState();
   }, []);
 

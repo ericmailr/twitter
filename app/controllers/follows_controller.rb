@@ -18,7 +18,7 @@ class FollowsController < ApplicationController
         @content = {following: followed_users, followers: followers, followers_you_know: followers_user_follows}
         respond_to do |format|
             format.json do 
-                msg = { :status => "ok", :isFollowed => current_user.followed_users.include?(@user) }
+                msg = { :status => "ok", :isFollowed => current_user.followed_users.include?(@user), :content => @content}
                 render :json => msg  
             end
             format.html { }
