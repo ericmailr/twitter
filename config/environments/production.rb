@@ -61,14 +61,25 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "twitter_production"
 
   config.action_mailer.perform_caching = false
-  # added this
+
+  # added this, but it should default to true anyway
   config.action_mailer.perform_deliveries = true 
 
   # mailtrap  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => 'e1f92dcd95f15a',
+    :password => 'a6ca7b5b4d38f6',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
 
   # devise
 
-  config.action_mailer.default_url_options = { host: 'twitter-clone-ericmiller.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'twitter-clone-ericmiller.herokuapp.com', :protocol => 'https' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
