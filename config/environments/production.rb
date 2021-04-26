@@ -61,6 +61,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "twitter_production"
 
   config.action_mailer.perform_caching = false
+  # added this
+  config.action_mailer.perform_deliveries = true 
 
   # mailtrap  
   config.action_mailer.delivery_method = :smtp
@@ -72,6 +74,7 @@ Rails.application.configure do
     :port => '2525',
     :authentication => :cram_md5
   }
+
 
   # devise
 
