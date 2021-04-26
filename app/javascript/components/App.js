@@ -109,7 +109,6 @@ function App(props) {
             toggleModal={toggleModal}
           />
         );
-        break;
       default:
         mainComponent = <Home posts={content.posts} />;
     }

@@ -47,6 +47,9 @@ function Login({ authenticity_token, flash }) {
           <a href="/users/sign_up">
             <span> Sign up for Twitter</span>
           </a>
+          <a href="/users/password/new">
+            <span>Forgot my password</span>
+          </a>
         </div>
       </form>
     </div>

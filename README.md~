@@ -46,6 +46,7 @@ Eric Miller
 	- [ ] background image 
 	- [ ] follow button
 	- [ ] Avatar popup on mouseover
+	- [ ] clicking on likes, retweets should pop up a modal showing users
 	- [ ] Make back button on TopHeader not just go back a page
 - [ ] current_user avatar in newtweet should link to profile
 - [ ] mobile

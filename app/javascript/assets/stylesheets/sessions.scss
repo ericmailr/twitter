@@ -288,7 +288,7 @@
 #login-options {
   color: RGB(var(--reply-color));
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 @media only screen and (max-width: 1000px) {

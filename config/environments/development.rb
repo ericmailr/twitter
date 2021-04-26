@@ -35,6 +35,17 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  # mailtrap. sends emails to mailtrap in development mode
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => 'e1f92dcd95f15a',
+    :password => 'a6ca7b5b4d38f6',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
   
   # Devise default url options
 
