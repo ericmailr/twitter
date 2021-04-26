@@ -61,7 +61,18 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "twitter_production"
 
   config.action_mailer.perform_caching = false
-  
+
+  # mailtrap  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => 'e1f92dcd95f15a',
+    :password => 'a6ca7b5b4d38f6',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
+
   # devise
 
   config.action_mailer.default_url_options = { host: 'twitter-clone-ericmiller.herokuapp.com' }
