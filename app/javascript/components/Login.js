@@ -1,19 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import FormInput from "./FormInput";
 
 function Login({ authenticity_token, flash }) {
-  const colorInputs = (e) => {
-    e.currentTarget.parentElement.classList.add("focused");
-    e.currentTarget.parentElement.style.border =
-      "2px solid RGB(var(--reply-color))";
-  };
-  const decolorInputs = (e) => {
-    e.currentTarget.parentElement.classList.remove("focused");
-    e.currentTarget.parentElement.style.border =
-      "2px solid rgba(136, 153, 166, 0.25)";
-  };
-
   return (
     <div id="login-container">
       <div id="login-top">
