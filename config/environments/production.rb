@@ -65,16 +65,25 @@ Rails.application.configure do
   # added this, but it should default to true anyway
   config.action_mailer.perform_deliveries = true 
 
-  # mailtrap  
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :user_name => 'e1f92dcd95f15a',
-    :password => 'a6ca7b5b4d38f6',
-    :address => 'smtp.mailtrap.io',
-    :domain => 'smtp.mailtrap.io',
-    :port => '2525',
-    :authentication => :cram_md5
-  }
+#  config.action_mailer.delivery_method = :smtp
+#  config.action_mailer.smtp_settings = {
+#    address:              'smtp.gmail.com',
+#    port:                 587,
+#    domain:               'smtp.gmail.com',
+#    user_name:            '<username>',
+#    password:             '<password>',
+#    authentication:       'plain',
+#    enable_starttls_auto: true }
+
+  ActionMailer::Base.smtp_settings = {
+  :port           => ENV['MAILGUN_SMTP_PORT'],
+  :address        => ENV['MAILGUN_SMTP_SERVER'],
+  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+  :domain         => 'twitter-clone-ericmiller.herokuapp.com',
+  :authentication => :plain,
+}
+ActionMailer::Base.delivery_method = :smtp
 
 
   # devise
