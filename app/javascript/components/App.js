@@ -8,6 +8,7 @@ import StatusPage from "./StatusPage";
 import Profile from "./users/Profile";
 import Modal from "./Modal";
 import Signup from "./Signup";
+import PostList from "./PostList";
 
 function App(props) {
   const {
@@ -23,6 +24,7 @@ function App(props) {
     contentType,
     followable_users,
     errors,
+    users,
   } = props;
   const [modalState, setModal] = useState({
     modalType: "none",
@@ -99,6 +101,8 @@ function App(props) {
           />
         );
         break;
+      case "Users":
+        return <PostList posts={users} toggleModal={toggleModal} />;
       case "Profile":
         return (
           <Profile
@@ -156,6 +160,7 @@ App.propTypes = {
   user: PropTypes.object,
   followable_users: PropTypes.array,
   errors: PropTypes.object,
+  users: PropTypes.array,
 };
 
 export default App;

@@ -15,7 +15,9 @@ function SuggestedSection(props) {
 
   return (
     <div className="suggested-section">
-      <h2> Who to follow </h2>
+      <h2>
+        <a href="/users"> Who to follow </a>
+      </h2>
       <div id="who-to-follow">{suggestedFollows}</div>
     </div>
   );

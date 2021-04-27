@@ -55,6 +55,10 @@ class UsersController < ApplicationController
        @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
     end
 
+    def index
+        @users = User.followable_users(current_user).map{|user| {:user => user, :postType => "user"}}
+    end
+
     private
 
         def user_params
