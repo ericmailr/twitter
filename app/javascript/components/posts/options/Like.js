@@ -23,7 +23,9 @@ function Like(props) {
           </svg>
         </span>
         {!props.isStatusOption && props.likesCount != 0 && (
-          <span className={`option-count ${props.isLiked && "liked-color"}`}>
+          <span
+            className={`option-count ${props.isLiked && "liked-color"}`}
+            onClick={props.toggleLike}>
             {props.likesCount}
           </span>
         )}

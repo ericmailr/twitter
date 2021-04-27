@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Retweet(props) {
-  const retweetPopup = (e) => {
+  const retweetPopup = (e, retweetModal) => {
     e.stopPropagation();
-    let retweetModal = e.currentTarget.lastChild;
+    //let retweetModal = e.currentTarget.lastChild;
     retweetModal.style.display = "flex";
     const hideRetweetPopup = (e) => {
       if (!e.target.closest(".retweet-modal")) {
@@ -25,7 +25,7 @@ function Retweet(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className="option-container retweet-option">
         <div
           className="option-container-text"
@@ -33,7 +33,7 @@ function Retweet(props) {
           onMouseLeave={props.mouseLeaveColor}>
           <span
             onClick={(e) => {
-              retweetPopup(e);
+              retweetPopup(e, e.currentTarget.lastChild);
             }}
             className="svg-background">
             <svg className="tweet-options-svg retweet-svg" viewBox="0 0 24 24">
@@ -81,13 +81,16 @@ function Retweet(props) {
             <span
               className={`option-count ${
                 props.isRetweeted && "retweeted-color"
-              }`}>
+              }`}
+              onClick={(e) => {
+                retweetPopup(e, e.currentTarget.previousSibling.lastChild);
+              }}>
               {props.retweetsCount}
             </span>
           )}
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
