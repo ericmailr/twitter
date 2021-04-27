@@ -77,6 +77,7 @@ function App(props) {
     e.currentTarget.parentElement.style.border =
       "2px solid RGB(var(--reply-color))";
   };
+
   const decolorInputs = (e) => {
     e.currentTarget.parentElement.classList.remove("focused");
     e.currentTarget.parentElement.style.border =
@@ -120,6 +121,8 @@ function App(props) {
   };
 
   return (
+    // what's the point of container for Login, Signup.
+    // why render App at all for Login and Signup
     <div id="container">
       {current_user ? (
         <React.Fragment>

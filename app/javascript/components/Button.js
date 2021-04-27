@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ buttonText, clickAction, buttonClasses }) {
+function Button({ buttonText, clickAction, buttonClasses, formId }) {
   return (
     <div className="button-container">
       <div className="submit-button-spacer"></div>
@@ -13,12 +13,12 @@ function Button({ buttonText, clickAction, buttonClasses }) {
         <>
           <button
             type="submit"
-            form="signup-form"
+            form={formId || "signup-form"}
             className={buttonClasses} /*onClick={clickAction}*/
             disabled={
               buttonClasses.includes("unsubmittable-button") ? true : false
             }>
-            Submit
+            {buttonText}
           </button>
         </>
       )}
