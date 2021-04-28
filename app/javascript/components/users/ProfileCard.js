@@ -2,12 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function ProfileCard(props) {
+  (() => {
+    cloudinary.setCloudName("hr0v6dg24");
+    var widget = cloudinary.createUploadWidget(
+      {
+        uploadPreset: "ml_default",
+      },
+      (error, result) => {}
+    );
+    //  widget.open();
+  })();
   return (
     <div className="profile-description">
       <div className="username-handle">
         <h2 className="username">{props.user.username}</h2>
         <p className="font-secondary handle">@{props.user.handle}</p>
       </div>
+      {props.currentUser.handle === props.user.handle && (
+        <div id="widget-thing" style={{ height: "200px" }}></div>
+      )}
+
       <div>
         <svg viewBox="0 0 24 24" className="misc-svg font-secondary">
           <g>

@@ -15,6 +15,7 @@ function SuggestedFollow(props) {
   }, []);
 
   const toggleFollow = async (e) => {
+    e.stopPropagation();
     const csrf = document
       .querySelector("meta[name='csrf-token']")
       .getAttribute("content");
@@ -65,6 +66,9 @@ function SuggestedFollow(props) {
   return (
     <div
       className="suggested-follow tweet-container"
+      onClick={() => {
+        window.location.href = Routes.profile_path(props.user.handle);
+      }}
       style={props.last ? { borderBottom: "none" } : {}}>
       <div className="avatar-container suggested-follow-avatar">
         <Avatar />

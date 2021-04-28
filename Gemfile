@@ -41,12 +41,18 @@ gem 'ancestry'
 
 gem 'webpacker', '~> 5.x'
 gem 'react-rails', '~> 2.6.1'
+# stores rails route helpers; i only use in some spots, don't think i should keep
 gem 'js-routes', '~> 1.4.9'
 gem 'active_model_serializers'
 gem 'htmlbeautifier'
 gem 'bootstrap', '~> 5.0.0.alpha3'
 gem 'jquery-rails'
-gem 'devise', '~>4.7.1'
+gem 'devise', '~> 4.7.1'
+
+# image management
+gem 'carrierwave', '~> 2.2.1'
+gem 'cloudinary', '~> 1.20.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,7 +61,6 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'rspec-rails', '~> 5.0.0'
-  gem 'devise', '~>4.7.1'
 end
 
 group :development do

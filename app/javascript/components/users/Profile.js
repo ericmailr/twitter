@@ -6,7 +6,14 @@ import TopHeader from "../TopHeader";
 import ProfileCard from "./ProfileCard";
 
 function Profile(props) {
-  const { user, content, userCreatedAt, contentType, toggleModal } = props;
+  const {
+    user,
+    content,
+    userCreatedAt,
+    contentType,
+    toggleModal,
+    currentUser,
+  } = props;
   return (
     <React.Fragment>
       <TopHeader
@@ -25,7 +32,11 @@ function Profile(props) {
         />
       ) : (
         <React.Fragment>
-          <ProfileCard user={user} userCreatedAt={userCreatedAt} />
+          <ProfileCard
+            user={user}
+            userCreatedAt={userCreatedAt}
+            currentUser={currentUser}
+          />
           <ProfilePostContent
             contentType={contentType}
             user={props.user}
