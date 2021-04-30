@@ -3,6 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "colors.scss";
 
+input:-webkit-autofill::first-line,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  //-webkit-box-shadow: 0 0 0 30px $main-background-color inset !important;
+  box-shadow: 0 0 0 50px $main-background-color inset !important;
+  font-family: "Segoe UI", Helvetica !important;
+  font-size: 19px !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: yellow !important;
+}
+
 // SIGNUP
 
 .form-container {
