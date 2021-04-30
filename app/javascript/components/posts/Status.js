@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "../../assets/avatar.png";
+import Avatar from "../users/Avatar";
 import TweetOptions from "./TweetOptions";
 import Stats from "./Stats";
 
@@ -9,7 +9,7 @@ function Status(props) {
     <div className="status">
       <div className="status-header">
         <div className="avatar-container">
-          <img className="avatar" src={Avatar} alt="default avatar" />
+          <Avatar avatar_public_id={props.tweet.user.avatar_public_id} />
         </div>
         <div className="status-tweeter">
           <a href={Routes.profile_path(props.tweet.user.handle)}>

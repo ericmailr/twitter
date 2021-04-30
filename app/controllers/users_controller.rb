@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     include ApplicationHelper
-    before_action :authenticate_user!, only: :show
+    before_action :authenticate_user! #, only: :show
 =begin
     def new
         @user = User.new
@@ -53,11 +53,41 @@ class UsersController < ApplicationController
             end
        end
        @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
+        api_key = "243252674515468"
+        api_secret = "rxaZrsPJmyR1GTvNlfV6g-uxn0k"
+       @uploadSignature = Cloudinary::Utils.sign_request({:public_id=>"my_image", :timestamp=>Time.now.to_i}, :options=>{:api_key=>api_key, :api_secret=>api_secret})
+
+
+        respond_to do |format|
+            format.json do
+                msg = { :status => "ok", :message => "Success!", :uploadSignature => @uploadSignature }
+                render :json => msg
+            end
+            format.html {  }
+        end
+
     end
 
     def index
         @users = User.followable_users(current_user).map{|user| {:user => user, :postType => "user"}}
     end
+
+    def update
+        #update avatar_public_id
+        user = User.find(params[:id])
+        if (user.avatar_public_id != "default_avatar") 
+            Cloudinary::Uploader.destroy(user.avatar_public_id)
+        end
+        user.update(avatar_public_id: params[:avatar_public_id])
+         respond_to do |format|
+            format.json do
+                msg = { :status => "ok", :message => "Success!" }
+                render :json => msg
+            end
+            format.html {  }
+        end       
+    end
+
 
     private
 

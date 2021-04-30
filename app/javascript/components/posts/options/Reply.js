@@ -14,6 +14,7 @@ function Reply(props) {
             props.toggleModal("compose-reply", {
               tweet: props.tweet,
               updatedAt: props.updatedAt,
+              avatar_public_id: props.tweet.avatar_public_id,
             });
           }}>
           <span className="svg-background">

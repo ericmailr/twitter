@@ -14,13 +14,15 @@ function LogoutModal(props) {
         "Content-Type": "application/json",
         "X-CSRF-Token": csrf,
       },
-    }).then(() => location.reload());
+    }).then(() => {
+      window.location.href = "/users/sign_in";
+    });
   };
   return (
     <div id="logout-modal">
       <div className="logout-user-card">
         <div className="avatar-container">
-          <Avatar />
+          <Avatar avatar_public_id={props.avatar_public_id} />
         </div>
         <div className="user-identifiers">
           <div>
@@ -45,6 +47,7 @@ function LogoutModal(props) {
 LogoutModal.propTypes = {
   handle: PropTypes.string,
   username: PropTypes.string,
+  avatar_public_id: PropTypes.string,
 };
 
 export default LogoutModal;

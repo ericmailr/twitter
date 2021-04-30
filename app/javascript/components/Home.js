@@ -4,7 +4,7 @@ import TopHeader from "./TopHeader";
 import NewTweet from "./posts/NewTweet";
 import PostList from "./PostList";
 
-function Home({ postsProp, toggleModal }) {
+function Home({ postsProp, toggleModal, currentUser }) {
   // could remove postsProp and just fetch...
   const [posts, setPosts] = useState(postsProp);
   const fetchPosts = async () => {
@@ -31,7 +31,7 @@ function Home({ postsProp, toggleModal }) {
   return (
     <React.Fragment>
       <TopHeader header="Home" />
-      <NewTweet rows={1} />
+      <NewTweet rows={1} avatar_public_id={currentUser.avatar_public_id} />
       <div id="divider"></div>
       <PostList posts={posts} toggleModal={toggleModal} />
     </React.Fragment>
@@ -41,6 +41,7 @@ function Home({ postsProp, toggleModal }) {
 Home.propTypes = {
   posts: PropTypes.array,
   toggleModal: PropTypes.func,
+  currentUser: PropTypes.object,
 };
 
 export default Home;

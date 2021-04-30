@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Tweet from "./Tweet";
 import NewTweet from "./NewTweet";
 
-function ComposeModal({ tweet }) {
+function ComposeModal({ tweet, avatar_public_id }) {
   return (
     <div id="modal" className="tweet-spacing">
       <div className="exit-modal">
@@ -18,6 +18,7 @@ function ComposeModal({ tweet }) {
       <div className="scrollable">
         {tweet && (
           <Tweet
+            avatar_public_id={avatar_public_id}
             tweet={tweet}
             isParent={true}
             updatedAt={tweet.updated_at_brief}
@@ -25,7 +26,11 @@ function ComposeModal({ tweet }) {
             isInModal={true}
           />
         )}
-        <NewTweet rows={5} parentTweet={tweet} />
+        <NewTweet
+          rows={5}
+          parentTweet={tweet}
+          avatar_public_id={avatar_public_id}
+        />
       </div>
     </div>
   );
@@ -33,6 +38,7 @@ function ComposeModal({ tweet }) {
 
 ComposeModal.propTypes = {
   tweet: PropTypes.object,
+  avatar_public_id: PropTypes.string,
 };
 
 export default ComposeModal;

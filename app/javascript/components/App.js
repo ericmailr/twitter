@@ -89,7 +89,11 @@ function App(props) {
     switch (mainContentType) {
       case "Home":
         mainComponent = (
-          <Home postsProp={content.posts} toggleModal={toggleModal} />
+          <Home
+            currentUser={current_user}
+            postsProp={content.posts}
+            toggleModal={toggleModal}
+          />
         );
         break;
       case "Tweet":

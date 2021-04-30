@@ -42,7 +42,7 @@ function NewTweet(props) {
     <div className="tweet-spacing">
       <div className="tweet-container">
         <div className="avatar-container">
-          <Avatar />
+          <Avatar avatar_public_id={props.avatar_public_id} />
         </div>
         <div className="tweet-content">
           <textarea
@@ -70,6 +70,7 @@ function NewTweet(props) {
 NewTweet.propTypes = {
   rows: PropTypes.number,
   parentTweet: PropTypes.object,
+  avatar_public_id: PropTypes.string,
 };
 
 export default NewTweet;

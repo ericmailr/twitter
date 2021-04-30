@@ -23,9 +23,6 @@ function Tweet(props) {
   return (
     <React.Fragment>
       <div
-        /* I don't understand why isInModal is using false from other Tweet when <Tweet/> is called from ComposeModal and this div is clicked... */
-        /* try creating new TweetInComposeModal component */
-        /* Tweet rendered by ComposeModal, which is rendered up the line by the original Tweet that is being replied to, and THAT onClick handler is being executed i think */
         onClick={clickTweetHandler}
         className={
           props.isReply ? "post-container" : "post-container post-border"
@@ -43,7 +40,7 @@ function Tweet(props) {
         )}
         <div className="tweet-container">
           <div className="avatar-container">
-            <Avatar />
+            <Avatar avatar_public_id={props.tweet.user.avatar_public_id} />
             {props.isParent && <div className="reply-connector"></div>}
           </div>
           <div className="tweet-content">
@@ -103,6 +100,7 @@ function Tweet(props) {
 Tweet.propTypes = {
   tweet: PropTypes.object,
   user: PropTypes.object,
+  avatar_public_id: PropTypes.string,
   updatedAt: PropTypes.string,
   replyingTo: PropTypes.string,
   isLiked: PropTypes.bool,

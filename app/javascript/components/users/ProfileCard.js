@@ -1,17 +1,59 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {
+  Image,
+  Video,
+  Transformation,
+  CloudinaryContext,
+} from "cloudinary-react";
 
 function ProfileCard(props) {
-  (() => {
+  const cloudName = "hr0v6dg24";
+  const csrf = document
+    .querySelector("meta[name='csrf-token']")
+    .getAttribute("content");
+  const generateSignature = async () => {
+    console.log("params_to_sign: ", params_to_sign);
+    console.log("callback: ", callback);
+    let response = await fetch(
+      `/${props.user.handle}?params_to_sign=${params_to_sign}`
+    );
+    let signature = await response.json();
+    console.log(signature.uploadSignature);
+    return signature.uploadSignature;
+  };
+
+  const updateUserAvatarUrl = async (error, result) => {
+    if (result.event === "success") {
+      //console.log("error: ", error);
+      //console.log("result: ", result);
+
+      console.log("result.info.public_id", result.info.public_id);
+      await fetch(`/users/${props.user.id}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          avatar_public_id: result.info.public_id,
+        }),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrf,
+        },
+      });
+    }
+  };
+
+  const uploadImage = () => {
     cloudinary.setCloudName("hr0v6dg24");
     var widget = cloudinary.createUploadWidget(
       {
-        uploadPreset: "ml_default",
+        uploadPreset: "sugrxluo",
+        //uploadSignature: generateSignature,
       },
-      (error, result) => {}
+      updateUserAvatarUrl
     );
-    //  widget.open();
-  })();
+    widget.open();
+  };
   return (
     <div className="profile-description">
       <div className="username-handle">
@@ -19,9 +61,13 @@ function ProfileCard(props) {
         <p className="font-secondary handle">@{props.user.handle}</p>
       </div>
       {props.currentUser.handle === props.user.handle && (
-        <div id="widget-thing" style={{ height: "200px" }}></div>
+        <div
+          id="widget-thing"
+          onClick={uploadImage}
+          style={{ cursor: "pointer" }}>
+          Pick an avatar image
+        </div>
       )}
-
       <div>
         <svg viewBox="0 0 24 24" className="misc-svg font-secondary">
           <g>

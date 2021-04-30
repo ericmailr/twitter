@@ -39,6 +39,8 @@ Eric Miller
   - [ ]
 - [ ] Cloudinary
   - [ ] create ENV variables with figaro for cloudinary.yml
+  - https://support.cloudinary.com/hc/en-us/articles/207885595-How-can-I-generate-the-signed-upload-payload-on-my-server-
+  - https://github.com/cloudinary-training/advanced-concepts/tree/master/signing-widgets/server
 - [ ] Signup page
   - [ ] Forgot my password
     - [ ]

@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :handle, :name, :followers, :followed_users, :tweetCount 
+  attributes :id, :username, :handle, :name, :followers, :followed_users, :tweetCount, :avatar_public_id
   
   def tweetCount
     return object.tweets.length()

@@ -20,6 +20,7 @@ function PostList({ posts, contentType, toggleModal }) {
               />
               <PostWrapper
                 tweet={postHash.post}
+                user={postHash.post.user}
                 updatedAt={postHash.post.updated_at_brief}
                 postType={"reply"}
                 toggleModal={toggleModal}

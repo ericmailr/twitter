@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   root to: redirect('/users/sign_in')
 
-  resources :users, only: [:show, :destroy, :index]
+  resources :users, only: [:show, :destroy, :update, :index]
   resources :follows, only: [:create]
   resources :tweets, only: [:new, :show]
   resources :likes, only: [:create, :destroy]

@@ -71,7 +71,7 @@ function SuggestedFollow(props) {
       }}
       style={props.last ? { borderBottom: "none" } : {}}>
       <div className="avatar-container suggested-follow-avatar">
-        <Avatar />
+        <Avatar avatar_public_id={props.user.avatar_public_id} />
       </div>
       <div className="suggested-follow-content">
         <div className="suggested-follow-handle">

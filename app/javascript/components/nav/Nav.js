@@ -84,7 +84,9 @@ function Nav({ user, toggleModal }) {
             <div
               className="nav-compose"
               onClick={() => {
-                toggleModal("compose-new");
+                toggleModal("compose-new", {
+                  avatar_public_id: user.avatar_public_id,
+                });
               }}>
               <span className="svg-background svg-hover reply-color-background-hover">
                 <svg className="nav-svg" viewBox="0 0 24 24">
@@ -111,7 +113,11 @@ function Nav({ user, toggleModal }) {
                 alt="default avatar"
               />
             </span>
-            <LogoutModal username={user.username} handle={user.handle} />
+            <LogoutModal
+              avatar_public_id={user.avatar_public_id}
+              username={user.username}
+              handle={user.handle}
+            />
           </div>
         </div>
       </nav>

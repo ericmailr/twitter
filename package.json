@@ -6,6 +6,7 @@
     "@rails/webpacker": "5.2.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.6.0",
+    "cloudinary-react": "^1.7.0",
     "is-svg": "^4.2.2",
     "jquery": "^3.6.0",
     "jquery-ujs": "^1.2.2",
