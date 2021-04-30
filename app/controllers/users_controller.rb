@@ -53,14 +53,14 @@ class UsersController < ApplicationController
             end
        end
        @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
-        api_key = "243252674515468"
-        api_secret = "rxaZrsPJmyR1GTvNlfV6g-uxn0k"
-       @uploadSignature = Cloudinary::Utils.sign_request({:public_id=>"my_image", :timestamp=>Time.now.to_i}, :options=>{:api_key=>api_key, :api_secret=>api_secret})
+        #api_key = "243252674515468"
+        #api_secret = "rxaZrsPJmyR1GTvNlfV6g-uxn0k"
+       #@uploadSignature = Cloudinary::Utils.sign_request({:public_id=>"my_image", :timestamp=>Time.now.to_i}, :options=>{:api_key=>api_key, :api_secret=>api_secret})
 
 
         respond_to do |format|
             format.json do
-                msg = { :status => "ok", :message => "Success!", :uploadSignature => @uploadSignature }
+                msg = { :status => "ok", :message => "Success!" }
                 render :json => msg
             end
             format.html {  }

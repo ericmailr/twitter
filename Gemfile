@@ -48,7 +48,7 @@ gem 'htmlbeautifier'
 gem 'bootstrap', '~> 5.0.0.alpha3'
 gem 'jquery-rails'
 gem 'devise', '~> 4.7.1'
-
+gem "figaro"
 # image management
 gem 'carrierwave', '~> 2.2.1'
 gem 'cloudinary', '~> 1.20.0'

@@ -10,7 +10,6 @@ import {
 
 function Avatar({ avatar_public_id }) {
   const cloudName = "hr0v6dg24";
-  console.log(avatar_public_id);
   return (
     <Image
       className="avatar"

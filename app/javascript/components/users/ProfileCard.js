@@ -13,13 +13,13 @@ function ProfileCard(props) {
     .querySelector("meta[name='csrf-token']")
     .getAttribute("content");
   const generateSignature = async () => {
-    console.log("params_to_sign: ", params_to_sign);
-    console.log("callback: ", callback);
+    //console.log("params_to_sign: ", params_to_sign);
+    //console.log("callback: ", callback);
     let response = await fetch(
       `/${props.user.handle}?params_to_sign=${params_to_sign}`
     );
     let signature = await response.json();
-    console.log(signature.uploadSignature);
+    //console.log(signature.uploadSignature);
     return signature.uploadSignature;
   };
 
@@ -28,7 +28,7 @@ function ProfileCard(props) {
       //console.log("error: ", error);
       //console.log("result: ", result);
 
-      console.log("result.info.public_id", result.info.public_id);
+      //console.log("result.info.public_id", result.info.public_id);
       await fetch(`/users/${props.user.id}`, {
         method: "PUT",
         body: JSON.stringify({
@@ -94,7 +94,7 @@ function ProfileCard(props) {
           Following
         </a>
         <a href={Routes.followers_path(props.user.handle)}>
-          <span className="follow-number">{props.user.followers.length}</span>{" "}
+          <span className="follow-number">{props.user.followers.length}</span>
           Followers
         </a>
       </div>
