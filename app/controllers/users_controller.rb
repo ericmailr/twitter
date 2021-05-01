@@ -19,51 +19,50 @@ class UsersController < ApplicationController
 =end
 
     def show
-        @main_content_type = "Profile"
-        @user = User.find_by!(handle: params[:handle])
-        @content_type = params[:content_type]
-        tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
-        posts = tweets.sort_by(&:updated_at).reverse.to_a
-        already_included, tweets, with_replies, likes = [], [], [], []
-        posts.each do |post|
-            postHash = {postType: post.class.name.downcase}
-            if post.class.name == "Tweet"
-                if post.parent && !already_included.include?(post.parent)
-                    postHash[:parent] = TweetSerializer.new(post.parent)
-                    postHash[:post] = TweetSerializer.new(post)
-                    postHash[:postType] = 'reply'
-                    with_replies << postHash
-                    already_included << post.parent
-                elsif !post.parent && !already_included.include?(post)
-                    postHash[:post] = TweetSerializer.new(post)
-                    tweets << postHash
-                    with_replies << postHash
-                    already_included << post
-                end
-            elsif ["Retweet", "QuoteTweet", "Like"].include?(post.class.name) && !already_included.include?(post.tweet)
-                postHash[:post] = PostSerializer.new(post)
-                postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)
-                if post.class.name == "Like"
-                    likes << postHash
-                else
-                    tweets << postHash
-                    with_replies << postHash
-                    already_included << post
+        @user = User.find_by(handle: params[:handle])
+        if (@user == nil) 
+            redirect_to root_path
+        else
+            @main_content_type = "Profile"
+            @content_type = params[:content_type]
+            tweets = @user.tweets + @user.retweets + @user.quote_tweets + @user.likes
+            posts = tweets.sort_by(&:updated_at).reverse.to_a
+            already_included, tweets, with_replies, likes = [], [], [], []
+            posts.each do |post|
+                postHash = {postType: post.class.name.downcase}
+                if post.class.name == "Tweet"
+                    if post.parent && !already_included.include?(post.parent)
+                        postHash[:parent] = TweetSerializer.new(post.parent)
+                        postHash[:post] = TweetSerializer.new(post)
+                        postHash[:postType] = 'reply'
+                        with_replies << postHash
+                        already_included << post.parent
+                    elsif !post.parent && !already_included.include?(post)
+                        postHash[:post] = TweetSerializer.new(post)
+                        tweets << postHash
+                        with_replies << postHash
+                        already_included << post
+                    end
+                elsif ["Retweet", "QuoteTweet", "Like"].include?(post.class.name) && !already_included.include?(post.tweet)
+                    postHash[:post] = PostSerializer.new(post)
+                    postHash[:quoted_tweet] = TweetSerializer.new(post.tweet)
+                    if post.class.name == "Like"
+                        likes << postHash
+                    else
+                        tweets << postHash
+                        with_replies << postHash
+                        already_included << post
+                    end
                 end
             end
-       end
-       @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
-        #api_key = "243252674515468"
-        #api_secret = "rxaZrsPJmyR1GTvNlfV6g-uxn0k"
-       #@uploadSignature = Cloudinary::Utils.sign_request({:public_id=>"my_image", :timestamp=>Time.now.to_i}, :options=>{:api_key=>api_key, :api_secret=>api_secret})
-
-
-        respond_to do |format|
-            format.json do
-                msg = { :status => "ok", :message => "Success!" }
-                render :json => msg
+            @content = {tweets: tweets, with_replies: with_replies, media: nil, likes: likes}
+            respond_to do |format|
+                format.json do
+                    msg = { :status => "ok", :message => "Success!" }
+                    render :json => msg
+                end
+                format.html {  }
             end
-            format.html {  }
         end
 
     end
