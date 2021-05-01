@@ -442,8 +442,6 @@ function Signup({ flash, authenticity_token, errors }) {
 }
 
 Signup.propTypes = {
-  colorInputs: PropTypes.func,
-  decolorInputs: PropTypes.func,
   flash: PropTypes.object,
   authenticity_token: PropTypes.string,
   errors: PropTypes.object,

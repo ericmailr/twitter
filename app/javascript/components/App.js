@@ -72,18 +72,6 @@ function App(props) {
     setModal({ modalType: modalType, modalProps: modalProps });
   };
 
-  const colorInputs = (e) => {
-    e.currentTarget.parentElement.classList.add("focused");
-    e.currentTarget.parentElement.style.border =
-      "2px solid RGB(var(--reply-color))";
-  };
-
-  const decolorInputs = (e) => {
-    e.currentTarget.parentElement.classList.remove("focused");
-    e.currentTarget.parentElement.style.border =
-      "2px solid rgba(136, 153, 166, 0.25)";
-  };
-
   const getMainComponent = () => {
     let mainComponent = null;
     switch (mainContentType) {
@@ -141,8 +129,6 @@ function App(props) {
         <Signup
           authenticity_token={authenticity_token}
           flash={flash}
-          colorInputs={colorInputs}
-          decolorInputs={decolorInputs}
           errors={errors}
         />
       ) : (
