@@ -14,7 +14,7 @@ function SuggestedFollow(props) {
     });
   }, []);
 
-  const toggleFollow = async (e) => {
+  const toggleFollow = async (e, isButtonOnly) => {
     e.stopPropagation();
     const csrf = document
       .querySelector("meta[name='csrf-token']")
@@ -43,9 +43,12 @@ function SuggestedFollow(props) {
       });
     }
     let json = await msg.json();
+    let followingClasses = isButtonOnly
+      ? "following-button follow-button-only"
+      : "following-button";
     setFollowState({
       isFollowed: json.isFollowed,
-      buttonClass: json.isFollowed ? "following-button" : "",
+      buttonClass: json.isFollowed ? followingClasses : "",
     });
   };
 
@@ -64,28 +67,15 @@ function SuggestedFollow(props) {
   };
 
   return (
-    <div
-      className="suggested-follow tweet-container"
-      onClick={() => {
-        window.location.href = Routes.profile_path(props.user.handle);
-      }}
-      style={props.last ? { borderBottom: "none" } : {}}>
-      <div className="avatar-container suggested-follow-avatar">
-        <Avatar avatar_public_id={props.user.avatar_public_id} />
-      </div>
-      <div className="suggested-follow-content">
-        <div className="suggested-follow-handle">
-          <a href={Routes.profile_path(props.user.handle)}>
-            <span className={"username"}>{truncate(props.user.username)}</span>
-            <span className={"font-secondary handle"}>
-              {" @"}
-              {truncate(props.user.handle)}
-            </span>
-          </a>
-        </div>
+    <>
+      {props.buttonOnly ? (
         <div
-          className={"follow-button " + followState.buttonClass}
-          onClick={toggleFollow}
+          className={
+            "follow-button follow-button-only " + followState.buttonClass
+          }
+          onClick={(e) => {
+            toggleFollow(e, true);
+          }}
           onMouseEnter={followButtonEnterStyle}
           onMouseLeave={followButtonLeaveStyle}
           style={
@@ -95,14 +85,51 @@ function SuggestedFollow(props) {
           }>
           {followState.isFollowed ? "Following" : "Follow"}
         </div>
-      </div>
-    </div>
+      ) : (
+        <div
+          className="suggested-follow tweet-container"
+          onClick={() => {
+            window.location.href = Routes.profile_path(props.user.handle);
+          }}
+          style={props.last ? { borderBottom: "none" } : {}}>
+          <div className="avatar-container suggested-follow-avatar">
+            <Avatar avatar_public_id={props.user.avatar_public_id} />
+          </div>
+          <div className="suggested-follow-content">
+            <div className="suggested-follow-handle">
+              <a href={Routes.profile_path(props.user.handle)}>
+                <span className={"username"}>
+                  {truncate(props.user.username)}
+                </span>
+                <span className={"font-secondary handle"}>
+                  {" @"}
+                  {truncate(props.user.handle)}
+                </span>
+              </a>
+            </div>
+            <div
+              className={"follow-button " + followState.buttonClass}
+              onClick={toggleFollow}
+              onMouseEnter={followButtonEnterStyle}
+              onMouseLeave={followButtonLeaveStyle}
+              style={
+                followState.isFollowed
+                  ? { maxWidth: "101px" }
+                  : { maxWidth: "79px" }
+              }>
+              {followState.isFollowed ? "Following" : "Follow"}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
 SuggestedFollow.propTypes = {
   user: PropTypes.object,
   last: PropTypes.bool,
+  buttonOnly: PropTypes.bool,
 };
 
 export default SuggestedFollow;

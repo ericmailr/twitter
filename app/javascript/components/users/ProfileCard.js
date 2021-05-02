@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Avatar from "./Avatar";
+import SuggestedFollow from "../discover/SuggestedFollow";
 
 function ProfileCard(props) {
   const cloudName = "hr0v6dg24";
@@ -56,6 +57,9 @@ function ProfileCard(props) {
           <Avatar avatar_public_id={props.user.avatar_public_id} />
         </div>
       </div>
+      {props.currentUser.handle !== props.user.handle && (
+        <SuggestedFollow user={props.user} buttonOnly={true} />
+      )}
       <div className="profile-description">
         <div className="username-handle">
           <h2 className="username">{props.user.username}</h2>
@@ -107,6 +111,7 @@ function ProfileCard(props) {
 ProfileCard.propTypes = {
   user: PropTypes.object,
   userCreatedAt: PropTypes.string,
+  currentUser: PropTypes.object,
 };
 
 export default ProfileCard;

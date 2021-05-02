@@ -353,6 +353,7 @@ a:hover {
   flex-direction: column;
   align-items: flex-start;
   border-top: 1px solid rgba(136, 153, 166, 0.25);
+  position: relative;
 }
 
 .profile-header {
@@ -964,6 +965,12 @@ nav {
   background-color: rgba(var(--reply-color), 0.1);
   transition-property: background-color;
   transition-duration: 0.2s;
+}
+
+.follow-button-only {
+  position: absolute;
+  top: 300px;
+  right: 20px;
 }
 
 .following-button {

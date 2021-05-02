@@ -31,19 +31,23 @@ Eric Miller
 
 ## My todo list
 
+### Top Priority
+
 - [ ] Heroku
   - [ ] Learn management tools
 - [o] Login
   - [x] fix login page on mobile
   - [x] [Devise](Devise)
   - [ ]
-- [ ] Cloudinary
-  - [ ] create ENV variables with figaro for cloudinary.yml
+- [x] Cloudinary
+  - [x] create ENV variables with figaro for cloudinary.yml
   - https://support.cloudinary.com/hc/en-us/articles/207885595-How-can-I-generate-the-signed-upload-payload-on-my-server-
   - https://github.com/cloudinary-training/advanced-concepts/tree/master/signing-widgets/server
-- [ ] Signup page
-  - [ ] Forgot my password
-    - [ ]
+- [o] Signup page
+  - [o] Forgot my password
+    - [x] Get it working
+    - [ ] Format the reset password page
+  - [ ] - [ ]
   - [ ] Refactor Signup, FormInput, Button
 - [ ] Profile
   - [ ] avatar,
