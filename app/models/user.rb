@@ -35,13 +35,15 @@ class User < ApplicationRecord
         end
     end
 
-    def User.new_remember_token
-        SecureRandom.urlsafe_base64
-    end
-
-    def User.digest(token)
-        Digest::SHA1.hexdigest(token.to_s)
-    end
+    # unused
+    # (using Devise)
+#    def User.new_remember_token
+#        SecureRandom.urlsafe_base64
+#    end
+#
+#    def User.digest(token)
+#        Digest::SHA1.hexdigest(token.to_s)
+#    end
 
     def User.search(query)
         query = query.downcase

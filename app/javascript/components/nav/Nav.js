@@ -107,7 +107,9 @@ function Nav({ user, toggleModal }) {
             onClick={showLogoutModal}
             style={{ position: "relative" }}>
             <span className="svg-background" style={{ cursor: "pointer" }}>
-              <Avatar avatar_public_id={user.avatar_public_id} />
+              <div className="avatar-container">
+                <Avatar avatar_public_id={user.avatar_public_id} />
+              </div>
             </span>
             <LogoutModal
               avatar_public_id={user.avatar_public_id}
