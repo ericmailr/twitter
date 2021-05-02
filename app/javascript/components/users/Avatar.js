@@ -7,21 +7,20 @@ import {
   CloudinaryContext,
 } from "cloudinary-react";
 
-function Avatar({ avatar_public_id, width }) {
+function Avatar({ avatar_public_id }) {
   const cloudName = "hr0v6dg24";
   return (
     <Image
       className="avatar"
       cloudName={cloudName}
-      publicId={
-        avatar_public_id ? avatar_public_id : "default_avatar.png"
-      }></Image>
+      publicId={avatar_public_id ? avatar_public_id : "default_avatar.png"}>
+      <Transformation gravity="face" crop="thumb" />
+    </Image>
   );
 }
 
 Avatar.propTypes = {
   avatar_public_id: PropTypes.string,
-  width: PropTypes.string,
 };
 
 export default Avatar;
