@@ -1,22 +1,6 @@
 class UsersController < ApplicationController
     include ApplicationHelper
     before_action :authenticate_user! #, only: :show
-=begin
-    def new
-        @user = User.new
-    end
-
-    def create
-        User.create user_params
-        if (User.find_by(username: user_params[:username])) 
-            flash[:notice] = "Signed up! You may now log in."
-            redirect_to login_path
-        else 
-            flash[:alert] = "Failed to sign up."
-            redirect_to signup_path
-        end
-    end
-=end
 
     def show
         @user = User.find_by(handle: params[:handle])
@@ -72,7 +56,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        #update avatar_public_id
         user = User.find(params[:id])
         if (user.avatar_public_id != "default_avatar") 
             Cloudinary::Uploader.destroy(user.avatar_public_id)
@@ -80,7 +63,7 @@ class UsersController < ApplicationController
         user.update(avatar_public_id: params[:avatar_public_id])
          respond_to do |format|
             format.json do
-                msg = { :status => "ok", :message => "Success!" }
+                msg = { :status => "ok", :message => "Success! avatar_public_id updated." }
                 render :json => msg
             end
             format.html {  }

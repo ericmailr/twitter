@@ -40,7 +40,9 @@ function Tweet(props) {
         )}
         <div className="tweet-container">
           <div className="avatar-container">
-            <Avatar avatar_public_id={props.tweet.user.avatar_public_id} />
+            <a href={`/${props.tweet.user.handle}`}>
+              <Avatar avatar_public_id={props.tweet.user.avatar_public_id} />
+            </a>
             {props.isParent && <div className="reply-connector"></div>}
           </div>
           <div className="tweet-content">

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AvatarImg from "../../assets/avatar.png";
 import LogoutModal from "./LogoutModal";
+import Avatar from "../users/Avatar";
 
 function Nav({ user, toggleModal }) {
   const showLogoutModal = (e) => {
@@ -106,12 +106,8 @@ function Nav({ user, toggleModal }) {
             onMouseLeave={mouseLeaveColor}
             onClick={showLogoutModal}
             style={{ position: "relative" }}>
-            <span className="svg-background">
-              <img
-                className="nav-avatar"
-                src={AvatarImg}
-                alt="default avatar"
-              />
+            <span className="svg-background" style={{ cursor: "pointer" }}>
+              <Avatar avatar_public_id={user.avatar_public_id} />
             </span>
             <LogoutModal
               avatar_public_id={user.avatar_public_id}

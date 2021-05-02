@@ -26,7 +26,7 @@ function ProfileFollowContent({
   useEffect(() => {
     const updateInterval = setInterval(() => {
       fetchFollowContent();
-    }, 5000);
+    }, 50000);
     return () => {
       clearInterval(updateInterval);
     };

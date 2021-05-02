@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AvatarImg from "../../assets/avatar.png";
 import {
   Image,
   Video,
@@ -8,7 +7,7 @@ import {
   CloudinaryContext,
 } from "cloudinary-react";
 
-function Avatar({ avatar_public_id }) {
+function Avatar({ avatar_public_id, style }) {
   const cloudName = "hr0v6dg24";
   return (
     <Image
@@ -17,15 +16,6 @@ function Avatar({ avatar_public_id }) {
       publicId={avatar_public_id ? avatar_public_id : "default_avatar.png"}>
       <Transformation width="48" height="48" gravity="face" crop="thumb" />
     </Image>
-    /*
-    <div>
-      <img
-        className="avatar"
-        src={props.avatar_url ? props.avatar_url : AvatarImg}
-        alt="default avatar"
-      />
-    </div>
-    */
   );
 }
 
