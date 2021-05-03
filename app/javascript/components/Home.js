@@ -22,7 +22,7 @@ function Home({ postsProp, toggleModal, currentUser }) {
   useEffect(() => {
     const updateInterval = setInterval(() => {
       fetchPosts();
-    }, 50000);
+    }, 5000);
     return () => {
       clearInterval(updateInterval);
     };

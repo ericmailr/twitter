@@ -54,7 +54,10 @@ function ProfileCard(props) {
     <div className="profile-container">
       <div className="profile-header">
         <div className="avatar-container" id="profile-page-avatar">
-          <Avatar avatar_public_id={props.user.avatar_public_id} />
+          <Avatar
+            avatar_public_id={props.user.avatar_public_id}
+            diameter={190}
+          />
         </div>
       </div>
       {props.currentUser.handle !== props.user.handle && (
