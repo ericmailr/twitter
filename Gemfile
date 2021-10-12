@@ -14,7 +14,7 @@ gem 'rails', '~> 6.0.3.4'
 #User postgresql instead of sqlite3 to allow Heroku deployment
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
