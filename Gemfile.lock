@@ -180,7 +180,8 @@ GEM
     pg (1.2.3)
     popper_js (2.9.2)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-proxy (0.6.5)
@@ -328,7 +329,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   mimemagic!
   pg (~> 1.2.3)
-  puma (~> 3.7)
+  puma (~> 4.3)
   rails (~> 6.0.3.4)
   react-rails (~> 2.6.1)
   rspec-rails (~> 5.0.0)
